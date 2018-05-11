@@ -1,0 +1,36 @@
+<div class="header-component d-flex">
+  <a class="app-logo" routerLink="/home"><img src="assets/images/logo.svg"/></a>
+  <div class="left-nav-container d-flex align-items-center">
+    <div class="location-search-input">
+      <i class="fa fa-map-marker"></i>
+      <input class="form-control" placeholder="Where do you want to go boating?">
+    </div>
+    <div class="party-size-select">
+      <i class="fa fa-user"></i>
+      <select class="form-control" [(ngModel)]="partySize">
+        <option value="0" disabled selected hidden>Party Size</option>
+        <option *ngFor="let o of partySizeOptions" [ngValue]="o">
+          {{ o }}
+        </option>
+      </select>
+      <i class="fa fa-angle-down"></i>
+    </div>
+    <button
+      class="float-red-button btn"
+      (click)="chooseDate()">
+      <i class="fa fa-calendar"></i>
+      <span class="text-uppercase" l10nTranslate>navigation_choose_date</span>
+    </button>
+  </div>
+  <div class="right-nav-container d-flex align-items-center">
+    <a routerLink="/how-it-works" class="tab d-flex justify-content-center align-items-center" l10nTranslate>navigation_how_it_works</a>
+    <a routerLink="/list-your-boat" class="tab d-flex justify-content-center align-items-center" l10nTranslate>navigation_list_your_boat</a>
+    <a routerLink="/support" class="tab d-flex justify-content-center align-items-center" l10nTranslate>navigation_support</a>
+    <a routerLink="/sign-in" class="tab d-flex justify-content-center align-items-center" l10nTranslate>navigation_sign_in</a>
+    <button
+      class="float-red-button btn"
+      (click)="signup()">
+      <span class="text-uppercase" l10nTranslate>navigation_sign_up</span>
+    </button>
+  </div>
+</div>

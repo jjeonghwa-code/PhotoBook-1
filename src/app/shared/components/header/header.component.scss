@@ -1,0 +1,118 @@
+@import '../../../../mixins';
+@import '../../../../variables';
+
+.header-component {
+  height: $header-height;
+  background-color: $white;
+  box-shadow: 0 -1px 8px 0 rgba(0, 0, 0, 0.3);
+
+  .app-logo {
+    cursor: pointer;
+    background-color: $psp-red;
+    padding: 25px 47px;
+  }
+
+  .left-nav-container {
+    border-right: solid 1px $extra-lighter-gray;
+
+    .location-search-input {
+      position: relative;
+      width: 330px;
+      margin-left: 54px;
+  
+      i {
+        position: absolute;
+        top: 7px;
+        font-size: 26px;
+        color: $very-light-gray;
+      }
+  
+      input {
+        line-height: 1.33;
+        color: $extra-light-gray;
+        padding-left: 45px;
+        border-left: none;
+        border-top: none;
+        border-bottom: none;
+        border-radius: unset;
+  
+        &::placeholder {
+          color: $extra-light-gray;
+        }
+      }
+    }
+  
+    .party-size-select {
+      position: relative;
+      width: 200px;
+      margin-left: 40px;
+  
+      > i {
+        position: absolute;
+        color: $very-light-gray;
+        font-size: 26px;
+  
+        &:first-child {
+          top: 7px;
+          font-size: 26px;
+        }
+  
+        &:last-child {
+          top: 4px;
+          right: 0;
+          pointer-events: none;
+        }
+      }
+  
+      select {
+        line-height: 1.33;
+        color: $extra-light-gray;
+        border: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-left: 45px;
+      }
+    }
+  
+    .float-red-button {
+      margin-left: 31px;
+      margin-right: 35px;
+    }
+  }
+
+  .right-nav-container {
+    padding-left: 105px;
+
+    > a {
+      font-family: "proxima_novaregular", Arial, sans-serif;
+      font-size: 15px;
+      color: $almost-black;
+      line-height: 1.33;
+      margin-right: 30px;   
+    }
+
+    .float-red-button {
+      width: 102px;
+    }
+  }
+
+  // .tab {
+  //   cursor: pointer;
+  //   text-decoration: none;
+  //   width: 170px;
+  //   font-size: 16px;
+  //   font-weight: bold;
+  //   line-height: 20px;
+  //   color: $light-gray;
+  //   border-right: 2px solid $almost-white;
+
+  //   &:hover {
+  //     color: $light-blue;      
+  //     font-weight: 800;
+  //   }
+
+  //   &.home {
+  //     width: 137px;
+  //   }
+  // }
+}

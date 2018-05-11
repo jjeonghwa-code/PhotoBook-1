@@ -1,0 +1,71 @@
+$base-side-padding: 20px;
+$base-top-bottom-spacing: 25px;
+$base-font-size: 15px;
+$base-line-height: 18px;
+$max-body-width: 1080px;
+$top-row-padding: 10px;
+
+$psp-red: #f35c53;
+$psp-blue: hsl(195, 100%, 47%);
+$psp-green: #00AC6C;
+
+$white: #FFFFFF;
+$almost-ever-white: #FAFAFB;
+$almost-white: #F2F2F2;
+$extra-lighter-gray: #F0F0F0;
+$extra-light-gray: #B4B4B1;
+$very-light-gray: #DCDCE1;
+$light-gray: #dcdce1;
+$medium-light-gray: #AFAFAF;
+$medium-gray: #9B9B9B;
+$dark-gray: #838384;
+$very-dark-gray: #4F4F4F;
+$extra-dark-gray: #333333;
+$border-gray: #D6D6D6;
+$black: #000000;
+$almost-black: #001424;
+$mostly-black: #1e1e23;
+$light-blue: #2EAEB9;
+$medium-blue: #308BC5;
+$hot-pink: #FD8093;
+$lime-green: #B8E986;
+$medium-green: #01AC6C;
+$medium-dark-red: #EB254D;
+$dark-red: #D53E3E;
+
+$body-content-background-color: #F7F7F7;
+$body-box-shadow-width: 7px;
+$body-box-negative-shadow-width: -$body-box-shadow-width;
+$body-text-color: #4A4A4A;
+$body-height: calc(100vh - 126px);
+$header-height: 90px;
+$footer-height: 52px;
+
+$portrait-explorer-width: 755px;
+$medium-card-width: 954px;
+$medium-card-height: 450px;
+$small-card-width: 120px;
+$small-card-height: 57px;
+$small-card-border: 2px;
+$small-card-full-width: 120px + 2 * $small-card-border;
+$small-card-full-height: 57px + 2 * $small-card-border;
+$key-card-width: 92px;
+$key-card-height: 45px;
+
+/* Values pulled from the designs are above.
+ * Values that were "guessed" are below
+ */
+$disabled-button: #D3D3D3;
+
+$alert-success-text-color: #FFFFFF;
+$alert-success-background-color: #05cea1;
+$alert-success-border-color: unset;
+$alert-info-text-color: #ffffff;
+$alert-info-background-color: #308bc5;
+$alert-info-border-color: unset;
+$alert-warning-text-color: #856404;
+$alert-warning-background-color: #fff3cd;
+$alert-warning-border-color: #ffeeba;
+$alert-error-text-color: #ffffff;
+$alert-error-background-color: #d0021b;
+$alert-error-border-color: unset;

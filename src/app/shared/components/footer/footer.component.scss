@@ -1,0 +1,22 @@
+@import '../../../../mixins';
+@import '../../../../variables';
+
+.footer-component {
+  height: $footer-height;
+  background-color: $very-dark-gray;
+  padding-left: 32px;
+
+  > a {
+    cursor: pointer;
+    font-family: Avenir;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+    color: $white;
+    padding-right: 9px;
+
+    &:hover {
+      color: $light-blue;      
+    }
+  }
+}

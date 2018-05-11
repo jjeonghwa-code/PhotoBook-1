@@ -1,0 +1,10 @@
+@import '../../mixins';
+@import '../../variables';
+
+.home-component {
+  background-image: url('/assets/images/home-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: $body-height;
+  padding: 85px 185px;
+}
