@@ -16,6 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   startNow() {
-    this.router.navigate(['onboarding']);
+    this.router.navigate(['login']);
   }
 }

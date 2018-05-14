@@ -50,7 +50,7 @@ $browser-context: 14;
   background-color: $bg-color;
   color: $white;
   font-size: $font-size;
-  font-family: "proxima_novasemibold", Arial, sans-serif;
+  font-family: "San Francisco", Arial, sans-serif;
   line-height: 1.67;
   letter-spacing: 1px;
   @include border-radius($border-radius);
@@ -284,7 +284,7 @@ $browser-context: 14;
   }
 
   div {
-    font-family: "proxima_novasemibold", Arial, sans-serif;
+    font-family: "San Francisco Semi Bold", Arial, sans-serif;
     font-size: $font-size;
     line-height: 0.91;
     letter-spacing: 0.8px;
@@ -298,4 +298,26 @@ $browser-context: 14;
       color: $active-color;
     }
   }
+}
+
+// PhotoBook
+@mixin font-size($size) {
+  font-size: $size * 1px;
+  font-size: $size * 0.1rem;
+}
+
+@mixin icon-grid-svg($pos-x: 0em, $pos-y: 0em, $size: 100%) {
+  font-size: $size;
+  background-image: url('/assets/images/icons/icongrid_2.svg');
+  background-size: 51em 6em;
+  width: 1em;
+  height: 1em;
+  background-position: $pos-x $pos-y;
+  vertical-align: middle;
+}
+
+@mixin icon-grid-svg-display($display: inline-block, $margins: 0 auto) {
+  content: '';
+  display: $display;
+  margin: $margins;
 }

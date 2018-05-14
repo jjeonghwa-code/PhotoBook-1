@@ -28,7 +28,7 @@ body {
   color: $body-text-color;
   height: $body-height;
   font-size: $base-font-size;
-  font-family: "proxima_novaregular", Arial, sans-serif;
+  font-family: "San Francisco", Arial, sans-serif;
 }
 
 ol, ul {
@@ -100,7 +100,7 @@ button {
 }
 
 strong {
-  font-family: "proxima_novabold", Arial, sans-serif;
+  font-family: "San Francisco Bold", Arial, sans-serif;
   font-weight: normal;
 }
 
@@ -114,7 +114,7 @@ strong {
 
 .error-message {
   color: $psp-red;
-  font-family: "proxima_novamedium", Arial, sans-serif;
+  font-family: "San Francisco Medium", Arial, sans-serif;
   font-size: 10px;
   line-height: 1.0;
 }
@@ -172,7 +172,7 @@ strong {
   width: 80%;
   margin: 10px auto;
   padding-right: 25px;
-  font-family: "Muli";
+  font-family: "San Francisco";
   font-size: 14px;
   position: absolute;
   z-index: 1;
@@ -246,7 +246,7 @@ ul.nav-pills li.nav-item a.nav-link {
 
 ul.nav-pills li.nav-item a.nav-link span {
   font-size: 13px;
-  font-family: "proxima_novamedium", Arial, sans-serif;
+  font-family: "San Francisco Medium", Arial, sans-serif;
   background-color: $extra-light-gray;
   color: $very-dark-gray;
   display: block;
@@ -273,7 +273,7 @@ span.right-tab {
 /* Bootstrap Form Control Overrides         */
 /********************************************/
 .form-control {
-  font-family: "proxima_novaregular", Arial, sans-serif;
+  font-family: "San Francisco", Arial, sans-serif;
   font-size: 15px;
   color: $very-dark-gray;
   line-height: 17px;

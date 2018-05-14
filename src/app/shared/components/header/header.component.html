@@ -1,5 +1,19 @@
-<div class="header-component d-flex">
-  <a class="app-logo" routerLink="/home"><img src="assets/images/logo.svg"/></a>
+<div class="header-component d-flex justify-content-between">
+  <div class="app-logo d-flex align-items-center">
+    <a routerLink="/">
+      <div>OnsFotoboek</div>
+      <div l10nTranslate>LOGO_SUBTITLE</div>
+    </a>
+  </div>
+  <div class="right-nav-container d-flex align-items-center">
+    <a routerLink="/register" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_REGISTER</a>
+    <a routerLink="/login" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGIN</a>
+    <a (click)="switchLanguage()">
+      <img [src]="'LANGUAGE_TOGGLE_IMG' | translate:lang" />
+    </a>
+  </div>
+  
+  <!-- <a class="app-logo" routerLink="/"><img src="assets/images/logo.svg"/></a>
   <div class="left-nav-container d-flex align-items-center">
     <div class="location-search-input">
       <i class="fa fa-map-marker"></i>
@@ -32,5 +46,5 @@
       (click)="signup()">
       <span class="text-uppercase" l10nTranslate>navigation_sign_up</span>
     </button>
-  </div>
+  </div> -->
 </div>

@@ -18,9 +18,10 @@ import {
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
-      { code: 'de', dir: 'ltr' }
+      { code: 'en', dir: 'ltr' },
+      { code: 'nl', dir: 'ltr' }
     ],
-    defaultLocale: { languageCode: 'de', countryCode: 'DE' },
+    defaultLocale: { languageCode: 'nl', countryCode: 'NL' },
     currency: 'EUR',
     storage: StorageStrategy.Cookie
   },
@@ -33,18 +34,6 @@ const l10nConfig: L10nConfig = {
   }
 };
 
-// Advanced initialization.
-export function initL10n(l10nLoader: any) {
-  return () => l10nLoader.load();
-}
-
-export const LocalizationInitializer = {
-  provide: APP_INITIALIZER,
-  useFactory: initL10n,
-  deps: [L10nLoader],
-  multi: true
-};
-
 import { AppStateService, CommonService } from '../shared/services';
 
 @NgModule({
@@ -53,9 +42,6 @@ import { AppStateService, CommonService } from '../shared/services';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    LocalStorageModule.withConfig({
-      storageType: 'localStorage'
-    }),
     LocalizationModule.forRoot(l10nConfig),
     BsDatepickerModule.forRoot(),
     NouisliderModule,
@@ -77,8 +63,7 @@ import { AppStateService, CommonService } from '../shared/services';
   declarations: [],
   providers: [
     AppStateService,
-    CommonService,
-    LocalizationInitializer
+    CommonService
   ]
 })
 export class SharedModule {

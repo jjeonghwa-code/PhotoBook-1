@@ -15,9 +15,10 @@ import {
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
-      { code: 'de', dir: 'ltr' }
+      { code: 'en', dir: 'ltr' },
+      { code: 'nl', dir: 'ltr' }
     ],
-    defaultLocale: { languageCode: 'de', countryCode: 'DE' },
+    defaultLocale: { languageCode: 'nl', countryCode: 'NL' },
     currency: 'EURO',
     storage: StorageStrategy.Cookie
   },

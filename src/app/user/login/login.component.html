@@ -1,10 +1,11 @@
 <div class="login-page">
-  <mat-card>
-    <div class="text-center login-title">Login to your account</div>
+  <div class="medium-card card">
+    <div class="text-left login-title" l10nTranslate>LOGIN</div>
+    <div class="login-subtitle" [innerHtml]="'LOGIN_SUBTITLE' | translate:lang"></div>
     <form class="sign-in-form" name="loginForm" [formGroup]="loginForm" novalidate>
       <div class="form-group">
-        <input class="form-control email-form-control" formControlName="email">
         <label class="text-uppercase email-label-control">Email address:</label>
+        <input class="form-control email-form-control" formControlName="email">
         <div class="form-field-error" *ngIf="loginFormErrors.email.required">
           Email is required
         </div>
@@ -14,8 +15,8 @@
       </div>
 
       <div class="form-group password-form-field">
-        <input class="form-control password-form-control" type="password" formControlName="password">
         <label class="text-uppercase password-label-control">Password:</label>
+        <input class="form-control password-form-control" type="password" formControlName="password">
         <div class="form-field-error" *ngIf="loginFormErrors.password.required">
           Password is required
         </div>
@@ -36,5 +37,7 @@
         </button>
       </div>
     </form>
-  </mat-card>
+    <div class="login-title" l10nTranslate>NOT_REGISTERED_YET</div>
+    <div l10nTranslate>REGISTER_TIP</div>
+  </div>
 </div>

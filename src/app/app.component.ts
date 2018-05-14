@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 
-import { Language, TranslationService } from 'angular-l10n';
+import { LocaleService, TranslationService, Language } from 'angular-l10n';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +17,33 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'app';
 
   constructor(
+    public locale: LocaleService,
     public translationService: TranslationService
   ) { }
 
   public ngOnInit() {
     console.log('Initializing the app component');
+
+    // this.translationService.translationChanged().subscribe(
+    //   () => {
+    //     console.log('local chnageed!!');
+    //     this.changeDetectorRef.markForCheck();
+    //   }
+    // );
   }
 
   public ngOnDestroy() {
     console.log('Destroying the app component');
+  }
+
+  toggleLanguage() {
+    console.log(33333, this.locale.getCurrentLanguage());
+    if (this.locale.getCurrentLanguage() === 'en') {
+      this.locale.setDefaultLocale('nl', 'NL');
+      this.locale.setCurrentCurrency('EURO');
+    } else if (this.locale.getCurrentLanguage() === 'nl') {
+      this.locale.setDefaultLocale('en', 'US');
+      this.locale.setCurrentCurrency('USD');
+    }
   }
 }

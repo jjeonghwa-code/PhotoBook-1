@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'home', loadChildren: './home/home.module#HomeModule' },
-      { path: '', loadChildren: './pages/pages.module#PagesModule', canActivate: [AuthGuard] },
+      { path: 'home', loadChildren: './home/home.module#HomeModule', canActivate: [AuthGuard] },
+      { path: '', loadChildren: './user/user.module#UserModule' },
       // { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ]

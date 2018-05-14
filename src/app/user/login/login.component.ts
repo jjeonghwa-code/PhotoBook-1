@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocaleService, TranslationService, Language } from 'angular-l10n';
 import { UserService } from '../../shared/services';
 
 @Component({
@@ -9,6 +10,7 @@ import { UserService } from '../../shared/services';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @Language() lang: string;
   loginForm: FormGroup;
   loginFormErrors: any;
   loginErrorMessage: string;
