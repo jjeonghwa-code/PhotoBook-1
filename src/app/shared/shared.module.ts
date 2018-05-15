@@ -8,31 +8,9 @@ import { MaterialModule } from './material/material.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ComponentsModule } from './components/components.module';
 import {
-  L10nConfig,
-  L10nLoader,
   LocalizationModule,
-  LocaleValidationModule,
-  StorageStrategy,
-  ProviderType
+  LocaleValidationModule
 } from 'angular-l10n';
-const l10nConfig: L10nConfig = {
-  locale: {
-    languages: [
-      { code: 'en', dir: 'ltr' },
-      { code: 'nl', dir: 'ltr' }
-    ],
-    defaultLocale: { languageCode: 'nl', countryCode: 'NL' },
-    currency: 'EUR',
-    storage: StorageStrategy.Cookie
-  },
-  translation: {
-    providers: [
-      { type: ProviderType.Static, prefix: '/assets/locale-' }
-    ],
-    composedKeySeparator: '.',
-    i18nPlural: true
-  }
-};
 
 import { AppStateService, CommonService } from '../shared/services';
 
@@ -42,7 +20,8 @@ import { AppStateService, CommonService } from '../shared/services';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    LocalizationModule.forRoot(l10nConfig),
+    LocalizationModule,
+    LocaleValidationModule,
     BsDatepickerModule.forRoot(),
     NouisliderModule,
     MaterialModule,
@@ -67,7 +46,4 @@ import { AppStateService, CommonService } from '../shared/services';
   ]
 })
 export class SharedModule {
-  constructor(public l10nLoader: L10nLoader) {
-    this.l10nLoader.load();
-  }
 }
