@@ -1,7 +1,7 @@
 @import '../../../mixins';
 @import '../../../variables';
 
-.login-component {
+.register-component {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,6 +34,10 @@
 
   .sign-in-form {
     margin-bottom: 30px;
+
+    .empty-div {
+      width: 30px;
+    }
 
     .form-group {
       position: relative;

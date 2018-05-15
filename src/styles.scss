@@ -388,3 +388,28 @@ span.right-tab {
 .custom-radio-button {
   @include app-label-checkbox($very-dark-gray, $dark-gray, 12px);
 }
+
+// PhotoBook
+.icon-user {
+  padding-bottom: 22px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-1em, 0, 30px);
+  }
+}
+
+.icon-email {
+  padding-bottom: 22px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-2em, 0, 30px);
+  }
+}
+
+.icon-password {
+  padding-bottom: 22px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-3em, 0, 30px);
+  }
+}
