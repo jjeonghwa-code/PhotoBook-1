@@ -80,7 +80,7 @@
   "LOGIN_FORM_ERROR_REQUIRED_PASSWORD": "Password is required",
   "LOGIN_FORM_ERROR_PATTERN_PASSWORD": "Password length is too short",
 
-  "PASSWORD_RECOVERY_TYPE_EMAIL": "Provide your email address",
+  "PASSWORD_RECOVERY_TYPE_EMAIL": "OnsFotoboek will send you a new password per e-mail",
   
   "ROTATE_PHOTO": "Rotate the photo",
 

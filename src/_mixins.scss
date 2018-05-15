@@ -45,8 +45,8 @@ $browser-context: 14;
   }
 
   cursor: pointer;
-  width: $width;
-  height: $height;
+  min-width: $width;
+  min-height: $height;
   background-color: $bg-color;
   color: $white;
   font-size: $font-size;
@@ -54,6 +54,7 @@ $browser-context: 14;
   line-height: 1.67;
   letter-spacing: 1px;
   @include border-radius($border-radius);
+  padding: 5px 25px;
 
   &:disabled {
     background-color: $disabled-button;

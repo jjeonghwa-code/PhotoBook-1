@@ -79,7 +79,8 @@
         <label class="custom-checkbox">
           <input
             type="checkbox"
-            [(ngModel)]="newsletter" />
+            [(ngModel)]="newsletter"
+            [ngModelOptions]="{standalone: true}" />
           <span></span>
         </label>
         <span l10nTranslate>NEWSLETTER_SUBSCRIBE</span>
