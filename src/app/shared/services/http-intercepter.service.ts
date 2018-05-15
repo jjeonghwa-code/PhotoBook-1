@@ -13,13 +13,13 @@ constructor(
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (!req.url.includes('assets/')) {
-      const newRequest = req.clone({
-        url: `${environment.apiUrl}${req.url}`
-    });
+    // if (!req.url.includes('assets/')) {
+    //   const newRequest = req.clone({
+    //     url: `${environment.apiUrl}${req.url}`
+    // });
 
-      return next.handle(newRequest);
-    }
+    //   return next.handle(newRequest);
+    // }
 
     return next.handle(req);
   }
