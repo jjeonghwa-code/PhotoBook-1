@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
-import { UserService } from '../../shared/services';
+import { CommonService, UserService } from '../../shared/services';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginErrorMessage: string;
 
   constructor(
+    private commonService: CommonService,
     private useService: UserService,
     private formBuilder: FormBuilder,
     private router: Router
@@ -59,11 +60,14 @@ export class LoginComponent implements OnInit {
       this.useService.signedIn = true;
       this.router.navigate(['pages']);
     } else {
-      this.loginErrorMessage = 'Wrong password or email';
+      this.loginErrorMessage = 'Wrong password or email!';
+      setTimeout(() => {
+        this.loginErrorMessage = '';
+      }, 2000);
     }
   }
 
-  register() {
-
+  get loginSubTitle2(): string {
+    return this.commonService.translateTemplate('LOGIN_SUBTITLE_2', {});
   }
 }

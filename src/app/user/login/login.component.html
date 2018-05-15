@@ -1,24 +1,33 @@
 <div class="login-page">
   <div class="medium-card card">
     <div class="text-left login-title" l10nTranslate>LOGIN</div>
-    <div class="login-subtitle" [innerHtml]="'LOGIN_SUBTITLE' | translate:lang"></div>
+    <div class="login-subtitle">
+      <div l10nTranslate>LOGIN_SUBTITLE_1</div>
+      <div>{{ loginSubTitle2 }} <a routerLink="/reset-password" l10nTranslate>FORGOT_PASSWORD</a></div>
+    </div>
     <form class="sign-in-form" name="loginForm" [formGroup]="loginForm" novalidate>
-      <div class="form-group">
-        <label class="text-uppercase email-label-control">Email address:</label>
-        <input class="form-control email-form-control" formControlName="email">
-        <div class="form-field-error" *ngIf="loginFormErrors.email.required">
-          Email is required
-        </div>
-        <div class="form-field-error" *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
-          Please enter a valid email address
+      <div class="d-flex align-items-center">
+        <div class='icon-email'></div>
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" placeholder="Email" formControlName="email">
+          <div class="form-field-error" *ngIf="loginFormErrors.email.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_EMAIL
+          </div>
+          <div class="form-field-error" *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email" l10nTranslate>
+            LOGIN_FORM_ERROR_PATTERN_EMAIL
+          </div>
         </div>
       </div>
 
-      <div class="form-group password-form-field">
-        <label class="text-uppercase password-label-control">Password:</label>
-        <input class="form-control password-form-control" type="password" formControlName="password">
-        <div class="form-field-error" *ngIf="loginFormErrors.password.required">
-          Password is required
+      <div class="d-flex align-items-center">
+        <div class='icon-password'></div>
+        <div class="form-group">
+          <label l10nTranslate>PASSWORD</label>
+          <input class="form-control" type="password" [placeholder]="'PASSWORD' | translate:lang" formControlName="password">
+          <div class="form-field-error" *ngIf="loginFormErrors.password.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_PASSWORD
+          </div>
         </div>
       </div>
 
@@ -28,16 +37,18 @@
         </div>
       </div>
 
-      <div class="text-uppercase action">
-        <button mat-raised-button class="btn btn-primary" [disabled]="loginForm.invalid" (click)="login()">
-          Login
-        </button>
-        <button mat-raised-button class="btn btn-primary" [disabled]="loginForm.invalid" (click)="register()">
-          Register
-        </button>
-      </div>
+      <button
+        class="float-red-button btn pull-right"
+        [disabled]="loginForm.invalid"
+        (click)="login()">
+        <span l10nTranslate>LOGIN</span>
+      </button>
+
     </form>
     <div class="login-title" l10nTranslate>NOT_REGISTERED_YET</div>
-    <div l10nTranslate>REGISTER_TIP</div>
+    <div class="login-subtitle">
+      <div l10nTranslate>REGISTER_TIP</div>
+      <a routerLink="/register" l10nTranslate>REGISTER_FOR_A_FREE_ACCOUNT</a>
+    </div>
   </div>
 </div>
