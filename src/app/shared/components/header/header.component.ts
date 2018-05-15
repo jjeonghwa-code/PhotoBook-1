@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
 
@@ -10,7 +10,6 @@ import { LocaleService, TranslationService, Language } from 'angular-l10n';
 export class HeaderComponent implements OnInit {
   @Language() lang: string;
   @Input() isOnboarding: boolean;
-  @Output() toggleLanguage: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private router: Router,
@@ -29,22 +28,16 @@ export class HeaderComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.translation.translationChanged().subscribe(
-    //   () => {
-    //     console.log('local chnageed!!');
-    //     this.changeDetectorRef.markForCheck();
-    //   }
-    // );
+
   }
 
   switchLanguage() {
-    this.toggleLanguage.emit();
-    // if (this.locale.getCurrentLanguage() === 'en') {
-    //   this.locale.setDefaultLocale('nl', 'NL');
-    //   this.locale.setCurrentCurrency('EURO');
-    // } else if (this.locale.getCurrentLanguage() === 'nl') {
-    //   this.locale.setDefaultLocale('en', 'US');
-    //   this.locale.setCurrentCurrency('USD');
-    // }
+    if (this.locale.getCurrentLanguage() === 'en') {
+      this.locale.setDefaultLocale('nl', 'NL');
+      this.locale.setCurrentCurrency('EURO');
+    } else if (this.locale.getCurrentLanguage() === 'nl') {
+      this.locale.setDefaultLocale('en', 'US');
+      this.locale.setCurrentCurrency('USD');
+    }
   }
 }
