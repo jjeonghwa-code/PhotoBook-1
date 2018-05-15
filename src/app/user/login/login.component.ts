@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  get loginSubTitle2(): string {
-    return this.commonService.translateTemplate('LOGIN_SUBTITLE_2', {});
+  get loginSubTitleP2(): string {
+    return this.commonService.translateTemplate('LOGIN_SUBTITLE_P2', {});
   }
 }
