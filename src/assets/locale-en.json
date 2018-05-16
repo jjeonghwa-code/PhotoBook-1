@@ -54,6 +54,7 @@
   "REGISTER_FORM_ERROR_PATTERN_LASTNAME": "Last name may only contain upper- and lowercase characters.",
   "REGISTER_FORM_ERROR_REQUIRED_EMAIL": "Email is required.",
   "REGISTER_FORM_ERROR_PATTERN_EMAIL": "Email format is invalid.",
+  "REGISTER_FORM_ERROR_PATTERN_CONFIRM_EMAIL": "Emails do not match.",
   "REGISTER_FORM_ERROR_REQUIRED_PASSWORD": "Password is required.",
   "REGISTER_FORM_ERROR_PATTERN_PASSWORD": "Password length is too short.",
   "REGISTER_FORM_ERROR_REQUIRED_CONFIRM_PASSWORD": "Password confirmation is required.",

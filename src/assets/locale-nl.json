@@ -53,6 +53,7 @@
   "REGISTER_FORM_ERROR_PATTERN_LASTNAME": "Achternaam mag alleen grote- en kleine letters bevatten.",
   "REGISTER_FORM_ERROR_REQUIRED_EMAIL": "Email is verplicht.",
   "REGISTER_FORM_ERROR_PATTERN_EMAIL": "Email formaat is foutief.",
+  "REGISTER_FORM_ERROR_PATTERN_CONFIRM_EMAIL": "Emails do not match.",
   "REGISTER_FORM_ERROR_REQUIRED_PASSWORD": "Wachtwoord is verplicht.",
   "REGISTER_FORM_ERROR_PATTERN_PASSWORD": "Wachtwoord lengte is te kort.",
   "REGISTER_FORM_ERROR_REQUIRED_CONFIRM_PASSWORD": "Bevestig Wachtwoord is verplicht.",

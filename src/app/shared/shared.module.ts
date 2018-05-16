@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { NouisliderModule } from 'ng2-nouislider';
 import { MaterialModule } from './material/material.module';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ComponentsModule } from './components/components.module';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import {
   LocalizationModule,
   LocaleValidationModule

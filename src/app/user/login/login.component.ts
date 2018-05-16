@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
 import { CommonService, UserService } from '../../shared/services';
 
@@ -13,13 +14,13 @@ export class LoginComponent implements OnInit {
   @Language() lang: string;
   loginForm: FormGroup;
   loginFormErrors: any;
-  loginErrorMessage: string;
 
   constructor(
+    private router: Router,
+    private _notifications: NotificationsService,
     private commonService: CommonService,
     private useService: UserService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -54,17 +55,29 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    if (email === 'someone@example.com' && password === 'password') {
-      this.useService.signedIn = true;
-      this.router.navigate(['pages']);
-    } else {
-      this.loginErrorMessage = 'Wrong password or email!';
-      setTimeout(() => {
-        this.loginErrorMessage = '';
-      }, 2000);
-    }
+    const credentials = { 
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    };
+    this.useService.login(credentials)
+      .subscribe((res) => {
+        if (parseInt(res.errNum) == 200) {
+          // storageService.setUserInfo(res);
+          // filesService.user = res;
+          return this.router.navigate(['magazine/create/step/1']);
+        }
+
+        this._notifications.error(res.errMsg, null, {
+          clickToClose: true,
+          timeOut: 2000
+        });
+      },(err) => {
+          this._notifications.error('Wrong password or email!', null, {
+            clickToClose: true,
+            timeOut: 2000
+          });         
+        }
+      );
   }
 
   get loginSubTitleP2(): string {

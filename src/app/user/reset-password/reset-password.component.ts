@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
 import { CommonService, UserService } from '../../shared/services';
 
@@ -15,6 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   loginFormErrors: any;
 
   constructor(
+    private _notifications: NotificationsService,
     private commonService: CommonService,
     private useService: UserService,
     private formBuilder: FormBuilder,
@@ -51,13 +53,25 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   sendPassword() {
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    if (email === 'someone@example.com' && password === 'password') {
-      this.useService.signedIn = true;
-      this.router.navigate(['pages']);
-    } else {
+    const credentials = { 
+      email: this.loginForm.get('email').value
+    };
+    this.useService.resetPassword(credentials)
+      .subscribe((res) => {
+        if (parseInt(res.errNum) == 200) {
+          return this.router.navigate(['login']);
+        }
 
-    }
+        this._notifications.error(res.errMsg, null, {
+          clickToClose: true,
+          timeOut: 2000
+        });
+      },(err) => {
+          this._notifications.error('Something went wrong!', null, {
+            clickToClose: true,
+            timeOut: 2000
+          });         
+        }
+      );
   }
 }

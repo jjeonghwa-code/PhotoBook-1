@@ -49,6 +49,9 @@
           <div class="form-field-error" *ngIf="!loginFormErrors.emailRepeat.required && loginFormErrors.emailRepeat.email" l10nTranslate>
             LOGIN_FORM_ERROR_PATTERN_EMAIL
           </div>
+          <div class="form-field-error" *ngIf="!loginFormErrors.emailRepeat.required && !loginFormErrors.emailRepeat.email && loginFormErrors.emailRepeat.emailsNotMatch" l10nTranslate>
+            REGISTER_FORM_ERROR_PATTERN_CONFIRM_EMAIL
+          </div>
         </div>
       </div>
 
@@ -71,6 +74,9 @@
           <div class="form-field-error" *ngIf="loginFormErrors.passwordRepeat.required" l10nTranslate>
             LOGIN_FORM_ERROR_REQUIRED_PASSWORD
           </div>
+          <div class="form-field-error" *ngIf="loginFormErrors.passwordRepeat.passwordsNotMatch" l10nTranslate>
+            REGISTER_FORM_ERROR_PATTERN_CONFIRM_PASSWORD
+          </div>
         </div>
       </div>
 
@@ -84,12 +90,6 @@
           <span></span>
         </label>
         <span l10nTranslate>NEWSLETTER_SUBSCRIBE</span>
-      </div>
-
-      <div class="login-error-message">
-        <div *ngIf="loginErrorMessage">
-          {{ loginErrorMessage }}
-        </div>
       </div>
 
       <button
