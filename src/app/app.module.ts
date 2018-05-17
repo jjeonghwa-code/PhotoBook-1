@@ -23,6 +23,7 @@ import {
   StorageStrategy,
   ProviderType
 } from 'angular-l10n';
+import { GetStartedComponent } from './get-started/get-started.component';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -44,7 +45,8 @@ const l10nConfig: L10nConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GetStartedComponent
   ],
   imports: [
     BrowserModule,

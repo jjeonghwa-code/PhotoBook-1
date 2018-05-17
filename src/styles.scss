@@ -356,7 +356,7 @@ span.right-tab {
   }
 }
 
-.float-red-button {
+.common-rounded-button {
   @include app-button(300px, 60px, 30px, 32px, $psp-red);
   
   &:disabled {
@@ -366,20 +366,39 @@ span.right-tab {
   i {
     padding-right: 10px;
   }
+
+  &.primary,
+  &.alter {
+    background-image: linear-gradient(left, $color-primary, $color-secondary);
+
+    border: 0;
+    box-shadow: none;
+    color: #fff;
+
+    &.success {
+      background-image: linear-gradient(left, $color-dark-green, $color-light-green);
+    }
+
+    &.white {
+      color: $color-primary !important;
+      border: solid 1px $color-primary !important;
+      background: white !important;
+    }
+  }
 }
 
-.float-white-button {
-  @include app-button(140px, 40px, 12px, 20px, $white);
-  color: $psp-red;
+// .float-white-button {
+//   @include app-button(140px, 40px, 12px, 20px, $white);
+//   color: $psp-red;
 
-  &:disabled {
-    background-color: $dark-red;
-  }
+//   &:disabled {
+//     background-color: $dark-red;
+//   }
   
-  i {
-    padding-right: 10px;
-  }
-}
+//   i {
+//     padding-right: 10px;
+//   }
+// }
 
 .custom-checkbox {
   @include app-label-checkbox($very-dark-gray, $dark-gray, 30px);
