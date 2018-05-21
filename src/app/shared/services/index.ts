@@ -12,3 +12,6 @@ export { AppStateService } from './app-state.service';
 
 import { UserService } from './user.service';
 export { UserService } from './user.service';
+
+import { FilesService } from './files.service';
+export { FilesService } from './files.service';

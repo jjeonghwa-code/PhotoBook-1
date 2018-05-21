@@ -12,7 +12,11 @@ import {
   LocaleValidationModule
 } from 'angular-l10n';
 
-import { AppStateService, CommonService } from '../shared/services';
+import {
+  AppStateService,
+  CommonService,
+  FilesService
+} from '../shared/services';
 
 @NgModule({
   imports: [
@@ -20,6 +24,9 @@ import { AppStateService, CommonService } from '../shared/services';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    LocalStorageModule.withConfig({
+      storageType: 'localStorage'
+    }),
     LocalizationModule,
     LocaleValidationModule,
     BsDatepickerModule.forRoot(),
@@ -42,7 +49,8 @@ import { AppStateService, CommonService } from '../shared/services';
   declarations: [],
   providers: [
     AppStateService,
-    CommonService
+    CommonService,
+    FilesService
   ]
 })
 export class SharedModule {
