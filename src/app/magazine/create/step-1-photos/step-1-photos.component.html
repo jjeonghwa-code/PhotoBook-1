@@ -1,22 +1,25 @@
-<div draggable="true" ngClass="{{dragAreaClass}}">
-  <div class="row">
-    <div class="col-md-12 text-center" >
-      <a href="javascript:void(0)" (click)="file.click()" >
-        Click to browse 
-      </a>
-      Or Drag & Drop to upload your files
+<div draggable="true" class="step-1-photos-component d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
+  <div class="info-container">
+    <div class="d-flex">
+      <div class="title" >
+        <span>Drag and drop photos on this page or </span>
+        <a href="javascript:void(0)" (click)="file.click()" >
+          search on your computer
+        </a>
+      </div>
+      <div class='upload-files-btn' (click)="file.click()"></div>
       <input type="file"
+        #file
         hidden
-        accept=".jpeg,.png,.pdf"
-        #file 
+        accept="image/jpeg,image/jpg"
         [multiple]="(maxFiles > 1)"
         (change) = "onFileChange($event)" />
     </div>
+    <div class="error" *ngIf="errors.length > 0">
+      <div *ngFor="let err of errors">{{err}}</div>
+    </div>
   </div>
-
+  <div class="img-container" *ngFor="let i of imgSrcs">
+    <img [src]="i" />
+  </div>
 </div>
-<!-- <div class="row error" *ngIf="errors.length > 0">    
-  <ul>
-    <li *ngFor="let err of errors">{{err}}</li>
-  </ul>
-</div>   -->
