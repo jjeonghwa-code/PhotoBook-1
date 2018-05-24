@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 export const StateKeys = {
-  User: 'user',
+  UserInfo: 'userInfo',
   Magazine: 'magazine'
 };
 
@@ -11,12 +11,12 @@ export class AppStateService {
 
   constructor(private localStorageService: LocalStorageService) { }
 
-  set user(user: any) {
-    this.localStorageService.set(StateKeys.User, user);
+  set userInfo(user: any) {
+    this.localStorageService.set(StateKeys.UserInfo, user);
   }
 
-  get user() {
-    return this.localStorageService.get(StateKeys.User);
+  get userInfo() {
+    return this.localStorageService.get(StateKeys.UserInfo);
   }
 
   set magazine(magazine) {
