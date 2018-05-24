@@ -369,14 +369,14 @@ span.right-tab {
 
   &.primary,
   &.alter {
-    background-image: linear-gradient(left, $color-primary, $color-secondary);
+    background-image: linear-gradient(to left, $color-primary, $color-secondary);
 
     border: 0;
     box-shadow: none;
     color: #fff;
 
     &.success {
-      background-image: linear-gradient(left, $color-dark-green, $color-light-green);
+      background-image: linear-gradient(to left, $color-dark-green, $color-light-green);
     }
 
     &.white {
