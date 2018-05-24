@@ -3,7 +3,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
-import { CommonService, UserService } from '../../shared/services';
+import {
+  CommonService,
+  AppStateService,
+  FilesService,
+  UserService
+} from '../../shared/services';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +25,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _notifications: NotificationsService,
     private commonService: CommonService,
-    private useService: UserService,
+    private appStateService: AppStateService,
+    private fileService: FilesService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
     public locale: LocaleService
@@ -70,11 +77,11 @@ export class RegisterComponent implements OnInit {
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
     };
-    this.useService.login(credentials)
+    this.userService.login(credentials)
       .subscribe((res) => {
         if (parseInt(res.errNum) == 200) {
-          // storageService.setUserInfo(res);
-          // filesService.user = res;
+          this.appStateService.userInfo = res;
+          this.fileService.user = res;
           return this.router.navigate(['get-started']);
         }
 
@@ -106,7 +113,7 @@ export class RegisterComponent implements OnInit {
       language: this.locale.getCurrentLanguage(),
       newsletter: this.newsletter ? 1 : 0,
     };
-    this.useService.register(credentials)
+    this.userService.register(credentials)
       .subscribe((res) => {
         if (parseInt(res.errNum) == 200) {
           this.login();

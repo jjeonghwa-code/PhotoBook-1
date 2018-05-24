@@ -3,7 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
-import { CommonService, UserService } from '../../shared/services';
+import {
+  CommonService,
+  AppStateService,
+  FilesService,
+  UserService
+} from '../../shared/services';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +24,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _notifications: NotificationsService,
     private commonService: CommonService,
-    private useService: UserService,
+    private appStateService: AppStateService,
+    private fileService: FilesService,
+    private userService: UserService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -59,11 +66,11 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
     };
-    this.useService.login(credentials)
+    this.userService.login(credentials)
       .subscribe((res) => {
         if (parseInt(res.errNum) == 200) {
-          // storageService.setUserInfo(res);
-          // filesService.user = res;
+          this.appStateService.userInfo = res;
+          this.fileService.user = res;
           return this.router.navigate(['magazine/create/step/1']);
         }
 
