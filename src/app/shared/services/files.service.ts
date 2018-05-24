@@ -11,7 +11,7 @@ import { API } from '../consts';
 @Injectable()
 export class FilesService {
   files = this.appStateService.magazine || [];
-  user = this.appStateService.user || {};
+  user = this.appStateService.userInfo || {};
   folder_id = -1;
   cloudfolder = '';
   user_id = -1;
@@ -41,9 +41,9 @@ export class FilesService {
 
     return this.httpService.post(API.url.getCloudFolder, body, { headers })
       .map((res) => {
-        this.folder_id = res.data.folder_id;
-        this.cloudfolder = res.data.cloudfolder;
-        this.user_id = res.data.user_id;
+        this.folder_id = res.folder_id;
+        this.cloudfolder = res.cloudfolder;
+        this.user_id = res.user_id;
         return res;
       });
   }
@@ -62,16 +62,17 @@ export class FilesService {
   }
 
   public uploadFile(file) {
+    console.log(123123123, file);
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', undefined);
-    const body = new HttpParams()
-      .set('folder_id', this.folder_id.toString())
-      .set('user_id', this.user_id.toString())
-      .set('cloudfolder', this.cloudfolder)
-      .set('upl_filename', file.name)
-      .set('upl_attachment', file);
+    let formData: FormData = new FormData();
+    formData.append('folder_id', this.folder_id.toString());
+    formData.append('user_id', this.user_id.toString());
+    formData.append('cloudfolder', this.cloudfolder);
+    formData.append('upl_filename', file.name);
+    formData.append('upl_attachment', file);
 
-    return this.httpService.post(API.url.uploadCloud, body, { headers })
+    return this.httpService.post(API.url.uploadCloud, formData)
       .map((res) => {
         return res;
       });
