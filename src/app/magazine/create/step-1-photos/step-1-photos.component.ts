@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { FilesService } from '../../../shared/services';
 
@@ -20,7 +21,16 @@ export class Step1PhotosComponent implements OnInit {
   
   constructor(private fileService: FilesService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fileService.getFolder()
+      .subscribe(
+        success => {
+          this.refreshPhotoList();
+        },
+        error => {
+          console.log(error);
+      })
+  }
 
   onFileChange(event){
     let files = event.target.files; 
@@ -54,17 +64,28 @@ export class Step1PhotosComponent implements OnInit {
       this.saveFiles(files);
   }
 
-  refreshPhotoList(files) {
-    Object.keys(files).forEach((key) => {
-      const myReader: FileReader = new FileReader();
-
-      myReader.onloadend = (e) => {
-        const base64Data = myReader.result;
-        this.imgSrcs.push(base64Data); 
-      };
+  refreshPhotoList(files = []) {
+    if (files.length > 0) {
+      files.forEach((file) => {
+        const myReader: FileReader = new FileReader();
   
-      myReader.readAsDataURL(files[key]);
-    })
+        myReader.onloadend = (e) => {
+          const base64Data = myReader.result;
+          this.imgSrcs.push(base64Data); 
+        };
+    
+        myReader.readAsDataURL(file);
+      })  
+    } else {
+      this.fileService.getFolderPhotos()
+        .subscribe((res) => {
+          if (parseInt(res.errNum) == 100) {
+
+          }
+        },(err) => {
+            console.log(err);
+        })
+    }
   }
 
   saveFiles(files){
@@ -76,27 +97,29 @@ export class Step1PhotosComponent implements OnInit {
     }  
   
     if (files.length > 0) {
-      this.refreshPhotoList(files);
+      const filesArry = _.values(files);
+      this.refreshPhotoList(filesArry);
 
-      let formData: FormData = new FormData();
-      for (var j = 0; j < files.length; j++) {
-        formData.append("file[]", files[j], files[j].name);
-      }
-      var parameters = {
-        projectId: this.projectId,
-        sectionId: this.sectionId
-      }
-      this.fileService.uploadFile(formData)
+      // let formData: FormData = new FormData();
+      // for (var j = 0; j < files.length; j++) {
+      //   formData.append("file[]", files[j], files[j].name);
+      // }
+      // var parameters = {
+      //   projectId: this.projectId,
+      //   sectionId: this.sectionId
+      // }
+      const file = filesArry.shift();
+      this.fileService.uploadFile(file)
         .subscribe(
-        success => {
-          this.uploadStatus.emit(true);
-          console.log(success)
-        },
-        error => {
-          this.uploadStatus.emit(true);
-          this.errors.push(error.ExceptionMessage);
+          success => {
+            this.uploadStatus.emit(true);
+            console.log(success)
+          },
+          error => {
+            this.uploadStatus.emit(true);
+            this.errors.push(error.ExceptionMessage);
         })
-      }
+    }
   }
 
   private isValidFiles(files){
