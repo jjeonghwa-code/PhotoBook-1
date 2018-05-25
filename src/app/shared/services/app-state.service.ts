@@ -3,7 +3,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 export const StateKeys = {
   UserInfo: 'userInfo',
-  Magazine: 'magazine'
+  Files: 'files'
 };
 
 @Injectable()
@@ -19,11 +19,11 @@ export class AppStateService {
     return this.localStorageService.get(StateKeys.UserInfo);
   }
 
-  set magazine(magazine) {
-    this.localStorageService.set(StateKeys.Magazine, magazine);
+  set files(files: any[]) {
+    this.localStorageService.set(StateKeys.Files, files);
   }
 
-  get magazine() {
-    return this.localStorageService.get(StateKeys.Magazine);
+  get files() {
+    return this.localStorageService.get(StateKeys.Files);
   }
 }
