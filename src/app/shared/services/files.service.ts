@@ -10,7 +10,7 @@ import { API } from '../consts';
 
 @Injectable()
 export class FilesService {
-  files = this.appStateService.magazine || [];
+  files = this.appStateService.files || [];
   user = this.appStateService.userInfo || {};
   folder_id = -1;
   cloudfolder = '';
@@ -62,9 +62,9 @@ export class FilesService {
   }
 
   public uploadFile(file) {
-    console.log(123123123, file);
-    let headers = new HttpHeaders();
-    headers = headers.append('Content-Type', undefined);
+    // console.log(123123123, file);
+    // let headers = new HttpHeaders();
+    // headers = headers.append('Content-Type', undefined);
     let formData: FormData = new FormData();
     formData.append('folder_id', this.folder_id.toString());
     formData.append('user_id', this.user_id.toString());
@@ -76,5 +76,43 @@ export class FilesService {
       .map((res) => {
         return res;
       });
+  }
+
+  public deleteFile(file) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = new HttpParams()
+      .set('use_guid', this.user.use_guid)
+      .set('photo_id', file.id);
+
+    return this.httpService.post(API.url.deleteCloudPhoto, body, { headers })
+      .map((res) => {
+        return res;
+      });
+  }
+
+  public deleteAllCloudPhotos() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = new HttpParams()
+      .set('use_guid', this.user.use_guid);
+
+    return this.httpService.post(API.url.deleteAllCloudPhotos, body, { headers })
+      .map((res) => {
+        return res;
+      });
+  }
+
+  public getFileById(id) {
+    if (this.files.length === 0)
+      return false;
+
+    const files = this.files.filter((file) => {
+      if (!file)
+        return false;
+      return file.id === id;
+    });
+
+    return files.length ? files[0] : false;
   }
 }
