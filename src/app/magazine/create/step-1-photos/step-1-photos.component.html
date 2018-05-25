@@ -19,7 +19,9 @@
       <div *ngFor="let err of errors">{{err}}</div>
     </div>
   </div>
-  <div class="img-container" *ngFor="let i of imgSrcs">
-    <img [src]="i" />
+  <div class="img-container" *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
+    <img
+      [src]="imageScaleUrl + '?width=300&height=300&image=' + file.url + '&t=' + timestamp"
+      (click)="setMainImage(idx)" />
   </div>
 </div>
