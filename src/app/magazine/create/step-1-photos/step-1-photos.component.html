@@ -1,49 +1,65 @@
-<div draggable="true" class="step-1-photos-component d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
-  <div class="info-container">
-    <div class="d-flex">
-      <div class="title" >
-        <span l10nTranslate>STEP_1_MESSAGE_BASIS</span>
-        <a href="javascript:void(0)" (click)="file.click()" l10nTranslate>
-          STEP_1_SEARCH
-        </a>
+<div class="step-1-photos-component">
+  <div draggable="true" class="photo-drop-area d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
+    <div class="info-container">
+      <div class="d-flex">
+        <div class="title" >
+          <span l10nTranslate>STEP_1_MESSAGE_BASIS</span>
+          <a href="javascript:void(0)" (click)="file.click()" l10nTranslate>
+            STEP_1_SEARCH
+          </a>
+        </div>
+        <div class='upload-files-btn' (click)="file.click()"></div>
+        <input type="file"
+          #file
+          hidden
+          accept="image/jpeg,image/jpg"
+          [multiple]="(maxFiles > 1)"
+          (change) = "onFileChange($event)" />
       </div>
-      <div class='upload-files-btn' (click)="file.click()"></div>
-      <input type="file"
-        #file
-        hidden
-        accept="image/jpeg,image/jpg"
-        [multiple]="(maxFiles > 1)"
-        (change) = "onFileChange($event)" />
+      <div class="error">
+        <div
+          *ngIf="totalPortraitCounts < minPortraitFiles"
+          [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MISSING_PORTRAIT', {missingCount: minPortraitFiles-totalPortraitCounts})">
+        </div>
+        <div>{{ uploadedFilesMessage }} {{ minMaxWarningMessage }}</div>
+        <div [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MIN_MAX_DEFAULT', {min: minFiles, max: maxFiles})"></div>
+      </div>
     </div>
-    <div class="error">
-      <div
-        *ngIf="totalPortraitCounts < minPortraitFiles"
-        [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MISSING_PORTRAIT', {missingCount: minPortraitFiles-totalPortraitCounts})">
+    <!-- <div class="img-container" *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
+      <img
+        *ngIf="!file.isNotUploaded"
+        [src]="imageScaleUrl + '?width=300&height=300&image=' + file.url + '&t=' + timestamp"
+        (click)="setMainImage(idx)" />
+      <img
+        *ngIf="file.isNotUploaded"
+        [src]="file.url"
+        (click)="setMainImage(idx)" />
+      <div class="m-btn-photo-actions icon-warning"></div>
+    </div> -->
+    <div
+      class="img-container"
+      [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file) + ')'}"
+      [style.width.px]="file.width*150/file.height"
+      [style.height.px]="150"
+      *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
+      <div class='m-btn-photo-actions-wrapper'>
+        <span class="m-btn-photo-actions icon-warning"></span>
+        <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file)"></span>
       </div>
-      <div>{{ uploadedFilesMessage }} {{ minMaxWarningMessage }}</div>
-      <div [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MIN_MAX_DEFAULT', {min: minFiles, max: maxFiles})"></div>
     </div>
   </div>
-  <!-- <div class="img-container" *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
-    <img
-      *ngIf="!file.isNotUploaded"
-      [src]="imageScaleUrl + '?width=300&height=300&image=' + file.url + '&t=' + timestamp"
-      (click)="setMainImage(idx)" />
-    <img
-      *ngIf="file.isNotUploaded"
-      [src]="file.url"
-      (click)="setMainImage(idx)" />
-    <div class="m-btn-photo-actions icon-warning"></div>
-  </div> -->
-  <div
-    class="img-container"
-    [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file) + ')'}"
-    [style.width.px]="file.width*150/file.height"
-    [style.height.px]="150"
-    *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
-    <div class='m-btn-photo-actions-wrapper'>
-      <span class="m-btn-photo-actions icon-warning"></span>
-      <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file)"></span>
+  <div class="footer d-flex justify-content-between align-items-center">
+    <div class="left-buttons">
+      <a (click)="sort()">Sort</a>
+      <a (click)="file.click()">Add photos</a>
+      <a (click)="deleteAll()">Delete all</a>
+    </div>
+    <div>
+      <button
+        class="common-rounded-button primary btn mx-auto"
+        (click)="nextStep()">
+        <span l10nTranslate>NEXT_STEP</span>
+      </button>
     </div>
   </div>
 </div>

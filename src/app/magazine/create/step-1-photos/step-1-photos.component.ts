@@ -1,12 +1,13 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
 
 @Component({
   selector: 'app-step-1-photos',
   templateUrl: './step-1-photos.component.html',
-  styleUrls: ['./step-1-photos.component.scss']
+  styleUrls: ['./step-1-photos.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Step1PhotosComponent implements OnInit {
   errors: Array<string> =[];
@@ -202,6 +203,20 @@ export class Step1PhotosComponent implements OnInit {
       }, (error) => {
         console.log('Error removing photo', error);
       });     
+  }
+
+  deleteAll() {
+    this.filesService.deleteAllCloudPhotos()
+      .subscribe((data) => {
+        // storageService.deleteStepsStorage().then(function(state) {
+        this.refreshPhotoList();        
+      }, (error) => {
+        this.refreshPhotoList();        
+      });
+  }
+
+  sort() {
+
   }
 
   photoUrl(file) {
