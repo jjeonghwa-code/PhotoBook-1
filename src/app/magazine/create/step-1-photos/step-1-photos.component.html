@@ -21,6 +21,7 @@
           *ngIf="totalPortraitCounts < minPortraitFiles"
           [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MISSING_PORTRAIT', {missingCount: minPortraitFiles-totalPortraitCounts})">
         </div>
+        <div>{{ warningFilesMessage }}</div>
         <div>{{ uploadedFilesMessage }} {{ minMaxWarningMessage }}</div>
         <div [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MIN_MAX_DEFAULT', {min: minFiles, max: maxFiles})"></div>
       </div>
@@ -43,7 +44,7 @@
       [style.height.px]="150"
       *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
       <div class='m-btn-photo-actions-wrapper'>
-        <span class="m-btn-photo-actions icon-warning"></span>
+        <span class="m-btn-photo-actions icon-warning" *ngIf="isTooSmall(file) || isWrongRatio(file)"></span>
         <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file)"></span>
       </div>
     </div>

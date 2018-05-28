@@ -226,15 +226,45 @@ export class Step1PhotosComponent implements OnInit {
   isTooSmall(file) {
     if (!file) return;
 
-    var min = 800;
-    if (file.width < min || file.height < min)
+    const min = 800;
+    if (file.width < min || file.height < min) {
       return true;
+    }
 
     return false;
   }
 
+  isWrongRatio(file) {
+    if (!file) return;
+
+    const fourThree = 4 / 3;
+    const threeFour = 3 / 4;
+    const standardRatio = file.orientation === 0 ? fourThree : threeFour;
+    const tolerance = 0.01;
+    const ratio = file.width / file.height;
+    if (Math.abs(ratio - standardRatio) > tolerance) {
+      return true;
+    }
+
+    return false;
+  }
+
+  get warningFilesMessage() {
+    const warningFiles = this.files.filter((file) => {
+      return this.isTooSmall(file) || this.isWrongRatio(file);
+    })
+
+    const count = warningFiles.length;
+    return count > 1
+            ? this.commonService.translateTemplate('STEP_1_MESSAGE_WARNING_FILES', {n: count})
+            : this.commonService.translateTemplate('STEP_1_MESSAGE_ONE_WARNING_FILE', {});
+  }
+
   get uploadedFilesMessage() {
-    return this.commonService.translateTemplate('STEP_1_MESSAGE_UPLOADED_FILES', {n: this.files.length});
+    const count = this.files.length;
+    return count > 1
+            ? this.commonService.translateTemplate('STEP_1_MESSAGE_UPLOADED_FILES', {n: count})
+            : this.commonService.translateTemplate('STEP_1_MESSAGE_ONE_UPLOADED_FILES', {});
   }
 
   get minMaxWarningMessage() {
