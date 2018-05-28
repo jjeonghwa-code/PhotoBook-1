@@ -2,9 +2,9 @@
   <div class="info-container">
     <div class="d-flex">
       <div class="title" >
-        <span>Drag and drop photos on this page or </span>
-        <a href="javascript:void(0)" (click)="file.click()" >
-          search on your computer
+        <span l10nTranslate>STEP_1_MESSAGE_BASIS</span>
+        <a href="javascript:void(0)" (click)="file.click()" l10nTranslate>
+          STEP_1_SEARCH
         </a>
       </div>
       <div class='upload-files-btn' (click)="file.click()"></div>
@@ -15,13 +15,35 @@
         [multiple]="(maxFiles > 1)"
         (change) = "onFileChange($event)" />
     </div>
-    <div class="error" *ngIf="errors.length > 0">
-      <div *ngFor="let err of errors">{{err}}</div>
+    <div class="error">
+      <div
+        *ngIf="totalPortraitCounts < minPortraitFiles"
+        [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MISSING_PORTRAIT', {missingCount: minPortraitFiles-totalPortraitCounts})">
+      </div>
+      <div>{{ uploadedFilesMessage }} {{ minMaxWarningMessage }}</div>
+      <div [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MIN_MAX_DEFAULT', {min: minFiles, max: maxFiles})"></div>
     </div>
   </div>
-  <div class="img-container" *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
+  <!-- <div class="img-container" *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
     <img
+      *ngIf="!file.isNotUploaded"
       [src]="imageScaleUrl + '?width=300&height=300&image=' + file.url + '&t=' + timestamp"
       (click)="setMainImage(idx)" />
+    <img
+      *ngIf="file.isNotUploaded"
+      [src]="file.url"
+      (click)="setMainImage(idx)" />
+    <div class="m-btn-photo-actions icon-warning"></div>
+  </div> -->
+  <div
+    class="img-container"
+    [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file) + ')'}"
+    [style.width.px]="file.width*150/file.height"
+    [style.height.px]="150"
+    *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
+    <div class='m-btn-photo-actions-wrapper'>
+      <span class="m-btn-photo-actions icon-warning"></span>
+      <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file)"></span>
+    </div>
   </div>
 </div>

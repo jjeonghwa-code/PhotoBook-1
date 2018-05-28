@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
 
 @Component({
@@ -10,10 +11,14 @@ import { FilesService , AppStateService, CommonService } from '../../../shared/s
 export class Step1PhotosComponent implements OnInit {
   errors: Array<string> =[];
   dragAreaClass: string = 'dragarea';
-  @Input() fileExt: string[] = ["JPG", "JPEG"];
-  @Input() maxFiles: number = 100;
-  @Input() maxSize: number = 5; // 5MB
+  fileExt: string[] = ["JPG", "JPEG"];
+  minPortraitFiles: number = 2;
+  minFiles: number = 36;
+  maxFiles: number = 100;
+  maxSize: number = 5; // 5MB
   @Output() uploadStatus = new EventEmitter();
+
+  totalPortraitCounts: number = 0;
 
   files = this.appStateService.files || [];
   newFiles: any[] = [];
@@ -23,9 +28,10 @@ export class Step1PhotosComponent implements OnInit {
   amountOfPhotosToUpload = 0;
   isUploading = false;
   rotation = 0;
-  
+
   constructor(
     private filesService: FilesService,
+    private _notifications: NotificationsService,
     private appStateService: AppStateService,
     public commonService: CommonService
   ) { }
@@ -70,6 +76,10 @@ export class Step1PhotosComponent implements OnInit {
             text: file.text,
             weight: idx,
           };
+
+          if (newFile.orientation === 1) {
+            this.totalPortraitCounts++;
+          }
 
           if (currentFile) {
             // These properties can be updated by the server, so remove these.
@@ -131,51 +141,95 @@ export class Step1PhotosComponent implements OnInit {
   saveNewFiles(files){
     this.errors = []; // Clear error
     // Validate file size and allowed extensions
-    if (files.length > 0 && (!this.isValidFiles(files))) {
+    if (files.length > 0 && (!this.isValidFileExtension(files))) {
         this.uploadStatus.emit(false);
         return;
-    }  
-  
+    }
+
     if (files.length > 0) {
       this.newFiles = _.values(files);
+      // this.saveNewFilesFromLocal();
       this.uploadNextFile();
     }
   }
 
-  saveFilesFromLocal(files){
+  saveNewFilesFromLocal() {
     this.errors = []; // Clear error
-    // Validate file size and allowed extensions
-    if (files.length > 0 && (!this.isValidFiles(files))) {
-        this.uploadStatus.emit(false);
-        return;
-    }  
-  
-    if (files.length > 0) {
-      const filesArry = _.values(files);
-      files.forEach((file) => {
-        const myReader: FileReader = new FileReader();
-  
-        myReader.onloadend = (e) => {
-          const base64Data = myReader.result;
-          // this.imgSrcs.push(base64Data);
+    this.newFiles.forEach((file, idx) => {
+      const myReader: FileReader = new FileReader();
 
-          var newFile = {
-            url: base64Data,
-            name: '',
-            orientation: 0,
-            isCover: false,
-            id: '',
-            height: 0,
-            width: 0,
-            text: '',
-            weight: '',
-          };
+      myReader.onloadend = (e) => {
+        const base64Data = myReader.result;
 
-          this.files.push(newFile);
+        var newFile = {
+          url: base64Data,
+          isNotUploaded: true,
+          name: '',
+          orientation: 0,
+          isCover: false,
+          id: '',
+          height: 0,
+          width: 0,
+          text: '',
+          weight: '',
         };
-    
-        myReader.readAsDataURL(file);
-      })        
+
+        this.files.push(newFile);
+        if (idx === this.newFiles.length - 1) {
+          this.appStateService.files = this.files;
+          this.filesService.files = this.files;      
+        }
+      };
+
+      myReader.readAsDataURL(file);
+    })
+  }
+
+  deleteFile(file) {
+    this.filesService.deleteFile(file)
+      .subscribe((data) => {
+        if (file.isCover === true) {
+          // deleteStepsStorage deletes the selected-cover
+          // and we want to do this only if the user deletes their cover,
+          // so that they are forced to go to step 2 again which shows them
+          // a new cover.
+          // storageService.deleteStepsStorage().then(function(state) {
+            this.refreshPhotoList();
+          // });
+        } else {
+          this.refreshPhotoList();
+        }
+      }, (error) => {
+        console.log('Error removing photo', error);
+      });     
+  }
+
+  photoUrl(file) {
+    return file.isNotUploaded ? file.url : this.imageScaleUrl + '?width=300&height=300&image=' + file.url + '&t=' + this.timestamp;
+  }
+
+  isTooSmall(file) {
+    if (!file) return;
+
+    var min = 800;
+    if (file.width < min || file.height < min)
+      return true;
+
+    return false;
+  }
+
+  get uploadedFilesMessage() {
+    return this.commonService.translateTemplate('STEP_1_MESSAGE_UPLOADED_FILES', {n: this.files.length});
+  }
+
+  get minMaxWarningMessage() {
+    const uploadedCount = this.files.length;
+    const min = this.minFiles;
+    const max = this.maxFiles;
+    if (uploadedCount < min) {
+      return this.commonService.translateTemplate('STEP_1_MESSAGE_MIN_FILES', {missingCount: min - uploadedCount});
+    } else if (uploadedCount > max) {
+      return this.commonService.translateTemplate('STEP_1_MESSAGE_MAX_FILES', {overCount: uploadedCount - max});
     }
   }
 
@@ -200,11 +254,18 @@ export class Step1PhotosComponent implements OnInit {
             // Check the extension exists
             var exists = extensions.includes(ext);
             if (!exists) {
-                this.errors.push("Error (Extension): " + files[i].name);
+                this._notifications.error(`Error (Extension): ${ext}`, null, {
+                  clickToClose: true,
+                  timeOut: 2000
+                });
+
+                return false;
             }
             // Check file size
-            this.isValidFileSize(files[i]);
+            // this.isValidFileSize(files[i]);
         }
+
+        return true;
   }
 
   private isValidFileSize(file) {

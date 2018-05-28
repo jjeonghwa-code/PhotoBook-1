@@ -41,7 +41,7 @@
       min-width: 80px;
       min-height: 80px;
       border-radius: 50%;
-  
+
       &:before {
         @include icon-grid-svg-display();
         @include icon-grid-svg(-22em, 0, 30px);
@@ -52,18 +52,87 @@
     }
 
     .error {
-      font-size: 18px;  
+      font-size: 18px;
       color: $mostly-black;
       margin-top: 10px;
-    }  
+    }
   }
 
-  .img-container {
-    height: 150px;
-    margin: 10px;
+  // .img-container {
+  //   position: relative;
+  //   height: 150px;
+  //   margin: 10px;
 
-    > img {
-      height: 100%;
+  //   > img {
+  //     height: 100%;
+  //   }
+
+  //   .m-btn-photo-actions {
+  //     width: 35px;
+  //     height: 35px;
+  //     display: inline-block;
+  //     background-color: rgba(0, 0, 0, 0.4);
+  //     border-radius: 8px;
+  //     overflow: hidden;
+  //     cursor: pointer;
+    
+  //     &.icon-warning {
+  //       &:before {
+  //         @include icon-grid-svg-display();
+  //         @include icon-grid-svg(-10em, -1em, 20px);
+  //         position: absolute;
+  //         left: 50%;
+  //         top: 50%;
+  //       }
+  //     }  
+  //   }
+  // }
+  .img-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0;
+    margin: 0 10px 20px 10px;
+    position: relative;
+    overflow: hidden;
+
+    .m-btn-photo-actions-wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 5px;
+
+      .m-btn-photo-actions {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+      
+        &:before {
+          @include icon-grid-svg-display();
+          position: absolute;
+          left: 5px;
+          top: 5px;
+        }
+
+        &.icon-warning {
+          &:before {
+            @include icon-grid-svg(-10em, -1em, 20px);
+          }
+        }  
+
+        &.icon-delete {
+          background-color: $color-danger;
+
+          &:before {
+            @include icon-grid-svg(-27em, 0em, 16px);
+          }
+        }  
+      }
     }
   }
 }
