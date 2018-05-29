@@ -1,7 +1,10 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
+import { ConfirmDialogComponent } from '../../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
+import { EIO } from 'constants';
 
 @Component({
   selector: 'app-step-1-photos',
@@ -29,10 +32,13 @@ export class Step1PhotosComponent implements OnInit {
   amountOfPhotosToUpload = 0;
   isUploading = false;
   rotation = 0;
+  isDateAscending: boolean = false;
+  isNameAscending: boolean = false;
 
   constructor(
     private filesService: FilesService,
     private _notifications: NotificationsService,
+    private matDialog: MatDialog,
     private appStateService: AppStateService,
     public commonService: CommonService
   ) { }
@@ -96,14 +102,16 @@ export class Step1PhotosComponent implements OnInit {
         })
 
         // Sort by weight
-        newFiles.sort((a, b) => {
-          var keyA = parseInt(a.weight),
-              keyB = parseInt(b.weight);
+        this.isDateAscending = false;
+        this.dateSort(newFiles);
+        // newFiles.sort((a, b) => {
+        //   var keyA = parseInt(a.weight),
+        //       keyB = parseInt(b.weight);
 
-          if(keyA < keyB) return -1;
-          if(keyA > keyB) return 1;
-          return 0;
-        });
+        //   if(keyA < keyB) return -1;
+        //   if(keyA > keyB) return 1;
+        //   return 0;
+        // });
 
         newFiles.forEach((newFile, idx) => {
           newFile.weight = idx;
@@ -215,8 +223,30 @@ export class Step1PhotosComponent implements OnInit {
       });
   }
 
-  sort() {
+  dateSort(files, isToggle: boolean = false) {
+    if (isToggle === true) {
+      this.isDateAscending = !this.isDateAscending;
+    }
+    files.sort((a, b) => {
+      const valueA = parseInt(a.weight);
+      const valueB = parseInt(b.weight);
 
+      return this.isDateAscending ? valueA > valueB ? -1 : valueA === valueB ? 0 : 1
+      : valueA > valueB ? 1 : valueA === valueB ? 0 : -1;
+    });
+  }
+
+  nameSort(files, isToggle: boolean = false) {
+    if (isToggle === true) {
+      this.isNameAscending = !this.isNameAscending;
+    }
+    files.sort((a, b) => {
+      const valueA = a.name;
+      const valueB = b.name;
+
+      return this.isNameAscending ? valueA > valueB ? -1 : valueA === valueB ? 0 : 1
+      : valueA > valueB ? 1 : valueA === valueB ? 0 : -1;
+    });
   }
 
   photoUrl(file) {

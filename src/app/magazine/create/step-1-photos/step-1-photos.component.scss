@@ -126,7 +126,7 @@
           &:before {
             @include icon-grid-svg-display();
             position: absolute;
-            left: 5px;
+            left: 6px;
             top: 5px;
           }
   
@@ -161,6 +161,13 @@
 
         &:last-child {
           border: none;
+        }
+
+        &.ascending {
+          i {
+            transform: rotate(180deg);
+            transition: transform ease .2s;
+          }
         }
       }
     }

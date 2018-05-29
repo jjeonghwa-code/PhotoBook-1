@@ -51,9 +51,10 @@
   </div>
   <div class="footer d-flex justify-content-between align-items-center">
     <div class="left-buttons">
-      <a (click)="sort()">Sort</a>
-      <a (click)="file.click()">Add photos</a>
-      <a (click)="deleteAll()">Delete all</a>
+      <a [class.ascending]="isDateAscending" (click)="dateSort(files, true)">Sort By Date <i class="fa fa-angle-up"></i></a>
+      <a [class.ascending]="isNameAscending" (click)="nameSort(files, true)">Sort By Name <i class="fa fa-angle-up"></i></a>
+      <a (click)="file.click()">Add Photos</a>
+      <a (click)="deleteAll()">Delete All</a>
     </div>
     <div>
       <button
