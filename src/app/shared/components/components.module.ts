@@ -12,6 +12,7 @@ import {
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { LoadingComponent } from './loading/loading.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     FormsModule,
@@ -39,6 +41,9 @@ import { LoadingComponent } from './loading/loading.component';
     HeaderComponent,
     FooterComponent,
     LoadingComponent
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ]
 })
 export class ComponentsModule { }

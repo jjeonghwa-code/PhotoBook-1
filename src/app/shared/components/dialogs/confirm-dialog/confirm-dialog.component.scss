@@ -1,0 +1,18 @@
+@import '../../../../../mixins';
+@import '../../../../../variables';
+
+.confirm-dialog-component {
+  .main-body {
+    font-family: "San Francisco Semi Bold", Arial, sans-serif;
+    font-size: 20px;
+    color: $black;
+    margin: 30px;
+  }
+
+  .common-rounded-button {
+    min-width: 170px;
+    min-height: 40px;
+    font-size: 18px;
+    margin: 0 15px;
+  }
+}

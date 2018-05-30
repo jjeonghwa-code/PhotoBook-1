@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
 import { ConfirmDialogComponent } from '../../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
-import { EIO } from 'constants';
 
 @Component({
   selector: 'app-step-1-photos',
@@ -195,32 +194,56 @@ export class Step1PhotosComponent implements OnInit {
   }
 
   deleteFile(file) {
-    this.filesService.deleteFile(file)
-      .subscribe((data) => {
-        if (file.isCover === true) {
-          // deleteStepsStorage deletes the selected-cover
-          // and we want to do this only if the user deletes their cover,
-          // so that they are forced to go to step 2 again which shows them
-          // a new cover.
-          // storageService.deleteStepsStorage().then(function(state) {
+    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '570px',
+      panelClass: 'confirm-dialog',
+      data : {
+        confirmMessage: 'Are you sure to delete this photo?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.filesService.deleteFile(file)
+        .subscribe((data) => {
+          if (file.isCover === true) {
+            // deleteStepsStorage deletes the selected-cover
+            // and we want to do this only if the user deletes their cover,
+            // so that they are forced to go to step 2 again which shows them
+            // a new cover.
+            // storageService.deleteStepsStorage().then(function(state) {
+              this.refreshPhotoList();
+            // });
+          } else {
             this.refreshPhotoList();
-          // });
-        } else {
-          this.refreshPhotoList();
-        }
-      }, (error) => {
-        console.log('Error removing photo', error);
-      });     
+          }
+        }, (error) => {
+          console.log('Error removing photo', error);
+        });
+      }
+    });
   }
 
   deleteAll() {
-    this.filesService.deleteAllCloudPhotos()
-      .subscribe((data) => {
-        // storageService.deleteStepsStorage().then(function(state) {
-        this.refreshPhotoList();        
-      }, (error) => {
-        this.refreshPhotoList();        
-      });
+    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '570px',
+      panelClass: 'confirm-dialog',
+      data : {
+        confirmMessage: 'Are you sure to delete all photos?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.filesService.deleteAllCloudPhotos()
+        .subscribe((data) => {
+          // storageService.deleteStepsStorage().then(function(state) {
+          this.refreshPhotoList();        
+        }, (error) => {
+          this.refreshPhotoList();        
+        });
+      }
+    });
   }
 
   dateSort(files, isToggle: boolean = false) {
