@@ -11,62 +11,64 @@
 }
 
 .step-1-photos-component {
+  position: relative;
+
+  .info-area {
+    position: absolute;
+    width: 500px;
+    font-size: 24px;
+    padding: 20px;
+
+    .title {
+      font-family: "San Francisco Medium", Arial, sans-serif;
+      line-height: 27px;
+      color: $black;
+      max-width: 385px;
+
+      a {
+        color: $psp-red;
+      }
+    }
+
+    .upload-files-btn {
+      position: relative;
+      cursor: pointer;
+      background-image: linear-gradient(to right, $color-primary, $color-secondary);
+      min-width: 80px;
+      min-height: 80px;
+      border-radius: 50%;
+
+      &:before {
+        @include icon-grid-svg-display();
+        @include icon-grid-svg(-22em, 0, 30px);
+        position: absolute;
+        left: 25px;
+        top: 25px;
+      }
+    }
+
+    .error {
+      font-size: 18px;
+      color: $mostly-black;
+      margin-top: 10px;
+    }
+  }
+  
   .photo-drop-area {
     height: calc(100vh - 185px);
     overflow: auto;
-  
+    padding: 20px;
+
     &.dragarea {
-      font-size: 24px;
       border: 3px solid #bbb; 
-      padding: 20px ;
       background-color: #fff;
       color: #bbb;
     }
   
     &.droparea {
-      font-size: 24px;
       border: 3px dashed #bbb; 
-      padding: 20px ;
       background-color: #eff;
       color: #aaa;
-    }
-  
-    .info-container {
-      width: 480px;
-  
-      .title {
-        font-family: "San Francisco Medium", Arial, sans-serif;
-        line-height: 27px;
-        color: $black;
-        max-width: 385px;
-  
-        a {
-          color: $psp-red;
-        }
-      }
-  
-      .upload-files-btn {
-        position: relative;
-        cursor: pointer;
-        background-image: linear-gradient(to right, $color-primary, $color-secondary);
-        min-width: 80px;
-        min-height: 80px;
-        border-radius: 50%;
-  
-        &:before {
-          @include icon-grid-svg-display();
-          @include icon-grid-svg(-22em, 0, 30px);
-          position: absolute;
-          left: 25px;
-          top: 25px;
-        }
-      }
-  
-      .error {
-        font-size: 18px;
-        color: $mostly-black;
-        margin-top: 10px;
-      }
     }
   
     // .img-container {
@@ -106,6 +108,10 @@
       margin: 0 10px 20px 10px;
       position: relative;
       overflow: hidden;
+
+      &:first-child {
+        margin-left: 500px;
+      }
   
       .m-btn-photo-actions-wrapper {
         width: 100%;
