@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
+import { DragulaService } from 'ng2-dragula';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
 import { ConfirmDialogComponent } from '../../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
 
@@ -37,10 +38,43 @@ export class Step1PhotosComponent implements OnInit {
   constructor(
     private filesService: FilesService,
     private _notifications: NotificationsService,
+    private dragulaService: DragulaService,
     private matDialog: MatDialog,
     private appStateService: AppStateService,
     public commonService: CommonService
-  ) { }
+  ) {
+    dragulaService.setOptions('draggable-photo-bag', {
+      revertOnSpill: true,
+      moves: function (el: any, container: any, handle: any): any {
+        return handle.classList.contains('img-container');
+      },
+      // accepts: function (el: any, target: any, source: any, sibling: any): any {
+      //   return !target.classList.contains('info-container');
+      // },
+      // invalid: function (el, handle) {
+      //   console.log(11111, el, handle);
+      //   return handle.classList.contains('info-container');
+      // }
+    });
+    dragulaService.dropModel.subscribe((value) => {
+      this.onDropModel(value.slice(1));
+    });
+    dragulaService.removeModel.subscribe((value) => {
+      this.onRemoveModel(value.slice(1));
+    });
+  }
+
+  private onDropModel(args) {
+    let [el, target, source] = args;
+    console.log(11111, this.files);
+    // do something else
+  }
+
+  private onRemoveModel(args) {
+    let [el, source] = args;
+    // console.log(22222, el, source);
+    // do something else
+  }
 
   ngOnInit() {
     this.filesService.getFolder()
@@ -81,6 +115,7 @@ export class Step1PhotosComponent implements OnInit {
             width: +file.imgWidth,
             text: file.text,
             weight: idx,
+            isNotUploaded: false
           };
 
           if (newFile.orientation === 1) {

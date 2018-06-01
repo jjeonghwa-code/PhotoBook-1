@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { NouisliderModule } from 'ng2-nouislider';
 import { MaterialModule } from './material/material.module';
-import { ComponentsModule } from './components/components.module';
+import { DragulaModule } from 'ng2-dragula';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import {
   LocalizationModule,
   LocaleValidationModule
 } from 'angular-l10n';
+import { ComponentsModule } from './components/components.module';
 
 import {
   AppStateService,
@@ -32,6 +33,7 @@ import {
     BsDatepickerModule.forRoot(),
     NouisliderModule,
     MaterialModule,
+    DragulaModule,
     ComponentsModule
   ],
   exports: [
@@ -44,6 +46,7 @@ import {
     BsDatepickerModule,
     NouisliderModule,
     MaterialModule,
+    DragulaModule,
     ComponentsModule
   ],
   declarations: [],

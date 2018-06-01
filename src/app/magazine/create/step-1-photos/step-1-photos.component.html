@@ -1,5 +1,5 @@
 <div class="step-1-photos-component">
-  <div draggable="true" class="photo-drop-area d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
+  <div [dragula]='"draggable-photo-bag"' [dragulaModel]='files' draggable="true" class="photo-drop-area d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
     <div class="info-container">
       <div class="d-flex">
         <div class="title" >
@@ -37,6 +37,7 @@
         (click)="setMainImage(idx)" />
       <div class="m-btn-photo-actions icon-warning"></div>
     </div> -->
+    <ng-container>
     <div
       class="img-container"
       [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file) + ')'}"
@@ -48,6 +49,7 @@
         <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file)"></span>
       </div>
     </div>
+    </ng-container>
   </div>
   <div class="footer d-flex justify-content-between align-items-center">
     <div class="left-buttons">
