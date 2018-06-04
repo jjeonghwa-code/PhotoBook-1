@@ -10,6 +10,20 @@ export class CommonService {
     private translationService: TranslationService
   ) { }
 
+  public imgUrlToBase64Data(url, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
   public trackStringItem(index: any, item: string): string {
     return item ? item : index;
   }
