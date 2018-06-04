@@ -4,7 +4,9 @@ import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { DragulaService } from 'ng2-dragula';
 import { FilesService , AppStateService, CommonService } from '../../../shared/services';
+import { Magazine } from '../../../shared/models';
 import { ConfirmDialogComponent } from '../../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
+import { PhotoEditorModalComponent } from './photo-editor-modal/photo-editor-modal.component';
 
 @Component({
   selector: 'app-step-1-photos',
@@ -24,7 +26,7 @@ export class Step1PhotosComponent implements OnInit {
 
   totalPortraitCounts: number = 0;
 
-  files = this.appStateService.files || [];
+  files = this.appStateService.getMagazine['files'] || [];
   newFiles: any[] = [];
   imageScaleUrl = this.filesService.imageScaleUrl;
   timestamp = new Date().getMilliseconds();
@@ -92,7 +94,7 @@ export class Step1PhotosComponent implements OnInit {
       .subscribe((data) => {
         if (parseInt(data.errNum) == 100) {
           this.files = [];
-          this.appStateService.files = this.files;
+          this.appStateService.setMagazine('files', this.files);
           this.filesService.files = this.files;
           return;
         }
@@ -152,7 +154,7 @@ export class Step1PhotosComponent implements OnInit {
         })
 
         this.files = newFiles;
-        this.appStateService.files = this.files;
+        this.appStateService.setMagazine('files', this.files);
         this.filesService.files = this.files;
       },(err) => {
         console.log('Error listing folder contents', err);
@@ -219,13 +221,30 @@ export class Step1PhotosComponent implements OnInit {
 
         this.files.push(newFile);
         if (idx === this.newFiles.length - 1) {
-          this.appStateService.files = this.files;
+          this.appStateService.setMagazine('files', this.files);
           this.filesService.files = this.files;      
         }
       };
 
       myReader.readAsDataURL(file);
     })
+  }
+
+  openPhotoEditor(file) {
+    const dialogRef = this.matDialog.open(PhotoEditorModalComponent, {
+      // width: '570px',
+      panelClass: 'photo-editor-dialog',
+      data : {
+        currentFile: file,
+        files: this.files
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+      }
+    });
   }
 
   deleteFile(file) {

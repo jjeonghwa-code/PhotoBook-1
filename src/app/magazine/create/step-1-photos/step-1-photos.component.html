@@ -42,6 +42,7 @@
       [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file) + ')'}"
       [style.width.px]="file.width*150/file.height"
       [style.height.px]="150"
+      (click)="openPhotoEditor(file)"
       *ngFor="let file of files; index as idx; trackBy: commonService.trackStringItem">
       <div class='m-btn-photo-actions-wrapper'>
         <span class="m-btn-photo-actions icon-warning" *ngIf="isTooSmall(file) || isWrongRatio(file)"></span>

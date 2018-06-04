@@ -9,6 +9,7 @@ import { Step3StyleComponent } from './step-3-style/step-3-style.component';
 import { Step4LayoutComponent } from './step-4-layout/step-4-layout.component';
 import { Step5PreviewComponent } from './step-5-preview/step-5-preview.component';
 import { Step6OrderComponent } from './step-6-order/step-6-order.component';
+import { PhotoEditorModalComponent } from './step-1-photos/photo-editor-modal/photo-editor-modal.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,11 @@ import { Step6OrderComponent } from './step-6-order/step-6-order.component';
     Step3StyleComponent,
     Step4LayoutComponent,
     Step5PreviewComponent,
-    Step6OrderComponent
+    Step6OrderComponent,
+    PhotoEditorModalComponent
+  ],
+  entryComponents: [
+    PhotoEditorModalComponent
   ]
 })
 export class CreateModule { }

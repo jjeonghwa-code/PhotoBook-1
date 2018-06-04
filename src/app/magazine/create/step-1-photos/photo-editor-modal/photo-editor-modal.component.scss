@@ -1,0 +1,30 @@
+@import '../../../../../mixins';
+@import '../../../../../variables';
+
+.photo-editor-modal-component {
+  .main-body {
+    font-family: "San Francisco Semi Bold", Arial, sans-serif;
+    font-size: 20px;
+    color: $black;
+    margin: 30px;
+
+    i {
+      cursor: pointer;
+      border-radius: 50%;
+      color: $white;
+      background-image: linear-gradient(to left, $color-primary, $color-secondary);
+      padding: 0px 7px 1px 7px;
+    }
+
+    img {
+      height: 300px;
+    }
+  }
+
+  .common-rounded-button {
+    min-width: 170px;
+    min-height: 40px;
+    font-size: 18px;
+    margin: 0 15px;
+  }
+}

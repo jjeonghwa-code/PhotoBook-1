@@ -10,7 +10,7 @@ import { API } from '../consts';
 
 @Injectable()
 export class FilesService {
-  files = this.appStateService.files || [];
+  files = this.appStateService.getMagazine('files') || [];
   user = this.appStateService.userInfo || {};
   folder_id = -1;
   cloudfolder = '';
