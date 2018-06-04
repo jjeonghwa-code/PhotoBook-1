@@ -6,7 +6,17 @@
   <div class="main-body d-flex align-items-center justify-content-between">
     <i class="fa fa-angle-left" (click)="prevPhoto()"></i>
     <div class="mx-4">
-      <img [src]="data.files[currentFileIndex].url" />
+      <image-cropper        
+        [imageBase64]="base64Image"
+        format="jpg,jpeg"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 3"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (loadImageFailed)="loadImageFailed()"
+        [style.display]="cropperReady ? null : 'none'">
+      </image-cropper>
+      <!-- <img [src]="croppedImage" /> -->
     </div>
     <i class="fa fa-angle-right" (click)="nextPhoto()"></i>
   </div>
