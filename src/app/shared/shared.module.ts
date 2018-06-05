@@ -7,6 +7,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { MaterialModule } from './material/material.module';
 import { DragulaModule } from 'ng2-dragula';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NguiReactModule } from '@ngui/react';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import {
   LocalizationModule,
@@ -36,6 +37,7 @@ import {
     MaterialModule,
     DragulaModule,
     ImageCropperModule,
+    NguiReactModule,
     ComponentsModule
   ],
   exports: [
@@ -50,6 +52,7 @@ import {
     MaterialModule,
     DragulaModule,
     ImageCropperModule,
+    NguiReactModule,
     ComponentsModule
   ],
   declarations: [],

@@ -10,6 +10,7 @@ import { Step4LayoutComponent } from './step-4-layout/step-4-layout.component';
 import { Step5PreviewComponent } from './step-5-preview/step-5-preview.component';
 import { Step6OrderComponent } from './step-6-order/step-6-order.component';
 import { PhotoEditorModalComponent } from './step-1-photos/photo-editor-modal/photo-editor-modal.component';
+import { PesdkReactuiComponent } from './step-1-photos/pesdk-reactui/pesdk-reactui.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { PhotoEditorModalComponent } from './step-1-photos/photo-editor-modal/ph
     Step4LayoutComponent,
     Step5PreviewComponent,
     Step6OrderComponent,
-    PhotoEditorModalComponent
+    PhotoEditorModalComponent,
+    PesdkReactuiComponent
   ],
   entryComponents: [
     PhotoEditorModalComponent

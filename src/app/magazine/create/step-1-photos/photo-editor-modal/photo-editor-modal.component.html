@@ -6,7 +6,9 @@
   <div class="main-body d-flex align-items-center justify-content-between">
     <i class="fa fa-angle-left" (click)="prevPhoto()"></i>
     <div class="mx-4">
-      <image-cropper        
+      {{data.files[this.currentFileIndex].url}}
+      <app-pesdk-reactui [imgSrc]="data.files[this.currentFileIndex].url"></app-pesdk-reactui>
+      <!-- <image-cropper
         [imageBase64]="base64Image"
         format="jpg,jpeg"
         [maintainAspectRatio]="true"
@@ -15,7 +17,7 @@
         (imageLoaded)="imageLoaded()"
         (loadImageFailed)="loadImageFailed()"
         [style.display]="cropperReady ? null : 'none'">
-      </image-cropper>
+      </image-cropper> -->
       <!-- <img [src]="croppedImage" /> -->
     </div>
     <i class="fa fa-angle-right" (click)="nextPhoto()"></i>
