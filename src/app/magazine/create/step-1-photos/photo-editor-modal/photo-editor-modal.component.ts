@@ -41,20 +41,20 @@ export class PhotoEditorModalComponent implements OnInit {
   ngOnInit() {
     console.log(123321, this.data);
     this.currentFileIndex = this.data.currentFile.weight;
-    this.getBase64Image();
+    // this.getBase64Image();
   }
 
   prevPhoto() {
     if (this.currentFileIndex > 0) {
       this.currentFileIndex--;
-      this.getBase64Image();
+      // this.getBase64Image();
     }
   }
 
   nextPhoto() {
     if (this.currentFileIndex < this.data.files.length - 1) {
       this.currentFileIndex++;
-      this.getBase64Image();
+      // this.getBase64Image();
     }
   }
 }

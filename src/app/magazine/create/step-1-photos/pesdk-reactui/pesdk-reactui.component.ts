@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Input, OnChanges, Output, EventEmitter, ElementRef } from '@angular/core';
 // Import PhotoEditor SDK React
 import * as PhotoEditorReactUI from 'photoeditorsdk/js/PhotoEditorSDK.UI.ReactUI.js';
 
@@ -15,57 +15,74 @@ declare global {
 window.React = window.React || React
 window.ReactDom = window.ReactDom || ReactDom
 
-let templateStr: string = `
-  <ngui-react
-    [reactComponent]="reactComponent"
-    [reactProps]="reactProps">
-  </ngui-react>
-`;
-
 @Component({
   selector: 'app-pesdk-reactui',
-  // template: templateStr,
   templateUrl: './pesdk-reactui.component.html',
   styleUrls: ['../../../../../../node_modules/photoeditorsdk/css/PhotoEditorSDK.UI.ReactUI.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PesdkReactuiComponent implements OnInit {
-
-
-  ngOnInit(): void {
-
-  }
+export class PesdkReactuiComponent implements OnInit, OnChanges {
   //members
   reactComponent: React.Component
   reactProps: any
   //inputs
   @Input() license: string = license;
   @Input() imgSrc: string;
+  @Output() srcChange: EventEmitter<any> = new EventEmitter();
+  image = new Image();
+  editor;
+
   //functions
-  constructor() {
+  constructor(private el: ElementRef) {
+
+  }
+
+  ngOnInit() {
+
+  }
+
+  ngOnChanges() {
     let licenseProps = {
       license: this.license
     }
 
-    let image = new Image()
-    image.src = this.imgSrc;
-    console.log(123321123, this.imgSrc);
-  
-    let defaultProps = {
+    this.image.src = this.imgSrc;
+    console.log(123, this.el);
+    this.editor = new PhotoEditorReactUI({
+      container: this.el.nativeElement,
       license: license,
       assets: {
         baseUrl: '/assets/photoeditorsdk' // see angular-cli.json for configuraton
       },
-      style:{
+      responsive: true,
+      style: {
         width: 1024,
         height: 576
       },
       editor: {
-        image: image
-      }
-    }
+        image: this.image,
+        export: {
+          download: false
+        }
+      },
+    });
+    this.editor.on('export', (result) => this.srcChange.emit(result));
 
-    this.reactComponent = PhotoEditorReactUI.ReactComponent; // use the react Component
-    this.reactProps = {...defaultProps, ...licenseProps}
+    // let defaultProps = {
+    //   license: license,
+    //   assets: {
+    //     baseUrl: '/assets/photoeditorsdk' // see angular-cli.json for configuraton
+    //   },
+    //   style:{
+    //     width: 1024,
+    //     height: 576
+    //   },
+    //   editor: {
+    //     image: image
+    //   }
+    // }
+
+    // this.reactComponent = PhotoEditorReactUI.ReactComponent; // use the react Component
+    // this.reactProps = {...defaultProps, ...licenseProps}
   }
 }
