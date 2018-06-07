@@ -137,8 +137,7 @@
     ],
     "typedef": [
       true,
-      "parameter",
-      // "property-declaration"
+      "parameter"
     ],
     "typedef-whitespace": [
       true,

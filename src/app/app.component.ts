@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public options = {
     position: ['middle', 'center'],
   };
-  
+
   constructor() { }
 
   public ngOnInit() {
