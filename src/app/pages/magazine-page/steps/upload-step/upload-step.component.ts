@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UploadStateService } from './services/upload-state.service';
 
 @Component({
   selector: 'pb-upload-step',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadStepComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private uploadStateService: UploadStateService
+  ) { }
 
   ngOnInit() {
+    this.uploadStateService.getPhotos().subscribe(res => {
+      console.log(res);
+    });
   }
 
 }

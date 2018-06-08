@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '@photobook/core/services/user.service';
+import { catchError, finalize, tap } from 'rxjs/operators';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   selector: 'pb-login',
@@ -7,9 +12,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  isLoading = false;
+  loginForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userSerivce: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
+
+  login() {
+    this.isLoading = true;
+    this.userSerivce.login(this.loginForm.value)
+      .pipe(
+        tap(e => this.router.navigate(['/magazine/create/step1'])),
+        catchError((e) => of('Login failed')),
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe(message => {
+        // nothing
+      });
   }
 
 }

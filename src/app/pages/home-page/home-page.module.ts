@@ -7,7 +7,7 @@ import { HomePageComponent } from './home-page.component';
 @NgModule({
   imports: [
     CommonModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [HomePageComponent]
 })

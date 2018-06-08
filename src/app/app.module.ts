@@ -7,6 +7,8 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { StateService } from '@photobook/state-service';
 import { CommonService } from '@photobook/common-service';
+import { UserService } from '@photobook/core/services/user.service';
+import { AuthGuard } from '@photobook/core/guards/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +57,9 @@ const l10nConfig: L10nConfig = {
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     StateService,
-    CommonService
+    CommonService,
+    UserService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

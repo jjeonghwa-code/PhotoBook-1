@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { API } from '@photobook/core/consts/api';
+import { StateService } from '@photobook/state-service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,8 @@ import { API } from '@photobook/core/consts/api';
 export class UserService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private stateService: StateService
   ) { }
 
   register(credentials: any) {
@@ -33,7 +36,14 @@ export class UserService {
     const body = new HttpParams()
       .set('use_email', credentials.email)
       .set('use_password', credentials.password);
-    return this.http.post(API.url.signIn, body, {headers: headers});
+    return this.http.post(API.url.signIn, body, {headers: headers})
+      .pipe(
+        tap((res: any) => {
+          if (parseInt(res.errNum, 10) === 200) {
+            this.stateService.userInfo = res;
+          }
+        })
+      );
   }
 
   resetPassword(credentials) {
