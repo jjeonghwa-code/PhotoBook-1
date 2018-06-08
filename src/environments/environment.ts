@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  imageScaleUrl: 'https://cloud.onsfotoboek.nl/image.php',
+  version: 'YPM_V2.php',
+  host: 'https://app.onsfotoboek.nl',
+  uploadHost: 'https://upload.onsfotoboek.nl'
 };
 
 /*
