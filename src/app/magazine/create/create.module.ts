@@ -11,11 +11,14 @@ import { Step5PreviewComponent } from './step-5-preview/step-5-preview.component
 import { Step6OrderComponent } from './step-6-order/step-6-order.component';
 import { PhotoEditorModalComponent } from './step-1-photos/photo-editor-modal/photo-editor-modal.component';
 
+import { PhotoUploadModule } from './photo-upload/photo-upload.module';
+
 @NgModule({
   imports: [
     CommonModule,
     CreateRoutingModule,
-    SharedModule
+    SharedModule,
+    PhotoUploadModule
   ],
   declarations: [
     Step1PhotosComponent,
