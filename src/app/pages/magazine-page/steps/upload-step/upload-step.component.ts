@@ -14,7 +14,7 @@ export class UploadStepComponent implements OnInit {
 
   ngOnInit() {
     this.uploadStateService.getPhotos().subscribe(res => {
-      console.log(res);
+      // nothing
     });
   }
 

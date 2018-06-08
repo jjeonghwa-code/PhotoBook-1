@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import * as _ from 'lodash';
 
 export const StateKeys = {
   UserInfo: 'userInfo',
@@ -18,6 +19,9 @@ export class StateService {
 
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn);
 
+  magazine: any = {};
+  magazine$: BehaviorSubject<any> = new BehaviorSubject<any>(this.magazine);
+
   constructor(
     private localStorageService: LocalStorageService
   ) { }
@@ -33,6 +37,15 @@ export class StateService {
 
   get userInfo() {
     return this.localStorageService.get(StateKeys.UserInfo);
+  }
+
+  setMagazinePart(key: string, value: any) {
+    this.magazine = this.localStorageService.get(StateKeys.Magazine) || {};
+    const source: any = {};
+    source[key] = value;
+    _.merge(this.magazine, source);
+    this.localStorageService.set(StateKeys.Magazine, this.magazine);
+    this.magazine$.next(this.magazine);
   }
 
   authChanged() {

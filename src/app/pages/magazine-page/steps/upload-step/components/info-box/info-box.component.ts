@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from '@photobook/state-service';
 
 @Component({
   selector: 'pb-info-box',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoBoxComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private stateService: StateService
+  ) { }
 
   ngOnInit() {
+    this.stateService.magazine$.subscribe(magazine => {
+      console.log(magazine);
+    });
   }
 
 }
