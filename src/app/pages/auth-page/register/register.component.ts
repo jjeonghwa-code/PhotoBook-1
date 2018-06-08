@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@photobook/core/services/user.service';
-import { catchError, finalize, switchMap, tap } from 'rxjs/operators';
+import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Router } from '@angular/router';
 
@@ -47,8 +47,13 @@ export class RegisterComponent implements OnInit {
     };
     this.registerAndLogin(credentials)
       .pipe(
-        tap(x => {
-          this.router.navigate(['/magazine/create/step1']);
+        tap((res: any) => {
+          if (parseInt(res.errNum, 10) === 200) {
+            this.router.navigate(['/magazine/create/step1']);
+          } else {
+            // TODO: error
+            console.log(res);
+          }
         }),
         catchError(e => of(e)),
         finalize(() => this.isLoading = false)
@@ -60,7 +65,15 @@ export class RegisterComponent implements OnInit {
 
   private registerAndLogin(credentials) {
     return this.userService.register(credentials)
-      .pipe(switchMap(x => this.userService.login({email: credentials.email, password: credentials.password})));
+      .pipe(
+        switchMap((x: any) => {
+          if (parseInt(x.errNum, 10) === 200) {
+            return this.userService.login({email: credentials.email, password: credentials.password});
+          } else {
+            return of(x);
+          }
+        })
+      );
   }
 
 }

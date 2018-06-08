@@ -32,7 +32,14 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.userSerivce.login(this.loginForm.value)
       .pipe(
-        tap(e => this.router.navigate(['/magazine/create/step1'])),
+        tap((x: any) => {
+          if (parseInt(x.errNum, 10) === 200) {
+            this.router.navigate(['/magazine/create/step1']);
+          } else {
+            // TODO: error
+            console.log(x);
+          }
+        }),
         catchError((e) => of('Login failed')),
         finalize(() => this.isLoading = false)
       )
