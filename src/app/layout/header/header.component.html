@@ -1,0 +1,6 @@
+<div>
+  <a>Logo</a>
+  <div>Menus</div>
+  <a routerLink="/login" *ngIf="!(auth$ | async)">Login</a>
+  <a (click)="logout()" *ngIf="auth$ | async">Logout</a>
+</div>

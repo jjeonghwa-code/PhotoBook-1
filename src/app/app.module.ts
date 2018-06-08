@@ -10,6 +10,7 @@ import { CommonService } from '@photobook/common-service';
 import { UserService } from '@photobook/core/services/user.service';
 import { AuthGuard } from '@photobook/core/guards/auth.guard';
 
+import { LayoutModule } from './layout/layout.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -50,6 +51,7 @@ const l10nConfig: L10nConfig = {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    LayoutModule,
     LocalStorageModule.withConfig({storageType: 'localStorage', prefix: 'PHOTOBOOK'}),
     LocalizationModule.forRoot(l10nConfig),
     LocaleValidationModule.forRoot()

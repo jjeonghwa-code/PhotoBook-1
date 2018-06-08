@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '@photobook/core/services/user.service';
@@ -6,26 +6,37 @@ import { CommonService } from '@photobook/common-service';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
+import { StateService } from '@photobook/state-service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'pb-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   @Language() lang: string;
   isLoading = false;
   loginForm: FormGroup;
   loginFormErrors: any;
 
+  auth$: Subscription = new Subscription();
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private stateService: StateService,
     private commonService: CommonService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    this.auth$ = this.stateService.isLoggedIn$.subscribe(flag => {
+      if (flag) {
+        this.router.navigate(['/magazine/create/step1']);
+      }
+    });
+
     this.loginFormErrors = {
       email: {},
       password: {}
@@ -40,6 +51,10 @@ export class LoginComponent implements OnInit {
     this.loginForm.valueChanges.subscribe(() => {
       this.formValuesChanged();
     });
+  }
+
+  ngOnDestroy() {
+    this.auth$.unsubscribe();
   }
 
   formValuesChanged() {
