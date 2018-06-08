@@ -19,7 +19,6 @@ export class StateService {
 
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn);
 
-  magazine: any = {};
   magazine$: BehaviorSubject<any> = new BehaviorSubject<any>(this.magazine);
 
   constructor(
@@ -28,6 +27,10 @@ export class StateService {
 
   get isLoggedIn() {
     return !!this.localStorageService.get(StateKeys.UserInfo);
+  }
+
+  get magazine() {
+    return this.localStorageService.get(StateKeys.Magazine) || {};
   }
 
   set userInfo(user: any) {
@@ -40,11 +43,11 @@ export class StateService {
   }
 
   setMagazinePart(key: string, value: any) {
-    this.magazine = this.localStorageService.get(StateKeys.Magazine) || {};
     const source: any = {};
     source[key] = value;
-    _.merge(this.magazine, source);
-    this.localStorageService.set(StateKeys.Magazine, this.magazine);
+    const magazine = this.magazine;
+    _.merge(magazine, source);
+    this.localStorageService.set(StateKeys.Magazine, magazine);
     this.magazine$.next(this.magazine);
   }
 
