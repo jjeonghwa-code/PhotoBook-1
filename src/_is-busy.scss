@@ -1,0 +1,70 @@
+$busy-size : 25px;
+$busy-size-small : 15px;
+$busy-size-big : 50px;
+$busy-factor-width : 5;
+
+.busy-container {
+  display: block;
+}
+
+.is-busy {
+  position: relative;
+  min-height: $busy-size;
+  pointer-events: none;
+  outline: none;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
+  }
+
+  &:after {
+    content: '';
+    background-image: url(/assets/images/loading.svg);
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,-50%);
+    background-size: contain;
+    width: $busy-size * $busy-factor-width;
+    height: $busy-size;
+  }
+
+  &.busy-right:after {
+    left: auto;
+    right: 15px;
+    transform: translate(0,-50%);
+  }
+
+  &.busy-big {
+    min-height: $busy-size-big;
+
+    &:after{
+      width: $busy-size-big * $busy-factor-width;
+      height: $busy-size-big;
+    }
+  }
+  
+  &.busy-small {
+    min-height: $busy-size-small;
+
+    &:after{
+      width: $busy-size-small * $busy-factor-width;
+      height: $busy-size-small;
+    }
+  }
+
+  &.busy-light:after {
+    content: url(/assets/images/loading_light.svg);
+  }
+}
+
+button.is-busy {
+  @extend .busy-small;
+  @extend .busy-right;
+}

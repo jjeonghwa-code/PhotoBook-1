@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'San Francisco Bold';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-bold-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-bold-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-bold-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'San Francisco Medium';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-medium-webfont-webfont.woff2') format('woff2'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-medium-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-medium-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-medium-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'San Francisco';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-regular-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-regular-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-regular-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'San Francisco Semi Bold';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-semibold-webfont-webfont.woff2') format('woff2'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-semibold-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-semibold-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-semibold-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'San Francisco Thin';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-thin-webfont-webfont.woff2') format('woff2'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-thin-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-thin-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-thin-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'San Francisco Ultra Light';
+  src: url('./assets/fonts/san-francisco/sanfranciscodisplay-ultralight-webfont-webfont.woff') format('woff'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-ultralight-webfont-webfont.ttf') format('truetype'),
+       url('./assets/fonts/san-francisco/sanfranciscodisplay-ultralight-webfont-webfont.svg#webfontregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -11,6 +11,34 @@ import { CommonService } from '@photobook/common-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// localization module
+import {
+  L10nConfig,
+  L10nLoader,
+  LocalizationModule,
+  LocaleValidationModule,
+  StorageStrategy,
+  ProviderType
+} from 'angular-l10n';
+const l10nConfig: L10nConfig = {
+  locale: {
+    languages: [
+      { code: 'en', dir: 'ltr' },
+      { code: 'nl', dir: 'ltr' }
+    ],
+    defaultLocale: { languageCode: 'nl', countryCode: 'NL' },
+    currency: 'EURO',
+    storage: StorageStrategy.Cookie
+  },
+  translation: {
+    providers: [
+      { type: ProviderType.Static, prefix: '/assets/locale-' }
+    ],
+    composedKeySeparator: '.',
+    i18nPlural: true
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,6 +49,8 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     AppRoutingModule,
     LocalStorageModule.withConfig({storageType: 'localStorage', prefix: 'PHOTOBOOK'}),
+    LocalizationModule.forRoot(l10nConfig),
+    LocaleValidationModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
@@ -29,4 +59,8 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(public l10nLoader: L10nLoader) {
+    this.l10nLoader.load();
+  }
+}
