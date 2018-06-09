@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
       .pipe(
         tap((res: any) => {
           if (parseInt(res.errNum, 10) === 200) {
-            this.router.navigate(['get-started']);
+            this.router.navigate(['/get-started']);
           } else {
             this._notifications.error(res.errMsg, null, {
               clickToClose: true,

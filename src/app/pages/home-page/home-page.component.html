@@ -1,3 +1,24 @@
-<p>
-  home-page works!
-</p>
+<div class="get-started-component">
+  <div class="icons-container d-flex justify-content-around align-items-end">
+    <div class="icon-photos">
+      <div l10nTranslate>GET_STARTED_PHOTOS</div>
+    </div>
+    <div class="icon-style">
+      <div l10nTranslate>GET_STARTED_STYLE</div>
+    </div>
+    <div class="icon-layout">
+      <div l10nTranslate>GET_STARTED_LAYOUT</div>
+    </div>
+    <div class="icon-done">
+      <div l10nTranslate>GET_STARTED_DONE</div>
+    </div>
+  </div>
+  <div class="video-container d-flex flex-column mx-auto">
+    <div id='intro-video-wrapper'><iframe id='intro-video' src='https://www.youtube.com/embed/PYUc7yWwnwQ?feature=oembed&amp;wmode=opaque'></iframe></div>
+    <button
+      class="common-rounded-button primary btn mx-auto"
+      (click)="getStarted()">
+      <span l10nTranslate>GET_STARTED_CREATE</span>
+    </button>
+  </div>
+</div>
