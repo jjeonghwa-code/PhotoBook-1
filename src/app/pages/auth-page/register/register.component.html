@@ -1,27 +1,103 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()">
-  <div class="form-group">
-    <label>first Name</label>
-    <input class="form-control" formControlName="firstName">
+<div class="register-component">
+  <div class="medium-card card">
+    <div class="text-left login-title" l10nTranslate>REGISTER_FORM_TITLE</div>
+    <div class="login-subtitle">
+      <div l10nTranslate>REGISTER_FORM_SUBTITLE_P1</div>
+      <div>{{ loginSubTitle2 }} <a routerLink="/login" l10nTranslate>REGISTER_FORM_GO_TO_LOGIN</a></div>
+    </div>
+    <form class="sign-in-form" name="registerForm" [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
+      <div class="d-flex align-items-center">
+        <div class='icon-user'></div>
+        <div class="form-group">
+          <label l10nTranslate>FIRSTNAME</label>
+          <input class="form-control" [placeholder]="'REGISTER_FORM_FIRSTNAME' | translate:lang" formControlName="firstName">
+          <div class="form-field-error" *ngIf="registerFormErrors.firstName.required" l10nTranslate>
+            REGISTER_FORM_ERROR_REQUIRED_FIRSTNAME
+          </div>
+        </div>
+        <div class="form-group">
+          <label l10nTranslate>LASTNAME</label>
+          <input class="form-control" [placeholder]="'REGISTER_FORM_LASTNAME' | translate:lang" formControlName="lastName">
+          <div class="form-field-error" *ngIf="registerFormErrors.lastName.required" l10nTranslate>
+            REGISTER_FORM_ERROR_REQUIRED_LASTNAME
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <div class='icon-email'></div>
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" [placeholder]="'REGISTER_FORM_EMAIL' | translate:lang" formControlName="email">
+          <div class="form-field-error" *ngIf="registerFormErrors.email.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_EMAIL
+          </div>
+          <div class="form-field-error" *ngIf="!registerFormErrors.email.required && registerFormErrors.email.email" l10nTranslate>
+            LOGIN_FORM_ERROR_PATTERN_EMAIL
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <div class='empty-div'></div>
+        <div class="form-group">
+          <label l10nTranslate>EMAIL_REPEAT</label>
+          <input class="form-control" [placeholder]="'REGISTER_FORM_REPEAT_EMAIL' | translate:lang" formControlName="emailRepeat">
+          <div class="form-field-error" *ngIf="registerFormErrors.emailRepeat.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_EMAIL
+          </div>
+          <div class="form-field-error" *ngIf="!registerFormErrors.emailRepeat.required && registerFormErrors.emailRepeat.email" l10nTranslate>
+            LOGIN_FORM_ERROR_PATTERN_EMAIL
+          </div>
+          <div class="form-field-error" *ngIf="!registerFormErrors.emailRepeat.required && !registerFormErrors.emailRepeat.email && registerFormErrors.emailRepeat.emailsNotMatch" l10nTranslate>
+            REGISTER_FORM_ERROR_PATTERN_CONFIRM_EMAIL
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <div class='icon-password'></div>
+        <div class="form-group">
+          <label l10nTranslate>PASSWORD</label>
+          <input class="form-control" type="password" [placeholder]="'REGISTER_FORM_MIN6' | translate:lang" formControlName="password">
+          <div class="form-field-error" *ngIf="registerFormErrors.password.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_PASSWORD
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center">
+        <div class='empty-div'></div>
+        <div class="form-group">
+          <label l10nTranslate>PASSWORD_REPEAT</label>
+          <input class="form-control" type="password" [placeholder]="'REGISTER_FORM_REPEAT' | translate:lang" formControlName="passwordRepeat">
+          <div class="form-field-error" *ngIf="registerFormErrors.passwordRepeat.required" l10nTranslate>
+            LOGIN_FORM_ERROR_REQUIRED_PASSWORD
+          </div>
+          <div class="form-field-error" *ngIf="registerFormErrors.passwordRepeat.passwordsNotMatch" l10nTranslate>
+            REGISTER_FORM_ERROR_PATTERN_CONFIRM_PASSWORD
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mb-2">
+        <div class='empty-div'></div>
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            [(ngModel)]="newsletter"
+            [ngModelOptions]="{standalone: true}" />
+          <span></span>
+        </label>
+        <span l10nTranslate>NEWSLETTER_SUBSCRIBE</span>
+      </div>
+
+      <button
+        class="common-rounded-button btn pull-right"
+        [disabled]="registerForm.invalid">
+        <span l10nTranslate>REGISTER</span>
+      </button>
+
+    </form>
   </div>
-  <div class="form-group">
-    <label>last Name</label>
-    <input class="form-control" formControlName="lastName">
-  </div>
-  <div class="form-group">
-    <label>email</label>
-    <input class="form-control" formControlName="email">
-  </div>
-  <div class="form-group">
-    <label>email confirm</label>
-    <input class="form-control" formControlName="emailRepeat">
-  </div>
-  <div class="form-group">
-    <label>password</label>
-    <input class="form-control" formControlName="password">
-  </div>
-  <div class="form-group">
-    <label>email confirm</label>
-    <input class="form-control" formControlName="passwordRepeat">
-  </div>
-  <button class="btn btn-primary">Register</button>
-</form>
+</div>

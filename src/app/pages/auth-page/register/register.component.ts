@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@photobook/core/services/user.service';
+import { CommonService } from '@photobook/common-service';
 import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Router } from '@angular/router';
+import { LocaleService, TranslationService, Language } from 'angular-l10n';
 
 @Component({
   selector: 'pb-register',
@@ -11,25 +13,58 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  @Language() lang: string;
 
   isLoading = false;
   registerForm: FormGroup;
+  registerFormErrors: any;
+  newsletter: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private commonService: CommonService,
+    public locale: LocaleService
   ) { }
 
   ngOnInit() {
+    this.registerFormErrors = {
+      firstName: {},
+      lastName: {},
+      email: {},
+      emailRepeat: {},
+      password: {},
+      passwordRepeat: {}
+    };
+
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      emailRepeat: ['', [Validators.required, Validators.email]], // TODO: check original code for the validation
+      emailRepeat: ['', [Validators.required, Validators.email, confirmEmail]], // TODO: check original code for the validation
       password: ['', Validators.required],
-      passwordRepeat: ['', [Validators.required]], // TODO: check original code for the validation
+      passwordRepeat: ['', [Validators.required, confirmPassword]], // TODO: check original code for the validation
     });
+
+    this.formValuesChanged();
+    this.registerForm.valueChanges.subscribe(() => {
+      this.formValuesChanged();
+    });
+  }
+
+  formValuesChanged() {
+    for (const field in this.registerFormErrors) {
+      if (this.registerFormErrors.hasOwnProperty(field)) {
+        this.registerFormErrors[field] = {};
+
+        const control = this.registerForm.get(field);
+
+        if (control && control.dirty && !control.valid) {
+          this.registerFormErrors[field] = control.errors;
+        }
+      }
+    }
   }
 
   register() {
@@ -41,15 +76,16 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.get('password').value,
       pushToken: '',
       profilePic: '',
+      // profilePic: (vm.avatar != "public/images/profile_picture_default.jpg") ? vm.avatar.split(',')[1] : '',
       device: '3',
-      newsletter: 0, // TODO: resolve newsletter
-      language: '' // TODO: get from local serivce
+      newsletter: this.newsletter ? 1 : 0, // TODO: resolve newsletter
+      language: this.locale.getCurrentLanguage() // TODO: get from local serivce
     };
     this.registerAndLogin(credentials)
       .pipe(
         tap((res: any) => {
           if (parseInt(res.errNum, 10) === 200) {
-            this.router.navigate(['/magazine/create/step1']);
+            this.router.navigate(['get-started']);
           } else {
             // TODO: error
             console.log(res);
@@ -76,4 +112,53 @@ export class RegisterComponent implements OnInit {
       );
   }
 
+  get loginSubTitle2(): string {
+    return this.commonService.translateTemplate('REGISTER_FORM_SUBTITLE_P2', {});
+  }
+}
+
+function confirmPassword(control: AbstractControl) {
+  if ( !control.parent || !control ) {
+    return;
+  }
+
+  const password = control.parent.get('password');
+  const passwordRepeat = control.parent.get('passwordRepeat');
+
+  if ( !password || !passwordRepeat ) {
+    return;
+  }
+
+  if ( passwordRepeat.value === '' ) {
+    return;
+  }
+
+  if ( password.value !== passwordRepeat.value ) {
+    return {
+      passwordsNotMatch: true
+    };
+  }
+}
+
+function confirmEmail(control: AbstractControl) {
+  if ( !control.parent || !control ) {
+    return;
+  }
+
+  const email = control.parent.get('email');
+  const emailRepeat = control.parent.get('emailRepeat');
+
+  if ( !email || !emailRepeat ) {
+    return;
+  }
+
+  if ( emailRepeat.value === '' ) {
+    return;
+  }
+
+  if ( email.value !== emailRepeat.value ) {
+    return {
+      emailsNotMatch: true
+    };
+  }
 }

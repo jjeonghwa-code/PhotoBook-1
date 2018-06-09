@@ -1,0 +1,83 @@
+@import '../../../../mixins';
+@import '../../../../variables';
+
+.register-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/assets/images/background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: $body-height;
+  padding: 85px 185px;
+
+
+  .login-title {
+    font-family: "San Francisco Semi Bold", Arial, sans-serif;
+    font-size: 40px;
+    line-height: 40px;
+    color: $almost-black;
+    margin-bottom: 10px;
+  }
+
+  .login-subtitle {
+    font-family: "San Francisco Medium", Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+
+    a {
+      color: $psp-red;
+    }
+  }
+
+  .sign-in-form {
+    margin-bottom: 30px;
+
+    .empty-div {
+      width: 30px;
+    }
+
+    .form-group {
+      position: relative;
+      height: 80px;
+      margin-bottom: 20px;
+      flex: 1;
+      padding-left: 15px;
+
+      label {
+        font-family: "San Francisco Medium", Arial, sans-serif;
+        font-size: 22px;
+        line-height: 15px;
+      }
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 3px solid $medium-gray;
+        border-radius: unset;
+        padding-left: 0;
+
+        &.ng-invalid {
+          border-color: $alert-error-background-color;
+        }
+      }
+
+      .form-field-error {
+        color: $alert-error-background-color;
+        font-size: 14px;
+        margin: 2px;
+      }
+    }
+
+    .login-error-message {
+      font-family: "San Francisco Medium", Arial, sans-serif;
+      font-size: 20px;
+      height: 30px;
+      color: $alert-error-background-color;
+      text-align: center;
+    }
+  }
+}
