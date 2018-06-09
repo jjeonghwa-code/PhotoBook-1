@@ -1,6 +1,16 @@
-<div>
-  <a>Logo</a>
-  <div>Menus</div>
-  <a routerLink="/login" *ngIf="!(auth$ | async)">Login</a>
-  <a (click)="logout()" *ngIf="auth$ | async">Logout</a>
+<div class="header-component d-flex justify-content-between">
+  <div class="app-logo d-flex align-items-center">
+    <a routerLink="/">
+      <div>OnsFotoboek</div>
+      <div l10nTranslate>LOGO_SUBTITLE</div>
+    </a>
+  </div>
+  <div class="right-nav-container d-flex align-items-center">
+    <a routerLink="/register" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_REGISTER</a>
+    <a routerLink="/login" *ngIf="!(auth$ | async)" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGIN</a>
+    <a (click)="logout()" *ngIf="auth$ | async" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGOUT</a>
+    <a (click)="switchLanguage()">
+      <img [src]="'LANGUAGE_TOGGLE_IMG' | translate:lang" />
+    </a>
+  </div>
 </div>
