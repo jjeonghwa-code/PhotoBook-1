@@ -1,14 +1,22 @@
 <div class="header-component d-flex justify-content-between">
   <div class="app-logo d-flex align-items-center">
-    <a routerLink="/">
+    <a routerLink="/magazine/create/step1">
       <div>OnsFotoboek</div>
       <div l10nTranslate>LOGO_SUBTITLE</div>
     </a>
   </div>
   <div class="right-nav-container d-flex align-items-center">
-    <a routerLink="/register" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_REGISTER</a>
-    <a routerLink="/login" *ngIf="!(auth$ | async)" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGIN</a>
-    <a (click)="logout()" *ngIf="auth$ | async" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGOUT</a>
+    <ng-container *ngIf="!(auth$ | async)">
+      <a routerLink="/register" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_REGISTER</a>
+      <a routerLink="/login" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGIN</a>
+    </ng-container>
+    <ng-container *ngIf="auth$ | async">
+      <a routerLink="/magazine/create/step1" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_CREATE_MAGAZINE</a>
+      <a routerLink="/magazines" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_MY_MAGAZINES</a>
+      <a routerLink="/get-started" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_HELP</a>
+      <a routerLink="/profile" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_PROFILE</a>
+      <a (click)="logout()" class="tab d-flex justify-content-center align-items-center" l10nTranslate>NAV_LOGOUT</a>
+    </ng-container>
     <a (click)="switchLanguage()">
       <img [src]="'LANGUAGE_TOGGLE_IMG' | translate:lang" />
     </a>
