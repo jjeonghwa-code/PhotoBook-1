@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from '@photobook/core/interceptors/http.interceptor';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
 
 import { StateService } from '@photobook/state-service';
 import { CommonService } from '@photobook/common-service';
@@ -54,10 +55,12 @@ const l10nConfig: L10nConfig = {
     LayoutModule,
     LocalStorageModule.withConfig({storageType: 'localStorage', prefix: 'PHOTOBOOK'}),
     LocalizationModule.forRoot(l10nConfig),
-    LocaleValidationModule.forRoot()
+    LocaleValidationModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+    NotificationsService,
     StateService,
     CommonService,
     UserService,
