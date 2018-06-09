@@ -97,7 +97,8 @@
         [disabled]="registerForm.invalid">
         <span l10nTranslate>REGISTER</span>
       </button>
-
+      
+      <pb-spinner *ngIf="isLoading"></pb-spinner>
     </form>
   </div>
 </div>
