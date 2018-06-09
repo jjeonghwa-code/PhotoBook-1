@@ -8,6 +8,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
 import { StateService } from '@photobook/state-service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'pb-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   auth$: Subscription = new Subscription();
 
   constructor(
+    private _notifications: NotificationsService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private stateService: StateService,
@@ -79,8 +81,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (parseInt(x.errNum, 10) === 200) {
             this.router.navigate(['/magazine/create/step1']);
           } else {
-            // TODO: error
-            console.log(x);
+            this._notifications.error(x.errMsg, null, {
+              clickToClose: true,
+              timeOut: 2000
+            });
           }
         }),
         catchError((e) => of('Login failed')),

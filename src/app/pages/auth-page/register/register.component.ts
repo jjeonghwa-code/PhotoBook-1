@@ -6,6 +6,7 @@ import { catchError, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Router } from '@angular/router';
 import { LocaleService, TranslationService, Language } from 'angular-l10n';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'pb-register',
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
   newsletter: boolean;
 
   constructor(
+    private _notifications: NotificationsService,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
@@ -42,9 +44,9 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      emailRepeat: ['', [Validators.required, Validators.email, confirmEmail]], // TODO: check original code for the validation
+      emailRepeat: ['', [Validators.required, Validators.email, confirmEmail]],
       password: ['', Validators.required],
-      passwordRepeat: ['', [Validators.required, confirmPassword]], // TODO: check original code for the validation
+      passwordRepeat: ['', [Validators.required, confirmPassword]],
     });
 
     this.formValuesChanged();
@@ -78,8 +80,8 @@ export class RegisterComponent implements OnInit {
       profilePic: '',
       // profilePic: (vm.avatar != "public/images/profile_picture_default.jpg") ? vm.avatar.split(',')[1] : '',
       device: '3',
-      newsletter: this.newsletter ? 1 : 0, // TODO: resolve newsletter
-      language: this.locale.getCurrentLanguage() // TODO: get from local serivce
+      newsletter: this.newsletter ? 1 : 0,
+      language: this.locale.getCurrentLanguage()
     };
     this.registerAndLogin(credentials)
       .pipe(
@@ -87,8 +89,10 @@ export class RegisterComponent implements OnInit {
           if (parseInt(res.errNum, 10) === 200) {
             this.router.navigate(['get-started']);
           } else {
-            // TODO: error
-            console.log(res);
+            this._notifications.error(res.errMsg, null, {
+              clickToClose: true,
+              timeOut: 2000
+            });
           }
         }),
         catchError(e => of(e)),
