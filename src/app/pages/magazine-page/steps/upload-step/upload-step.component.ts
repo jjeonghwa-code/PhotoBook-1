@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadStateService } from './services/upload-state.service';
+import { StateService } from '@photobook/state-service';
 
 @Component({
   selector: 'pb-upload-step',
@@ -8,14 +9,23 @@ import { UploadStateService } from './services/upload-state.service';
 })
 export class UploadStepComponent implements OnInit {
 
+  magazine$ = this.stateService.magazine$;
+
   constructor(
-    private uploadStateService: UploadStateService
+    private uploadStateService: UploadStateService,
+    private stateService: StateService
   ) { }
 
   ngOnInit() {
-    this.uploadStateService.getPhotos().subscribe(res => {
-      // nothing
-    });
+    this.getPhotos();
+  }
+
+  async getPhotos() {
+    await this.uploadStateService.getPhotos().toPromise();
+  }
+
+  deleteFile(file) {
+    this.uploadStateService.openDeleteConfirmModal(file);
   }
 
 }

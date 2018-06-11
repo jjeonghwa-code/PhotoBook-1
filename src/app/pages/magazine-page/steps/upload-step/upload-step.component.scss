@@ -1,0 +1,17 @@
+.image-wrapper {
+  height: 250px;
+  position: relative;
+  margin-bottom: 1.5rem;
+  .image-actions-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    a {
+      cursor: pointer;
+    }
+  }
+  img {
+    height: 100%;
+    width: auto;
+  }
+}

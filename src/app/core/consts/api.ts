@@ -30,6 +30,8 @@ export const API: any = {
     getAddressInfo: baseUrl + '/getAddressInfo',
     rotateCloudPhoto: uploadBaseUrl + '/rotateCloudPhoto',
     getUploads: baseUrl + '/getUploads',
-    imageScaleUrl: environment.imageScaleUrl
+    imageScaleUrl: environment.imageScaleUrl,
+    setStorage: baseUrl + '/saveCreateSettings',
+    getStorage: baseUrl + '/getCreateSettings'
   }
 };

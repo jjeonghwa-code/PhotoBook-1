@@ -1,3 +1,5 @@
 <p>
-  info-box works!
+  <button class="btn btn-primary" (click)="fileInput.click()">Add</button>
+  <input type="file" #fileInput hidden accept="image/jpeg,image/jpg" [multiple]="true" (change)="addFile($event)" />
+  <button class="btn btn-primary" (click)="test()">Test</button>
 </p>
