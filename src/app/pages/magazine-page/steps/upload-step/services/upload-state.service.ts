@@ -73,7 +73,9 @@ export class UploadStateService {
           finalize(() => imageObj.isLoading = false),
           tap((res: any) => {
             if (parseInt(res.errNum, 10) === 200) {
-              this.stateService.updateTempList(res.data, currentIndex);
+              const newImageObj = new StorageFileInfo();
+              newImageObj.buildFileInfoFromImage(res, currentIndex);
+              this.stateService.updateTempList(newImageObj, currentIndex);
             } else {
               // upload failed
             }

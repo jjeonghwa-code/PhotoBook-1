@@ -14,8 +14,6 @@ export class FileService {
     private stateService: StateService
   ) { }
 
-
-
   getFolder() {
     const headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     const body = new HttpParams().set('use_guid', this.stateService.userInfo.use_guid);

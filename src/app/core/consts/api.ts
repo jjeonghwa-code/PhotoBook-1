@@ -14,7 +14,7 @@ export const API: any = {
     getCloudPhotos: baseUrl + '/getCloudPhotos',
     deleteCloudPhoto: baseUrl + '/deleteCloudPhoto',
     deleteAllCloudPhotos: baseUrl + '/deleteAllCloudPhotos',
-    uploadCloud: environment.uploadHost + '/uploadCloud.php',
+    uploadCloud: environment.uploadHost + '/uploadCloud_v2.php',
     uploadPDF: environment.uploadHost + '/uploadpdf_v2.php',
     setUserDetails: baseUrl + '/setUserDetails',
     getSubscriptionList: baseUrl + '/getSubscriptionList',
