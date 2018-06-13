@@ -8,6 +8,7 @@ import { DeleteConfirmModalComponent } from '../components/delete-confirm-modal/
 import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import * as _ from 'lodash';
 import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
+import { PhotoEditModalComponent } from '../components/photo-edit-modal/photo-edit-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -84,32 +85,6 @@ export class UploadStateService {
     }
   }
 
-  // private displayPendingFiles(files: Array<any>) {
-  //   files.map((file, index) => {
-  //     const myReader: FileReader = new FileReader();
-  //     myReader.onloadend = (e) => {
-  //       const tempFile = {
-  //         url: myReader.result,
-  //         isNotUploaded: true,
-  //         name: '',
-  //         orientation: 0,
-  //         isCover: false,
-  //         id: '',
-  //         height: 0,
-  //         width: 0,
-  //         text: '',
-  //         weight: '',
-  //         isLoading: true // this property is just for the loading status
-  //       };
-  //       this.stateService.appendTemporaryImage(tempFile);
-  //       this.fileService.setStorage(JSON.stringify(this.stateService.magazine)).subscribe(res => {
-  //         //
-  //       });
-  //     };
-  //     myReader.readAsDataURL(file);
-  //   });
-  // }
-
   private isValidFileExtension(files) {
     const extensions = this.fileExt.map(x => x.toLocaleUpperCase().trim());
     for (const file of files) {
@@ -122,7 +97,7 @@ export class UploadStateService {
     return true;
   }
 
-  private readFileAsBase64(file) {
+  readFileAsBase64(file) {
     const fileReader = new FileReader();
     return new Promise((resolve, reject) => {
       fileReader.onerror = () => {
@@ -136,5 +111,29 @@ export class UploadStateService {
       };
       fileReader.readAsDataURL(file);
     });
+  }
+
+  readUrlAsBase64(url) {
+    const xhr = new XMLHttpRequest();
+    return new Promise((resolve, reject) => {
+      xhr.onload = () => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.onerror = () => {
+        xhr.abort();
+        resolve(null);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    });
+  }
+
+  getFileByIndex(index) {
+    return this.stateService.files[index];
   }
 }

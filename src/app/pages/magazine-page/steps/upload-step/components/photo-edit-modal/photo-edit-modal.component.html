@@ -1,0 +1,31 @@
+<canvas #canvas width="600" hidden></canvas>
+<mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <p>Bewek foto</p>
+    <p>{{ currentIndex + 1 }}</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div>
+      <button mat-mini-fab (click)="slideImage(-1)"><mat-icon>chevron_left</mat-icon></button>
+    </div>
+    <image-cropper
+      [hidden]="isSliding"
+      [imageBase64]="tempbase64Image"
+      format="jpg,jpeg"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded()"
+      (loadImageFailed)="loadImageFailed()">
+    </image-cropper>
+    <div class="temp-image-wrapper" *ngIf="isSliding" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+      <img [src]="originbase64Image" [style.transform]="'rotate(' + rotate + 'deg)'">
+    </div>
+    <div>
+      <button mat-mini-fab (click)="slideImage(1)"><mat-icon>chevron_right</mat-icon></button>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="rotate" (input)="sliding($event)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
+  </div>
+</mat-dialog-content>

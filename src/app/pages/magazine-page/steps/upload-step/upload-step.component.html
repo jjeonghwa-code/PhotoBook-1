@@ -1,12 +1,12 @@
 <div>
   <pb-info-box></pb-info-box>
   <div [dragula]="'first-bag'" fxLayout="row wrap" fxLayoutGap="1.5rem">
-    <div class="image-wrapper" *ngFor="let file of (magazine$ | async)?.files">
+    <div class="image-wrapper" *ngFor="let file of (magazine$ | async)?.files; let i = index">
       <pb-spinner *ngIf="file?.isLoading"></pb-spinner>
       <div class="image-actions-wrapper">
         <a (click)="deleteFile(file)"><i class="fa fa-remove"></i></a>
       </div>
-      <img [src]="file?.url">
+      <img [src]="file?.url" (click)="editFile(file, i)">
     </div>
   </div>
 </div>

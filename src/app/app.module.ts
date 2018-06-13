@@ -24,6 +24,7 @@ import {
   StorageStrategy,
   ProviderType
 } from 'angular-l10n';
+import { MaterialModule } from '@photobook/material';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -50,6 +51,7 @@ const l10nConfig: L10nConfig = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     HttpClientModule,
     AppRoutingModule,
     LayoutModule,

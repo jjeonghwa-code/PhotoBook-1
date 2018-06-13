@@ -31,6 +31,7 @@ export class InfoBoxComponent implements OnInit, OnDestroy {
   }
 
   async addFile(e: any) {
+    console.log(e);
     try {
       this.isLoading = true;
       const _target: any = event.target;
