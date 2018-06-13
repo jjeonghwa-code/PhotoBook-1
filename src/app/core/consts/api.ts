@@ -15,6 +15,7 @@ export const API: any = {
     deleteCloudPhoto: baseUrl + '/deleteCloudPhoto',
     deleteAllCloudPhotos: baseUrl + '/deleteAllCloudPhotos',
     uploadCloud: environment.uploadHost + '/uploadCloud_v2.php',
+    uploadCloudEdited: environment.uploadHost + '/uploadCloudEdited.php',
     uploadPDF: environment.uploadHost + '/uploadpdf_v2.php',
     setUserDetails: baseUrl + '/setUserDetails',
     getSubscriptionList: baseUrl + '/getSubscriptionList',
@@ -32,6 +33,6 @@ export const API: any = {
     getUploads: baseUrl + '/getUploads',
     imageScaleUrl: environment.imageScaleUrl,
     setStorage: baseUrl + '/saveCreateSettings',
-    getStorage: baseUrl + '/getCreateSettings'
+    getStorage: baseUrl + '/getCreateSettings',
   }
 };

@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { API } from '@photobook/core/consts/api';
+import { map } from 'rxjs/operators';
 
 export const StateKeys = {
   UserInfo: 'userInfo',
@@ -50,7 +51,7 @@ export class StateService {
 
   refreshState(files, storage) {
     this.files = JSON.parse(JSON.stringify(files));
-    // this.localStorageService.set(StateKeys.Magazine, storage);
+    this.localStorageService.set(StateKeys.Magazine, JSON.parse(storage));
     this.tempFiles = JSON.parse(JSON.stringify(files));
     this.tempFileListChanged();
   }
@@ -60,7 +61,8 @@ export class StateService {
       this.tempFiles[index] = item;
       this.files[index] = item;
       this.setMagazinePart('files', this.files);
-      this.setStorage(JSON.stringify(this.localStorageService.get(StateKeys.Magazine))).subscribe(() => {});
+      const currentStorage = this.localStorageService.get(StateKeys.Magazine);
+      this.setStorage(JSON.stringify(currentStorage)).subscribe(() => {});
     } else {
       this.tempFiles.push(item);
       this.files.push(new StorageFileInfo());
@@ -73,8 +75,8 @@ export class StateService {
   }
 
   setMagazinePart(key: string, value: any) {
-    const store = this.localStorageService.get(StateKeys.Magazine);
-    const magazine = store ? store : {};
+    const store = this.localStorageService.get(StateKeys.Magazine) as string;
+    const magazine = store ? JSON.parse(JSON.stringify(store)) : {};
     magazine[key] = value;
     this.localStorageService.set(StateKeys.Magazine, magazine);
   }
@@ -98,7 +100,11 @@ export class StateService {
   getStorage() {
     const headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     const body = new HttpParams().set('use_guid', this.userInfo.use_guid);
-    return this.http.post(API.url.getStorage, body, {headers});
+    return this.http.post(API.url.getStorage, body, {headers}).pipe(map((x: any) => {
+      x.strMagazine = x.strMagazine.replace(/\\/g, '');
+      x.strMagazineCurrent = x.strMagazine.replace(/\\/g, '');
+      return x;
+    }));
   }
 
   setStorage(storage: string) {

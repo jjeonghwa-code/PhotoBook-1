@@ -60,4 +60,8 @@ export class FileService {
 
     return this.http.post(API.url.uploadCloud, formData);
   }
+
+  uploadCloudEdited() {
+    // return this.http.post(API.url.uploadCloudEdited);
+  }
 }

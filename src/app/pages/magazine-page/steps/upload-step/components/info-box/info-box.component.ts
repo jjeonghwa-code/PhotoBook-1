@@ -21,9 +21,7 @@ export class InfoBoxComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.magazine$$ = this.stateService.magazine$.subscribe(magazine => {
-      console.log(magazine);
-    });
+    this.magazine$$ = this.stateService.magazine$.subscribe(magazine => {});
   }
 
   ngOnDestroy() {
@@ -31,7 +29,6 @@ export class InfoBoxComponent implements OnInit, OnDestroy {
   }
 
   async addFile(e: any) {
-    console.log(e);
     try {
       this.isLoading = true;
       const _target: any = event.target;
