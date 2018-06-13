@@ -1,0 +1,12 @@
+.color-slider-wrapper {
+  .color-one {
+    width: 33px;
+    height: 33px;
+    display: block;
+    margin-bottom: 4px;
+    cursor: pointer;
+    &.selected {
+      outline: 2px solid orangered;
+    }
+  }
+}

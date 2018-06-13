@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { L10nModule } from '@photobook/l10n';
 import { UiKitModule } from '@photobook/ui-kit';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 import { DragulaModule } from 'ng2-dragula';
 
 import { UploadStateService } from './services/upload-state.service';
@@ -15,6 +16,8 @@ import { PhotoEditModalComponent } from './components/photo-edit-modal/photo-edi
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@photobook/material';
+import { PhotoMoodInputComponent } from './components/photo-mood-input/photo-mood-input.component';
+import { ColorSliderComponent } from './components/color-slider/color-slider.component';
 
 @NgModule({
   imports: [
@@ -26,13 +29,16 @@ import { MaterialModule } from '@photobook/material';
     L10nModule,
     UiKitModule,
     DragulaModule,
-    ImageCropperModule
+    ImageCropperModule,
+    PopoverModule.forRoot()
   ],
   declarations: [
     UploadStepComponent,
     InfoBoxComponent,
     DeleteConfirmModalComponent,
-    PhotoEditModalComponent
+    PhotoEditModalComponent,
+    PhotoMoodInputComponent,
+    ColorSliderComponent
   ],
   providers: [
     UploadStateService

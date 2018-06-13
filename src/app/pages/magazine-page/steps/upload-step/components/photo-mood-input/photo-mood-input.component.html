@@ -1,0 +1,59 @@
+<div class="photo-mood-input-wrapper" fxFlex="1 1 auto">
+  <div class="photo-mood-input-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="text-control-group" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <button [class.active]="mood.style.bold" (click)="changeStyle('bold')"><mat-icon>format_bold</mat-icon></button>
+      <button [class.active]="mood.style.italic" (click)="changeStyle('italic')"><mat-icon>format_italic</mat-icon></button>
+      <button [class.active]="mood.style.underline" (click)="changeStyle('underline')"><mat-icon>format_underline</mat-icon></button>
+      <button [popover]="textPaintOptions" [outsideClick]="true" #textPainter="bs-popover"><mat-icon>format_color_fill</mat-icon></button>
+      <button [popover]="textColorOptions" [outsideClick]="true" #textForePainter="bs-popover"><mat-icon>format_color_text</mat-icon></button>
+      <select [(ngModel)]="mood.font" (ngModelChange)="selectStyle.emit(mood)">
+        <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+      </select>
+    </div>
+    <div class="layout-control-group" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <button [class.active]="mood.align === TextAlign.Left" (click)="changeAlign(TextAlign.Left)"><mat-icon>format_align_left</mat-icon></button>
+      <button [class.active]="mood.align === TextAlign.Center" (click)="changeAlign(TextAlign.Center)"><mat-icon>format_align_center</mat-icon></button>
+      <button [class.active]="mood.align === TextAlign.Right" (click)="changeAlign(TextAlign.Right)"><mat-icon>format_align_right</mat-icon></button>
+    </div>
+  </div>
+  <div class="photo-mood-input-content">
+    <textarea [(ngModel)]="mood.text" [maxlength]="maxLength" (ngModelChange)="selectStyle.emit(mood)"></textarea>
+    <span>{{ mood.text?.length }}/{{ maxLength }}</span>
+  </div>
+</div>
+
+<ng-template #textPaintOptions>
+  <div class="text-paint-options">
+    <a class="close" (click)="textPainter.hide()"><i class="fa fa-times"></i></a>
+    <div class="type-option" fxLayout="column">
+      <p>Type</p>
+      <div class="type-group" fxLayout="row" fxLayoutGap="10px">
+        <a class="text-type-1" [class.selected]="mood.background.style === TextWrapperStyle.Type1" (click)="changeTextWrapperStyle(TextWrapperStyle.Type1)"><span>Text</span></a>
+        <a class="text-type-2" [class.selected]="mood.background.style === TextWrapperStyle.Type2" (click)="changeTextWrapperStyle(TextWrapperStyle.Type2)"><span>Text</span></a>
+        <a class="text-type-3" [class.selected]="mood.background.style === TextWrapperStyle.Type3" (click)="changeTextWrapperStyle(TextWrapperStyle.Type3)"><span>Text</span></a>
+      </div>
+    </div>
+    <div class="opacity-option" fxLayout="column">
+      <p>Opacity</p>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+        <div class="opacity-label min"></div>
+        <mat-slider fxFlex="1 1 auto" [min]="0" [max]="1" [step]="0.001" [(ngModel)]="mood.background.transparency" (input)="changeOpacity()"></mat-slider>
+        <div class="opacity-label max"></div>
+      </div>
+    </div>
+    <div class="color-option" fxLayout="column">
+      <p>Background colors</p>
+      <pb-color-slider [color]="mood.background.color" (select)="changeColor($event)"></pb-color-slider>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #textColorOptions>
+  <div class="text-paint-options">
+    <a class="close" (click)="textForePainter.hide()"><i class="fa fa-times"></i></a>
+    <div class="color-option" fxLayout="column">
+      <p>Text colors</p>
+      <pb-color-slider [color]="mood.color" (select)="changeForeColor($event)"></pb-color-slider>
+    </div>
+  </div>
+</ng-template>

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } f
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { UploadStateService } from '../../services/upload-state.service';
+import { ImageCropperComponent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'pb-photo-edit-modal',
@@ -11,17 +12,19 @@ import { UploadStateService } from '../../services/upload-state.service';
 export class PhotoEditModalComponent implements OnInit {
 
   @ViewChild('canvas') canvas: ElementRef;
-
-  originbase64Image: any = '';
-  tempbase64Image: any = '';
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
+  @ViewChild(ImageCropperComponent) cropper: ImageCropperComponent;
 
   currentIndex = 0;
 
-  rotate = 0;
+  originbase64Image: any = '';
+  tempbase64Image: any = '';
 
+  rotate = 0;
   isSliding = false;
+  tempCrop = {x1: 50, y1: 50, x2: 150, y2: 150};
+
+  cropRatio = 4 / 3;
+
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -56,19 +59,12 @@ export class PhotoEditModalComponent implements OnInit {
     this.tempbase64Image = canvas.toDataURL();
   }
 
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-  }
   imageCropped(image: string) {
-    this.croppedImage = image;
+    // console.log(this.cropper.cropper);
   }
-  imageLoaded() {
+  imageLoaded(e) {
     // show cropper
   }
-  loadImageFailed() {
-    // show message
-  }
-
   slideImage(value) {
     this.currentIndex += value;
     const file = this.uploadStateService.getFileByIndex(this.currentIndex);
@@ -83,6 +79,10 @@ export class PhotoEditModalComponent implements OnInit {
   rotateChange(e) {
     this.isSliding = false;
     this.rotateImage(this.rotate);
+  }
+
+  changeMood(e) {
+    console.log(e);
   }
 
 }

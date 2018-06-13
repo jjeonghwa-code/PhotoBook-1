@@ -4090,6 +4090,10 @@ ng2-nouislider@^1.7.11:
   version "1.7.11"
   resolved "https://registry.yarnpkg.com/ng2-nouislider/-/ng2-nouislider-1.7.11.tgz#b8ba5e3d2ffc23e1e32dfe54dd1726e2b4be316b"
 
+ngx-bootstrap@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.0.0.tgz#563368404dd71962e2ef8eee21794c6aeaab4490"
+
 ngx-image-cropper@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-0.2.8.tgz#555980facf3217fca98aafab7883d32f4be0c775"

@@ -336,7 +336,7 @@ span.right-tab {
     line-height: 20px;
 
     &.invalid {
-      color: $dark-red;      
+      color: $dark-red;
     }
   }
 
@@ -361,11 +361,11 @@ span.right-tab {
 
 .common-rounded-button {
   @include app-button(300px, 60px, 30px, 32px, $psp-red);
-  
+
   &:disabled {
     background-color: $dark-red;
   }
-  
+
   i {
     padding-right: 10px;
   }
@@ -397,7 +397,7 @@ span.right-tab {
 //   &:disabled {
 //     background-color: $dark-red;
 //   }
-  
+
 //   i {
 //     padding-right: 10px;
 //   }
@@ -434,4 +434,10 @@ span.right-tab {
     @include icon-grid-svg-display();
     @include icon-grid-svg(-3em, 0, 30px);
   }
+}
+
+// custom
+
+.popover {
+  max-width: 380px;
 }
