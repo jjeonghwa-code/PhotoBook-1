@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { UploadStateService } from '../../services/upload-state.service';
 import { ImageCropperComponent } from 'ngx-image-cropper';
+import { createElement } from '@angular/core/src/view/element';
 
 @Component({
   selector: 'pb-photo-edit-modal',
@@ -21,10 +22,44 @@ export class PhotoEditModalComponent implements OnInit {
 
   rotate = 0;
   isSliding = false;
-  tempCrop = {x1: 50, y1: 50, x2: 150, y2: 150};
+  tempCrop = {x1: 0, y1: 0, x2: 0, y2: 0};
 
   cropRatio = 4 / 3;
+  mood = {
+    text: '',
+    font: '',
+    align: 0,
+    color: '#000000',
+    style: {
+      bold: false, italic: false, underline: false
+    },
+    background: {
+      style: 0,
+      transparency: .5,
+      color: '#FFFFFF'
+    }
+  };
 
+  get moodHTML() {
+    return `
+<p style="color: ${this.mood.color};
+text-align: ${this.moodTextAlign};
+font-style: ${this.mood.style.italic ? 'italic' : ''};
+text-decoration: ${this.mood.style.underline ? 'underline' : ''};
+background-color: ${this.mood.background.color};
+font-weight: ${this.mood.style.bold ? 'bold' : ''};
+font-family: ${this.mood.font}">${this.mood.text}</p>`;
+  }
+
+  get moodTextAlign() {
+    if (this.mood.align === 0) {
+      return 'left';
+    } else if (this.mood.align === 1) {
+      return 'center';
+    } else {
+      return 'right';
+    }
+  }
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -60,11 +95,11 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   imageCropped(image: string) {
-    // console.log(this.cropper.cropper);
+    this.drawMood();
   }
   imageLoaded(e) {
-    // show cropper
   }
+
   slideImage(value) {
     this.currentIndex += value;
     const file = this.uploadStateService.getFileByIndex(this.currentIndex);
@@ -82,7 +117,22 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   changeMood(e) {
-    console.log(e);
+    this.mood = e;
+    this.drawMood();
+  }
+
+  drawMood() {
+    const cropperEl = (<any>this.cropper).elementRef.nativeElement.getElementsByClassName('cropper')[0];
+    const moodEl = document.getElementById('pb-mood-text');
+
+    if (moodEl) {
+      moodEl.innerHTML = this.moodHTML;
+    } else {
+      const moodElement = document.createElement('div');
+      moodElement.id = 'pb-mood-text';
+      moodElement.innerHTML = this.moodHTML;
+      cropperEl.append(moodElement);
+    }
   }
 
 }

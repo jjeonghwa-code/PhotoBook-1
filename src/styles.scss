@@ -441,3 +441,15 @@ span.right-tab {
 .popover {
   max-width: 380px;
 }
+
+#pb-mood-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 30px;
+  p {
+    padding: 15px;
+    margin: 0;
+    line-height: 1.2;
+  }
+}
