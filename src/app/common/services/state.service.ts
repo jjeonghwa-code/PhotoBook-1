@@ -60,9 +60,7 @@ export class StateService {
     if (index > -1) {
       this.tempFiles[index] = item;
       this.files[index] = item;
-      this.setMagazinePart('files', this.files);
-      const currentStorage = this.localStorageService.get(StateKeys.Magazine);
-      this.setStorage(JSON.stringify(currentStorage)).subscribe(() => {});
+      this.saveFileToStorage();
     } else {
       this.tempFiles.push(item);
       this.files.push(new StorageFileInfo());
@@ -72,6 +70,17 @@ export class StateService {
 
   tempFileListChanged() {
     this.magazine$.next({files: this.tempFiles});
+  }
+
+  replaceFile(oldFile, newfile) {
+    const index = this.files.findIndex(x => x.id === oldFile.id);
+    const newItem = new StorageFileInfo();
+    newItem.buildFileInfoFromImage(newfile, oldFile.weight);
+    console.log(newItem, index);
+    this.files[index] = newItem;
+    this.tempFiles[index] = newItem;
+    this.saveFileToStorage();
+    this.tempFileListChanged();
   }
 
   setMagazinePart(key: string, value: any) {
@@ -92,8 +101,10 @@ export class StateService {
     this.isLoggedIn$.next(false);
   }
 
-  saveToStorage() {
-    this.localStorageService.set(StateKeys.Magazine, this.magazine);
+  private async saveFileToStorage() {
+    this.setMagazinePart('files', this.files);
+    const currentStorage = this.localStorageService.get(StateKeys.Magazine);
+    await this.setStorage(JSON.stringify(currentStorage)).toPromise();
   }
 
   // Interacting with backend

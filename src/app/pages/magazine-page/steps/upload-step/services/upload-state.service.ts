@@ -32,6 +32,24 @@ export class UploadStateService {
       );
   }
 
+  deletePhotos() {
+    return this.fileService.deleteAllPhoto()
+      .pipe(
+        switchMap(x => this.getPhotos())
+      );
+  }
+
+  uploadEdited(file, base64Image) {
+    const base64result = base64Image.substr(base64Image.indexOf(',') + 1);
+    return this.fileService.uploadCloudEdited(file.id, base64result)
+      .pipe(
+        filter((x: any) => parseInt(x.errNum, 10) === 200),
+        tap((res: any) => {
+          this.stateService.replaceFile(file, res);
+        })
+      );
+  }
+
   refreshPhotos() {
     return combineLatest(this.fileService.getFolderPhotos(), this.stateService.getStorage())
       .pipe(

@@ -4,6 +4,7 @@ import { StateService } from '@photobook/state-service';
 import { PhotoEditModalComponent } from './components/photo-edit-modal/photo-edit-modal.component';
 import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
+import { FileService } from '@photobook/core/services/file.service';
 
 @Component({
   selector: 'pb-upload-step',
@@ -12,12 +13,14 @@ import { MatDialog } from '@angular/material';
 })
 export class UploadStepComponent implements OnInit {
 
+  isLoading = false;
   magazine$ = this.stateService.magazine$;
 
   constructor(
     public dialog: MatDialog,
     private uploadStateService: UploadStateService,
-    private stateService: StateService
+    private stateService: StateService,
+    private fileService: FileService
   ) { }
 
   ngOnInit() {
@@ -40,6 +43,17 @@ export class UploadStepComponent implements OnInit {
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
       // modal close
     });
+  }
+
+  async deleteAll() {
+    try {
+      this.isLoading = true;
+      await this.uploadStateService.deletePhotos().toPromise();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
 }

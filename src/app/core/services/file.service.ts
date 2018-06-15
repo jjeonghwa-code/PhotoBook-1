@@ -61,7 +61,17 @@ export class FileService {
     return this.http.post(API.url.uploadCloud, formData);
   }
 
-  uploadCloudEdited() {
-    // return this.http.post(API.url.uploadCloudEdited);
+  uploadCloudEdited(imgId, base64String) {
+    const formData: FormData = new FormData();
+    formData.append('img_id', imgId);
+    formData.append('user_id', this.stateService.user_id.toString());
+    formData.append('base64Data', base64String);
+    return this.http.post(API.url.uploadCloudEdited, formData);
+  }
+
+  deleteAllPhoto() {
+    const headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = new HttpParams().set('use_guid', this.stateService.userInfo.use_guid);
+    return this.http.post(API.url.deleteAllCloudPhotos, body, { headers });
   }
 }

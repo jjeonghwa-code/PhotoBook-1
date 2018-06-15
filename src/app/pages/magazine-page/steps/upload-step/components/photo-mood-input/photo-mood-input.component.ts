@@ -71,7 +71,7 @@ export class PhotoMoodInputComponent implements OnInit {
   }
 
   changeOpacity(value) {
-    this.mood.background.transparency = value;
+    this.mood.background.transparency = value.value;
     this.selectStyle.emit(this.mood);
   }
 

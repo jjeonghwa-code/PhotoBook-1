@@ -1,5 +1,6 @@
-<div>
+<div style="position: relative">
   <pb-info-box></pb-info-box>
+  <button class="btn btn-primary" (click)="deleteAll()">DeleteAll</button>
   <div [dragula]="'first-bag'" fxLayout="row wrap" fxLayoutGap="1.5rem">
     <div class="image-wrapper" *ngFor="let file of (magazine$ | async)?.files; let i = index">
       <pb-spinner *ngIf="file?.isLoading"></pb-spinner>
@@ -9,4 +10,5 @@
       <img [src]="file?.url" (click)="editFile(file, i)">
     </div>
   </div>
+  <pb-spinner *ngIf="isLoading"></pb-spinner>
 </div>

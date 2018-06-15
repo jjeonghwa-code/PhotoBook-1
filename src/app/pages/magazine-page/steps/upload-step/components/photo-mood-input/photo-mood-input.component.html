@@ -37,7 +37,7 @@
       <p>Opacity</p>
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
         <div class="opacity-label min"></div>
-        <mat-slider fxFlex="1 1 auto" [min]="0" [max]="1" [step]="0.001" [(ngModel)]="mood.background.transparency" (input)="changeOpacity()"></mat-slider>
+        <mat-slider fxFlex="1 1 auto" [min]="0" [max]="1" [step]="0.001" [(ngModel)]="mood.background.transparency" (input)="changeOpacity($event)"></mat-slider>
         <div class="opacity-label max"></div>
       </div>
     </div>

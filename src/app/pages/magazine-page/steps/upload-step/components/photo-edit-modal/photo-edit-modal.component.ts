@@ -4,6 +4,7 @@ import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-conf
 import { UploadStateService } from '../../services/upload-state.service';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { createElement } from '@angular/core/src/view/element';
+import { FileService } from '@photobook/core/services/file.service';
 
 @Component({
   selector: 'pb-photo-edit-modal',
@@ -19,6 +20,7 @@ export class PhotoEditModalComponent implements OnInit {
 
   originbase64Image: any = '';
   tempbase64Image: any = '';
+  cropped64Image: any = '';
 
   rotate = 0;
   isSliding = false;
@@ -42,13 +44,13 @@ export class PhotoEditModalComponent implements OnInit {
 
   get moodHTML() {
     return `
-<p style="color: ${this.mood.color};
-text-align: ${this.moodTextAlign};
-font-style: ${this.mood.style.italic ? 'italic' : ''};
-text-decoration: ${this.mood.style.underline ? 'underline' : ''};
-background-color: ${this.mood.background.color};
-font-weight: ${this.mood.style.bold ? 'bold' : ''};
-font-family: ${this.mood.font}">${this.mood.text}</p>`;
+      <p style="color: ${this.mood.color};
+      text-align: ${this.moodTextAlign};
+      font-style: ${this.mood.style.italic ? 'italic' : ''};
+      text-decoration: ${this.mood.style.underline ? 'underline' : ''};
+      background-color: ${this.convertHex(this.mood.background.color, this.mood.background.transparency)};
+      font-weight: ${this.mood.style.bold ? 'bold' : ''};
+      font-family: ${this.mood.font}">${this.mood.text}</p>`;
   }
 
   get moodTextAlign() {
@@ -61,11 +63,20 @@ font-family: ${this.mood.font}">${this.mood.text}</p>`;
     }
   }
 
+  convertHex(hex, opacity) {
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
+  }
+
   constructor(
     private cdr: ChangeDetectorRef,
     public dialogRef: MatDialogRef<DeleteConfirmModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private uploadStateService: UploadStateService
+    private uploadStateService: UploadStateService,
+    private fileService: FileService
   ) { }
 
   ngOnInit() {
@@ -95,6 +106,7 @@ font-family: ${this.mood.font}">${this.mood.text}</p>`;
   }
 
   imageCropped(image: string) {
+    this.cropped64Image = image;
     this.drawMood();
   }
   imageLoaded(e) {
@@ -135,4 +147,8 @@ font-family: ${this.mood.font}">${this.mood.text}</p>`;
     }
   }
 
+  async save() {
+    await this.uploadStateService.uploadEdited(this.data.file, this.cropped64Image).toPromise();
+    this.dialogRef.close();
+  }
 }
