@@ -1,17 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-enum TextAlign {
-  Left,
-  Center,
-  Right
-}
-
-enum TextWrapperStyle {
-  Type1,
-  Type2,
-  Type3
-}
-
+import { Mood, TextAlign, TextWrapperStyle } from '@photobook/core/models/mood';
 
 @Component({
   selector: 'pb-photo-mood-input',
@@ -20,26 +8,12 @@ enum TextWrapperStyle {
 })
 export class PhotoMoodInputComponent implements OnInit {
 
+  @Input() mood: Mood = new Mood();
   @Output() selectStyle: EventEmitter<any> = new EventEmitter<any>();
 
   maxLength = 110;
   TextAlign = TextAlign;
   TextWrapperStyle = TextWrapperStyle;
-
-  mood = {
-    text: '',
-    font: '',
-    align: TextAlign.Left,
-    color: '#000000',
-    style: {
-      bold: false, italic: false, underline: false
-    },
-    background: {
-      style: TextWrapperStyle.Type1,
-      transparency: .5,
-      color: '#FFFFFF'
-    }
-  };
 
   fonts = [
     'Font A',

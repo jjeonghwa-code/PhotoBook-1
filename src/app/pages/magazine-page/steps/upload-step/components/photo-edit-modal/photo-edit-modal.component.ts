@@ -3,8 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { UploadStateService } from '../../services/upload-state.service';
 import { ImageCropperComponent } from 'ngx-image-cropper';
-import { createElement } from '@angular/core/src/view/element';
-import { FileService } from '@photobook/core/services/file.service';
+import { Mood } from '@photobook/core/models/mood';
 
 @Component({
   selector: 'pb-photo-edit-modal',
@@ -27,61 +26,23 @@ export class PhotoEditModalComponent implements OnInit {
   tempCrop = {x1: 0, y1: 0, x2: 0, y2: 0};
 
   cropRatio = 4 / 3;
-  mood = {
-    text: '',
-    font: '',
-    align: 0,
-    color: '#000000',
-    style: {
-      bold: false, italic: false, underline: false
-    },
-    background: {
-      style: 0,
-      transparency: .5,
-      color: '#FFFFFF'
-    }
-  };
-
-  get moodHTML() {
-    return `
-      <p style="color: ${this.mood.color};
-      text-align: ${this.moodTextAlign};
-      font-style: ${this.mood.style.italic ? 'italic' : ''};
-      text-decoration: ${this.mood.style.underline ? 'underline' : ''};
-      background-color: ${this.convertHex(this.mood.background.color, this.mood.background.transparency)};
-      font-weight: ${this.mood.style.bold ? 'bold' : ''};
-      font-family: ${this.mood.font}">${this.mood.text}</p>`;
-  }
-
-  get moodTextAlign() {
-    if (this.mood.align === 0) {
-      return 'left';
-    } else if (this.mood.align === 1) {
-      return 'center';
-    } else {
-      return 'right';
-    }
-  }
-
-  convertHex(hex, opacity) {
-    hex = hex.replace('#', '');
-    const r = parseInt(hex.substring(0, 2), 16);
-    const g = parseInt(hex.substring(2, 4), 16);
-    const b = parseInt(hex.substring(4, 6), 16);
-    return 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
-  }
+  mood: Mood = new Mood();
 
   constructor(
     private cdr: ChangeDetectorRef,
     public dialogRef: MatDialogRef<DeleteConfirmModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private uploadStateService: UploadStateService,
-    private fileService: FileService
   ) { }
 
   ngOnInit() {
     this.currentIndex = this.data.index;
     this.readImageAsBase64(this.data.file.url);
+    if (this.data.file.mood) {
+      this.mood = JSON.parse(JSON.stringify(this.data.file.mood));
+    } else {
+      this.mood = new Mood();
+    }
   }
 
   async readImageAsBase64(fileUrl) {
@@ -138,17 +99,18 @@ export class PhotoEditModalComponent implements OnInit {
     const moodEl = document.getElementById('pb-mood-text');
 
     if (moodEl) {
-      moodEl.innerHTML = this.moodHTML;
+      moodEl.innerHTML = this.uploadStateService.getMoodHtml(this.mood);
     } else {
       const moodElement = document.createElement('div');
       moodElement.id = 'pb-mood-text';
-      moodElement.innerHTML = this.moodHTML;
+      moodElement.innerHTML = this.uploadStateService.getMoodHtml(this.mood);
       cropperEl.append(moodElement);
     }
   }
 
   async save() {
-    await this.uploadStateService.uploadEdited(this.data.file, this.cropped64Image).toPromise();
+    const res = await this.uploadStateService.uploadEdited(this.data.file, this.cropped64Image).toPromise();
+    await this.uploadStateService.saveMood(res, this.mood);
     this.dialogRef.close();
   }
 }

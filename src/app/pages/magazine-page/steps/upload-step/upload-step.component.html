@@ -8,6 +8,7 @@
         <a (click)="deleteFile(file)"><i class="fa fa-remove"></i></a>
       </div>
       <img [src]="file?.url" (click)="editFile(file, i)">
+      <div class="pb-mood-text" [innerHtml]="getMoodString(file?.mood)"></div>
     </div>
   </div>
   <pb-spinner *ngIf="isLoading"></pb-spinner>

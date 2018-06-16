@@ -5,6 +5,7 @@ import { PhotoEditModalComponent } from './components/photo-edit-modal/photo-edi
 import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { FileService } from '@photobook/core/services/file.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'pb-upload-step',
@@ -20,7 +21,7 @@ export class UploadStepComponent implements OnInit {
     public dialog: MatDialog,
     private uploadStateService: UploadStateService,
     private stateService: StateService,
-    private fileService: FileService
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -29,6 +30,15 @@ export class UploadStepComponent implements OnInit {
 
   async getPhotos() {
     await this.uploadStateService.getPhotos().toPromise();
+  }
+
+  getMoodString(mood) {
+    if (mood) {
+      const htmlString = this.uploadStateService.getMoodHtml(mood);
+      return this.sanitizer.bypassSecurityTrustHtml(htmlString);
+    } else {
+      return '';
+    }
   }
 
   deleteFile(file) {

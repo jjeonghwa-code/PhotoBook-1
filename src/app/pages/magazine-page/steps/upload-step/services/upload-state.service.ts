@@ -50,6 +50,10 @@ export class UploadStateService {
       );
   }
 
+  saveMood(file, mood) {
+    this.stateService.saveMood(file, mood);
+  }
+
   refreshPhotos() {
     return combineLatest(this.fileService.getFolderPhotos(), this.stateService.getStorage())
       .pipe(
@@ -76,6 +80,39 @@ export class UploadStateService {
           filter((x: any) => parseInt(x.errNum, 10) === 200))
         .subscribe(event => {});
     });
+  }
+
+  getMoodHtml(mood) {
+    if (!mood.text) {
+      return '';
+    }
+    let align = 'center';
+    if (mood.align === 0) {
+      align = 'left';
+    } else if (mood.align === 1) {
+      align = 'center';
+    } else {
+      align = 'right';
+    }
+
+    mood.background.color = mood.background.color.replace('#', '');
+    const r = parseInt(mood.background.color.substring(0, 2), 16);
+    const g = parseInt(mood.background.color.substring(2, 4), 16);
+    const b = parseInt(mood.background.color.substring(4, 6), 16);
+    const rgba = 'rgba(' + r + ',' + g + ',' + b + ',' + mood.background.transparency + ')';
+
+    if (mood.text) {
+      return `
+      <p style="color: ${mood.color};
+      text-align: ${align};
+      font-style: ${mood.style.italic ? 'italic' : ''};
+      text-decoration: ${mood.style.underline ? 'underline' : ''};
+      background-color: ${rgba};
+      font-weight: ${mood.style.bold ? 'bold' : ''};
+      font-family: ${mood.font}">${mood.text}</p>`;
+    } else {
+      return '';
+    }
   }
 
   async saveNewFiles(files) {

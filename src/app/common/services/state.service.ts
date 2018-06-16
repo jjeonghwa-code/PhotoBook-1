@@ -50,9 +50,9 @@ export class StateService {
   }
 
   refreshState(files, storage) {
-    this.files = JSON.parse(JSON.stringify(files));
+    this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
     this.localStorageService.set(StateKeys.Magazine, JSON.parse(storage));
-    this.tempFiles = JSON.parse(JSON.stringify(files));
+    this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
     this.tempFileListChanged();
   }
 
@@ -76,7 +76,6 @@ export class StateService {
     const index = this.files.findIndex(x => x.id === oldFile.id);
     const newItem = new StorageFileInfo();
     newItem.buildFileInfoFromImage(newfile, oldFile.weight);
-    console.log(newItem, index);
     this.files[index] = newItem;
     this.tempFiles[index] = newItem;
     this.saveFileToStorage();
@@ -99,6 +98,14 @@ export class StateService {
     this.cloudfolder = null;
     this.localStorageService.clearAll();
     this.isLoggedIn$.next(false);
+  }
+
+  saveMood(file, mood) {
+    const index = this.tempFiles.findIndex(x => x.id === file.imgID);
+    this.tempFiles[index].mood = mood;
+    this.files[index].mood = mood;
+    this.saveFileToStorage();
+    this.tempFileListChanged();
   }
 
   private async saveFileToStorage() {

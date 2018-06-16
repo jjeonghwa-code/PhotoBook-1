@@ -442,7 +442,7 @@ span.right-tab {
   max-width: 380px;
 }
 
-#pb-mood-text {
+#pb-mood-text, .pb-mood-text {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -452,4 +452,8 @@ span.right-tab {
     margin: 0;
     line-height: 1.2;
   }
+}
+
+.pb-mood-text {
+  font-size: 12px;
 }
