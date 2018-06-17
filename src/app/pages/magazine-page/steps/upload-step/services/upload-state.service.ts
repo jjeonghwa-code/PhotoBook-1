@@ -73,7 +73,7 @@ export class UploadStateService {
   }
 
   openDeleteConfirmModal(file) {
-    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {width: '250px'});
+    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {width: '570px'});
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
       this.fileService.deleteFile(file)
         .pipe(
