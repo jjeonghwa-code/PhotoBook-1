@@ -59,7 +59,6 @@ export class CommonService {
       '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
       '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
     if (!pattern.test(url)) {
-      console.log(url);
       return url;
     } else {
       const imageScaleUrl = API.url.imageScaleUrl;
