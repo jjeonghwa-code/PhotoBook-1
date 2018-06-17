@@ -1,3 +1,31 @@
-.active {
-  font-weight: bolder;
+@import 'mixins';
+@import 'variables';
+
+.steps-navigation-component {
+  display: flex;
+  justify-content: space-evenly;
+  background: $color-gray;
+  padding: 15px 0;
+
+  > a {
+    font-family: "San Francisco", Arial, sans-serif;
+    font-size: 18px;
+    color: $black;
+    text-decoration: none;
+
+    &:before {
+      @include icon-grid-svg-display();
+      @include icon-grid-svg(-14em, 0, 18px);
+    }
+
+    &:after {
+      @include icon-grid-svg-display();
+      @include icon-grid-svg(-6em, 0, 18px);
+    }
+
+    &.active {
+      font-family: 'San Francisco Bold';
+      color: $color-secondary;
+    }
+  }
 }
