@@ -4,8 +4,8 @@ import { StateService } from '@photobook/state-service';
 import { PhotoEditModalComponent } from './components/photo-edit-modal/photo-edit-modal.component';
 import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
-import { FileService } from '@photobook/core/services/file.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CommonService } from '@photobook/common-service';
 
 @Component({
   selector: 'pb-upload-step',
@@ -19,9 +19,10 @@ export class UploadStepComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private uploadStateService: UploadStateService,
+    public uploadStateService: UploadStateService,
     private stateService: StateService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -41,7 +42,12 @@ export class UploadStepComponent implements OnInit {
     }
   }
 
-  deleteFile(file) {
+  photoUrl(url) {
+    return this.commonService.checkImageUrl(url);
+  }
+
+  deleteFile(file, event) {
+    event.stopPropagation();
     this.uploadStateService.openDeleteConfirmModal(file);
   }
 

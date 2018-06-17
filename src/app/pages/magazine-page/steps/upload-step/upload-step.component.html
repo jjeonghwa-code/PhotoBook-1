@@ -2,12 +2,18 @@
   <pb-info-box></pb-info-box>
   <button class="btn btn-primary" (click)="deleteAll()">DeleteAll</button>
   <div [dragula]="'first-bag'" fxLayout="row wrap" fxLayoutGap="1.5rem">
-    <div class="image-wrapper" *ngFor="let file of (magazine$ | async)?.files; let i = index">
+    <div
+      class="image-wrapper"
+      [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file?.url) + ')'}"
+      [style.width.px]="file.width*150/file.height || 150"
+      [style.height.px]="150"
+      (click)="editFile(file, i)"
+      *ngFor="let file of (magazine$ | async)?.files; let i = index">
       <pb-spinner *ngIf="file?.isLoading"></pb-spinner>
-      <div class="image-actions-wrapper">
-        <a (click)="deleteFile(file)"><i class="fa fa-remove"></i></a>
+      <div class='m-btn-photo-actions-wrapper'>
+        <span class="m-btn-photo-actions icon-warning" *ngIf="uploadStateService.isTooSmall(file) || uploadStateService.isWrongRatio(file)"></span>
+        <span class='m-btn-photo-actions icon-delete pull-right' (click)="deleteFile(file, $event)"></span>
       </div>
-      <img [src]="file?.url" (click)="editFile(file, i)">
       <div class="pb-mood-text" [innerHtml]="getMoodString(file?.mood)"></div>
     </div>
   </div>

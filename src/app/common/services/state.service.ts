@@ -51,8 +51,11 @@ export class StateService {
 
   refreshState(files, storage) {
     this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+    // this.files = JSON.parse(JSON.stringify(files));
     this.localStorageService.set(StateKeys.Magazine, JSON.parse(storage));
     this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+    // this.tempFiles = JSON.parse(JSON.stringify(files));
+    this.saveFileToStorage();
     this.tempFileListChanged();
   }
 
@@ -70,6 +73,21 @@ export class StateService {
 
   tempFileListChanged() {
     this.magazine$.next({files: this.tempFiles});
+  }
+
+  deleteFile(file) {
+    const index = this.files.findIndex(x => x.id === file.id);
+    this.files.splice(index, 1);
+    this.tempFiles.splice(index, 1);
+    this.saveFileToStorage();
+    this.tempFileListChanged();
+  }
+
+  deleteAllFiles() {
+    this.files = [];
+    this.tempFiles = [];
+    this.saveFileToStorage();
+    this.tempFileListChanged();
   }
 
   replaceFile(oldFile, newfile) {

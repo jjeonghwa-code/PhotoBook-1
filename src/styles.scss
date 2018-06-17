@@ -438,6 +438,11 @@ span.right-tab {
 
 // custom
 
+image-cropper .source-image {
+  max-height: 300px !important;
+  min-height: 300px !important;
+}
+
 .popover {
   max-width: 380px;
 }

@@ -35,7 +35,8 @@ export class UploadStateService {
   deletePhotos() {
     return this.fileService.deleteAllPhoto()
       .pipe(
-        switchMap(x => this.getPhotos())
+        filter((x: any) => parseInt(x.errNum, 10) === 200),
+        tap(() => this.stateService.deleteAllFiles())
       );
   }
 
@@ -76,8 +77,11 @@ export class UploadStateService {
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
       this.fileService.deleteFile(file)
         .pipe(
-          switchMap((x: any) => parseInt(x.errNum, 10) === 200 ? this.refreshPhotos() : of(x)),
-          filter((x: any) => parseInt(x.errNum, 10) === 200))
+          filter((x: any) => parseInt(x.errNum, 10) === 200),
+          tap(() => {
+            this.stateService.deleteFile(file);
+          })
+        )
         .subscribe(event => {});
     });
   }
@@ -190,5 +194,35 @@ export class UploadStateService {
 
   getFileByIndex(index) {
     return this.stateService.files[index];
+  }
+
+  isTooSmall(file) {
+    if (!file) {
+      return;
+    }
+
+    const min = 800;
+    if (file.width < min || file.height < min) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isWrongRatio(file) {
+    if (!file) {
+      return;
+    }
+
+    const fourThree = 4 / 3;
+    const threeFour = 3 / 4;
+    const standardRatio = file.orientation === 0 ? fourThree : threeFour;
+    const tolerance = 0.01;
+    const ratio = file.width / file.height;
+    if (Math.abs(ratio - standardRatio) > tolerance) {
+      return true;
+    }
+
+    return false;
   }
 }
