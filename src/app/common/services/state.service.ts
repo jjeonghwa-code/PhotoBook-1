@@ -17,6 +17,8 @@ export const StateKeys = {
   providedIn: 'root'
 })
 export class StateService {
+  isDateAscending = false;
+  isNameAscending = false;
 
   user_id = -1;
   folder_id = 0;
@@ -75,6 +77,13 @@ export class StateService {
     this.magazine$.next({files: this.tempFiles});
   }
 
+  markFileAsFailed(index) {
+    this.files[index].isFailed = true;
+    this.files.splice(index, 1);
+    this.tempFiles.splice(index, 1);
+    this.tempFileListChanged();
+  }
+
   deleteFile(file) {
     const index = this.files.findIndex(x => x.id === file.id);
     this.files.splice(index, 1);
@@ -126,8 +135,41 @@ export class StateService {
     this.tempFileListChanged();
   }
 
+  sortByDate() {
+    this.isDateAscending = !this.isDateAscending;
+    const files = JSON.parse(JSON.stringify(this.files));
+    files.sort((a, b) => {
+      const valueA = parseInt(a.weight, 10);
+      const valueB = parseInt(b.weight, 10);
+
+      return this.isDateAscending ? valueA > valueB ? -1 : valueA === valueB ? 0 : 1
+      : valueA > valueB ? 1 : valueA === valueB ? 0 : -1;
+    });
+    this.files = JSON.parse(JSON.stringify(files));
+    this.tempFiles = JSON.parse(JSON.stringify(files));
+    this.saveFileToStorage();
+    this.tempFileListChanged();
+  }
+
+  sortByName() {
+    this.isNameAscending = !this.isNameAscending;
+    const files = JSON.parse(JSON.stringify(this.files));
+    files.sort((a, b) => {
+      const valueA = parseInt(a.name, 10);
+      const valueB = parseInt(b.name, 10);
+
+      return this.isNameAscending ? valueA > valueB ? -1 : valueA === valueB ? 0 : 1
+      : valueA > valueB ? 1 : valueA === valueB ? 0 : -1;
+    });
+    this.files = JSON.parse(JSON.stringify(files));
+    this.tempFiles = JSON.parse(JSON.stringify(files));
+    this.saveFileToStorage();
+    this.tempFileListChanged();
+  }
+
   private async saveFileToStorage() {
-    this.setMagazinePart('files', this.files);
+    const files = this.files.filter(x => !x.isFailed);
+    this.setMagazinePart('files', files);
     const currentStorage = this.localStorageService.get(StateKeys.Magazine);
     await this.setStorage(JSON.stringify(currentStorage)).toPromise();
   }

@@ -1,7 +1,7 @@
-<div style="position: relative">
-  <pb-info-box></pb-info-box>
-  <button class="btn btn-primary" (click)="deleteAll()">DeleteAll</button>
-  <div [dragula]="'first-bag'" fxLayout="row wrap" fxLayoutGap="1.5rem">
+<div class="upload-step-component">
+  <input type="file" #fileInput hidden accept="image/jpeg,image/jpg" [multiple]="true" (change)="addFiles($event)" />
+  <pb-info-box (addFiles)="fileInput.click()"></pb-info-box>
+  <div [dragula]="'draggable-photo-bag'" draggable="true" class="photo-drop-area d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
     <div
       class="image-wrapper"
       [ngStyle]="{'backgroundImage': 'url(' + photoUrl(file?.url) + ')'}"
@@ -17,5 +17,12 @@
       <div class="pb-mood-text" [innerHtml]="getMoodString(file?.mood)"></div>
     </div>
   </div>
-  <pb-spinner *ngIf="isLoading"></pb-spinner>
+  <pb-footer-bar
+    (sortByDate)="uploadStateService.sortByDate()"
+    (sortByName)="uploadStateService.sortByName()"
+    (addFiles)="fileInput.click()"
+    (deleteAllFiles)="deleteAll()"
+    (nextStep)="nextStep()">
+  </pb-footer-bar>
+  <pb-spinner *ngIf="uploadStateService.isLoading"></pb-spinner>
 </div>

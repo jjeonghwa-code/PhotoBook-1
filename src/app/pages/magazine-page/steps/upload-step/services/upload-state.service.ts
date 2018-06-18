@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FileService } from '@photobook/core/services/file.service';
-import { filter, finalize, map, switchMap, tap } from 'rxjs/operators';
+import { filter, finalize, map, switchMap, tap, catchError } from 'rxjs/operators';
 import { StateService } from '@photobook/state-service';
 import { of } from 'rxjs/internal/observable/of';
 import { MatDialog } from '@angular/material';
@@ -9,6 +9,7 @@ import { combineLatest } from 'rxjs/internal/observable/combineLatest';
 import * as _ from 'lodash';
 import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
 import { PhotoEditModalComponent } from '../components/photo-edit-modal/photo-edit-modal.component';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class UploadStateService {
 
   fileExt: string[] = ['JPG', 'JPEG'];
   totalPortraitCounts = 0;
+  isLoading = false;
 
   constructor(
     public dialog: MatDialog,
@@ -73,13 +75,44 @@ export class UploadStateService {
   }
 
   openDeleteConfirmModal(file) {
-    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {width: '570px'});
+    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {
+      width: '570px',
+      panelClass: 'confirm-dialog',
+      data : {
+        confirmMessage: 'Are you sure to delete this photo?'
+      }
+    });
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
+      this.isLoading = true;
       this.fileService.deleteFile(file)
+        .pipe(
+          tap(() => {
+            this.stateService.deleteFile(file);
+          }),
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(event => {});
+    });
+  }
+
+  openDeleteAllConfirmModal() {
+    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {
+      width: '570px',
+      panelClass: 'confirm-dialog',
+      data : {
+        confirmMessage: 'Are you sure to delete all photos?'
+      }
+    });
+    dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
+      this.isLoading = true;
+      this.fileService.deleteAllPhoto()
         .pipe(
           filter((x: any) => parseInt(x.errNum, 10) === 200),
           tap(() => {
-            this.stateService.deleteFile(file);
+            this.stateService.deleteAllFiles();
+            this.isLoading = false;
           })
         )
         .subscribe(event => {});
@@ -126,20 +159,25 @@ export class UploadStateService {
     const pendingFiles = _.values(files);
     for (const file of pendingFiles) {
       const imageObj = await this.readFileAsBase64(file) as any;
+      const size: any = await this.getSizeFromBase64(imageObj.url);
+      imageObj.height = size.height;
+      imageObj.width = size.width;
       const currentIndex = this.stateService.tempFiles.length;
       this.stateService.updateTempList(imageObj);
       if (imageObj) {
-        this.fileService.uploadFile(file).pipe(
+        await this.fileService.uploadFile(file).pipe(
           finalize(() => imageObj.isLoading = false),
+          catchError(err => {
+            this.stateService.markFileAsFailed(currentIndex);
+            return of(err);
+          }),
           tap((res: any) => {
             if (parseInt(res.errNum, 10) === 200) {
               const newImageObj = new StorageFileInfo();
               newImageObj.buildFileInfoFromImage(res, currentIndex);
               this.stateService.updateTempList(newImageObj, currentIndex);
-            } else {
-              // upload failed
             }
-          })).subscribe(() => {});
+          })).toPromise();
       }
     }
   }
@@ -192,6 +230,19 @@ export class UploadStateService {
     });
   }
 
+  getSizeFromBase64(base64string) {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => {
+        resolve({width: image.width, height: image.height});
+      };
+      image.onerror = (e) => {
+        resolve({width: 0, height: 0});
+      };
+      image.src = base64string;
+    });
+  }
+
   getFileByIndex(index) {
     return this.stateService.files[index];
   }
@@ -224,5 +275,13 @@ export class UploadStateService {
     }
 
     return false;
+  }
+
+  sortByDate() {
+    this.stateService.sortByDate();
+  }
+
+  sortByName() {
+    this.stateService.sortByName();
   }
 }

@@ -1,55 +1,86 @@
 @import 'mixins';
 @import 'variables';
 
-.image-wrapper {
-  cursor: pointer;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 0;
-  margin: 0 10px 20px 10px;
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: $color-secondary;
+}
+
+.upload-step-component {
   position: relative;
-  overflow: hidden;
 
-  &:first-child {
-    margin-left: 500px;
-  }
+  .photo-drop-area {
+    height: calc(100vh - 185px);
+    overflow: auto;
+    padding: 20px;
 
-  .m-btn-photo-actions-wrapper {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 5px;
+    &.dragarea {
+      border: 3px solid #bbb; 
+      background-color: #fff;
+      color: #bbb;
+    }
+  
+    &.droparea {
+      border: 3px dashed #bbb; 
+      background-color: #eff;
+      color: #aaa;
+    }
 
-    .m-btn-photo-actions {
-      width: 30px;
-      height: 30px;
-      display: inline-block;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 8px;
-      overflow: hidden;
+    .image-wrapper {
       cursor: pointer;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 0;
+      margin: 0 10px 20px 10px;
       position: relative;
+      overflow: hidden;
     
-      &:before {
-        @include icon-grid-svg-display();
-        position: absolute;
-        left: 6px;
-        top: 5px;
+      &:first-child {
+        margin-left: 500px;
       }
-
-      &.icon-warning {
-        &:before {
-          @include icon-grid-svg(-10em, -1em, 20px);
+    
+      .m-btn-photo-actions-wrapper {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 5px;
+    
+        .m-btn-photo-actions {
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          background-color: rgba(0, 0, 0, 0.4);
+          border-radius: 8px;
+          overflow: hidden;
+          cursor: pointer;
+          position: relative;
+        
+          &:before {
+            @include icon-grid-svg-display();
+            position: absolute;
+            left: 6px;
+            top: 5px;
+          }
+    
+          &.icon-warning {
+            &:before {
+              @include icon-grid-svg(-10em, -1em, 20px);
+            }
+          }  
+    
+          &.icon-delete {
+            background-color: $color-danger;
+            &:before {
+              @include icon-grid-svg(-27em, 0em, 16px);
+            }
+          }  
         }
-      }  
-
-      &.icon-delete {
-        background-color: $color-danger;
-        &:before {
-          @include icon-grid-svg(-27em, 0em, 16px);
-        }
-      }  
+      }
     }
   }
 }

@@ -1,0 +1,33 @@
+@import 'mixins';
+@import 'variables';
+
+.footer-bar-component {
+  padding: 5px 34px;
+
+  .left-buttons {
+    a {
+      cursor: pointer;
+      font-family: "San Francisco Bold", Arial, sans-serif;
+      color: $color-primary;
+      border-right: 1px solid $black;
+      padding: 0 5px;
+
+      &:last-child {
+        border: none;
+      }
+
+      &.ascending {
+        i {
+          transform: rotate(180deg);
+          transition: transform ease .2s;
+        }
+      }
+    }
+  }
+
+  .common-rounded-button {
+    min-width: 170px;
+    min-height: 40px;
+    font-size: 18px;
+  }
+}

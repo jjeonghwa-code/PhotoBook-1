@@ -9,6 +9,7 @@ export class StorageFileInfo {
   text: string;
   weight: string;
   isLoading: boolean;
+  isFailed: boolean;
 
   constructor(
     url = '',

@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@photobook/material';
 import { PhotoMoodInputComponent } from './components/photo-mood-input/photo-mood-input.component';
 import { ColorSliderComponent } from './components/color-slider/color-slider.component';
+import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { ColorSliderComponent } from './components/color-slider/color-slider.com
     DeleteConfirmModalComponent,
     PhotoEditModalComponent,
     PhotoMoodInputComponent,
-    ColorSliderComponent
+    ColorSliderComponent,
+    FooterBarComponent
   ],
   providers: [
     UploadStateService
