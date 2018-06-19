@@ -54,7 +54,7 @@ export class StateService {
   refreshState(files, storage) {
     this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
     // this.files = JSON.parse(JSON.stringify(files));
-    this.localStorageService.set(StateKeys.Magazine, JSON.parse(storage));
+    this.setMagazinePart('files', this.files);
     this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
     // this.tempFiles = JSON.parse(JSON.stringify(files));
     this.saveFileToStorage();
@@ -165,6 +165,10 @@ export class StateService {
     this.tempFiles = JSON.parse(JSON.stringify(files));
     this.saveFileToStorage();
     this.tempFileListChanged();
+  }
+
+  getMagazine() {
+    return this.localStorageService.get(StateKeys.Magazine);
   }
 
   private async saveFileToStorage() {

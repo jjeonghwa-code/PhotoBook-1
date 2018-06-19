@@ -1,0 +1,37 @@
+.cover-step-content-wrapper {
+  height: calc(100vh - 135px);
+}
+
+.cover-manage-section {
+  height: 100%;
+  border-left: 1px solid grey;
+  .form-group {
+    position: relative;
+    span {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+}
+
+.cover-image-preview {
+  position: relative;
+  img {
+    width: 100%;
+  }
+}
+
+.cover-info {
+  position: absolute;
+  background-color: white;
+  &.top {
+    top: 0;
+  }
+  &.bottom {
+    bottom: 0;
+  }
+  &.middle {
+    top: 50%;
+  }
+}
