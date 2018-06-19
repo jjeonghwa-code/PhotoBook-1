@@ -11,9 +11,9 @@
       </select>
     </div>
     <div class="layout-control-group" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <button [class.active]="mood.align === TextAlign.Left" (click)="changeAlign(TextAlign.Left)"><mat-icon>format_align_left</mat-icon></button>
-      <button [class.active]="mood.align === TextAlign.Center" (click)="changeAlign(TextAlign.Center)"><mat-icon>format_align_center</mat-icon></button>
-      <button [class.active]="mood.align === TextAlign.Right" (click)="changeAlign(TextAlign.Right)"><mat-icon>format_align_right</mat-icon></button>
+      <button class="gradient-bg" [class.active]="mood.align === TextAlign.Left" (click)="changeAlign(TextAlign.Left)"><mat-icon>format_align_left</mat-icon></button>
+      <button class="gradient-bg" [class.active]="mood.align === TextAlign.Center" (click)="changeAlign(TextAlign.Center)"><mat-icon>format_align_center</mat-icon></button>
+      <button class="gradient-bg" [class.active]="mood.align === TextAlign.Right" (click)="changeAlign(TextAlign.Right)"><mat-icon>format_align_right</mat-icon></button>
     </div>
   </div>
   <div class="photo-mood-input-content">
