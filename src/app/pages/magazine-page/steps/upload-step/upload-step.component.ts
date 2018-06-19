@@ -98,9 +98,10 @@ export class UploadStepComponent implements OnInit, OnDestroy {
   }
 
   editFile(file, index) {
+    let counter = this.uploadStateService.getFileLength()
     const dialogRef = this.dialog.open(PhotoEditModalComponent, {
       width: '800px',
-      data: { file: file, index: index }
+      data: { file: file, index: index, counter: counter }
     });
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
       // modal close

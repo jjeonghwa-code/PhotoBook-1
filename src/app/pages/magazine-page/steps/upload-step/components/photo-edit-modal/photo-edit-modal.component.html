@@ -1,14 +1,15 @@
 <canvas #canvas width="600" hidden></canvas>
 <mat-dialog-content>
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <p>Bewek foto</p>
-    <p>{{ currentIndex + 1 }}</p>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="px-50">
+    <p class="large-font">Bewek foto</p>
+    <p class="large-font">{{ currentIndex + 1 }} / {{ totalCounter }}</p>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
     <div>
-      <button mat-mini-fab (click)="slideImage(-1)"><mat-icon>chevron_left</mat-icon></button>
+      <button mat-mini-fab (click)="slideImage(-1)" class="bg-gradient-primary"><mat-icon>chevron_left</mat-icon></button>
     </div>
     <div class="photo-editor-wrapper" fxFlex="1 1 auto">
+      <div class="warning-section"></div>
       <div class="render-section">
         <image-cropper
           [hidden]="isSliding"
@@ -28,30 +29,41 @@
         <div class="action-flip-area">
           <p>Foto draaien</p>
           <div fxLayout="row">
-            <button mat-mini-fab type="button" (click)="rotateImage(-90)"><mat-icon>chevron_left</mat-icon></button>
-            <button mat-mini-fab type="button" (click)="rotateImage(90)"><mat-icon>chevron_right</mat-icon></button>
+            <button class="rotation-btn" type="button" (click)="rotateImage(-90)"><div class="decrease-rotation"></div></button>
+            <button class="rotation-btn" type="button" (click)="rotateImage(90)"><div class="increase-rotation"></div></button>
           </div>
         </div>
-        <div class="action-rotate-area" fxFlex="1 1 auto">
+        <div class="action-rotate-area px-50 mt-5" style="position: relative;" fxFlex="1 1 auto">
+          <div class="slider-label" style="position: absolute;" fxLayout="row" fxLayoutAlign="space-between center" >
+            <p>-45</p>
+            <p>|</p>
+            <p>45</p>
+          </div>
           <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="rotate" (input)="sliding($event)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
         </div>
         <div class="action-crop-area">
           <p>Crop style select</p>
-          <div fxLayout="row" fxLayoutGap="5px">
-            <button mat-mini-fab type="button" (click)="cropRatio = 4/3">4:3</button>
-            <button mat-mini-fab type="button" (click)="cropRatio = 3/4">3:4</button>
+          <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="flex-start flex-end" >
+            <button class="bg-gray portrait" type="button" (click)="cropRatio = 3/4">3:4</button>
+            <button class="bg-gradient-primary landscape" type="button" (click)="cropRatio = 4/3">4:3</button>
           </div>
         </div>
       </div>
     </div>
     <div>
-      <button mat-mini-fab (click)="slideImage(1)"><mat-icon>chevron_right</mat-icon></button>
+      <button mat-mini-fab (click)="slideImage(1)" class="bg-gradient-primary"><mat-icon>chevron_right</mat-icon></button>
     </div>
   </div>
-  <div class="mt-3" fxLayout="row" fxLayoutAlign="center center">
+  <div class="mt-3, px-50" fxLayout="column" fxLayoutAlign="center flex-start">
+    <p class="large-font mb-0 mt-3">Voeg tekst toe</p>
+    <hr class="line-color bg-gradient-primary mt-2" />
+  </div>
+  <div class="mt-3, mb-3, px-50" fxLayout="row" fxLayoutAlign="center center">
     <pb-photo-mood-input fxFlex="1 1 auto" [mood]="mood" (selectStyle)="changeMood($event)"></pb-photo-mood-input>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button class="btn btn-primary" (click)="save()">Save</button>
+  <div class="px-50"  fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="flex-end center" >
+    <button class="common-rounded-button primary btn pb-footer-bar" (click)="save()">Save</button>
+  </div>
 </mat-dialog-actions>

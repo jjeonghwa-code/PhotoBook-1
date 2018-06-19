@@ -247,6 +247,10 @@ export class UploadStateService {
     return this.stateService.files[index];
   }
 
+  getFileLength() {
+    return this.stateService.files.length;
+  }
+
   isTooSmall(file) {
     if (!file) {
       return;

@@ -16,7 +16,7 @@
       text-align: center;
       cursor: pointer;
       &.active {
-        background-color: grey;
+        background-image: linear-gradient(to top left, #FF8000, #FF3B30);
       }
     }
     select {
@@ -51,6 +51,7 @@
       border: none;
       font-size: 20px;
       padding: 10px;
+      background-color: #efefef;
     }
     span {
       position: absolute;

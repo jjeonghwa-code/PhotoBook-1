@@ -1,9 +1,84 @@
+
 .temp-image-wrapper {
   height: 100%;
   overflow: hidden;
 }
 
+.px-50 {
+  padding: 5px 50px 0 50px !important;
+}
+
+.portrait {
+  width: 40px;
+  height: 53px;
+}
+
+.landscape {
+  width: 53px;
+  height: 37px;
+}
+
+.decrease-rotation {
+  display: inline-block;
+  font-size: 0;
+
+  &::before {
+    background-position: -34em 0;
+    font-size: 30px;
+    background-image: url(/assets/images/icongrid_2.svg);
+    background-size: 51em 6em;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    content: '';
+    margin: 0 auto;
+    display: inline-block;
+  }
+}
+
+.increase-rotation {
+  display: inline-block;
+  font-size: 0;
+
+  &::before {
+    background-position: -35em 0;
+    font-size: 30px;
+    background-image: url(/assets/images/icongrid_2.svg);
+    background-size: 51em 6em;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    content: '';
+    margin: 0 auto;
+    display: inline-block;
+  }
+}
+
+.rotation-btn {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+.large-font {
+  font-size: 26px;
+}
+
+.slider-label {
+  left: 55px;
+  right: 60px;
+  top: -20px;
+  font-size: 16px;
+}
+
 .photo-editor-wrapper {
   background-color: #cdcdcd;
   padding: 5px;
+  margin: 0 10px;
+
+  .warning-section {
+    min-height: 50px;
+    width: 100%;
+    background-color: red;
+  }
 }

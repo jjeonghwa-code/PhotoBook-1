@@ -16,6 +16,7 @@ export class PhotoEditModalComponent implements OnInit {
   @ViewChild(ImageCropperComponent) cropper: ImageCropperComponent;
 
   currentIndex = 0;
+  totalCounter = 0;
 
   originbase64Image: any = '';
   tempbase64Image: any = '';
@@ -37,6 +38,7 @@ export class PhotoEditModalComponent implements OnInit {
 
   ngOnInit() {
     this.currentIndex = this.data.index;
+    this.totalCounter = this.data.counter;
     this.readImageAsBase64(this.data.file.url);
     if (this.data.file.mood) {
       this.mood = JSON.parse(JSON.stringify(this.data.file.mood));
