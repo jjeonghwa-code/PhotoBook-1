@@ -4,7 +4,8 @@
        [style.background-image]="'url(' + commonService.getPatternImage(styleForm.get('pattern').value, 'svg') + ')'">
     <div class="image-wrapper">
       <div class="border-wrapper"
-       [style.border-image-source]="'url(' + commonService.getBorderImage(styleForm.get('border').value, 'png', image.orientation) + ')'">
+       [style.border-image-source]="'url(' + commonService.getBorderImage(styleForm.get('border').value, 'png', image.orientation) + ')'"
+       [style.margin.px]="-36 - styleForm.get('borderThickness').value * 6">
       </div>
       <div class="photo">
         <img [src]="image.url">
