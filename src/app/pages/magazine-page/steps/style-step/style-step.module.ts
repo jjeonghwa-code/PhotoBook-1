@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { L10nModule } from '@photobook/l10n';
 import { UiKitModule } from '@photobook/ui-kit';
 import { MaterialModule } from '@photobook/material';
 
@@ -11,7 +12,7 @@ import { BorderSelectorComponent } from './components/border-selector/border-sel
 import { BorderThicknessSelectorComponent } from './components/border-thickness-selector/border-thickness-selector.component';
 import { PatternSelectorComponent } from './components/pattern-selector/pattern-selector.component';
 import { StyleStateService } from './services/style-state.service';
-import { CoverFooterBarComponent } from '../cover-step/components/cover-footer-bar/cover-footer-bar.component';
+import { StyleFooterBarComponent } from './components/style-footer-bar/style-footer-bar.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { CoverFooterBarComponent } from '../cover-step/components/cover-footer-b
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    L10nModule,
     UiKitModule,
     StyleStepRoutingModule,
     MaterialModule
@@ -28,7 +30,7 @@ import { CoverFooterBarComponent } from '../cover-step/components/cover-footer-b
     BorderSelectorComponent,
     BorderThicknessSelectorComponent,
     PatternSelectorComponent,
-    CoverFooterBarComponent
+    StyleFooterBarComponent
   ],
   providers: [
     StyleStateService
