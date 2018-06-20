@@ -1,0 +1,28 @@
+.style-step-content-wrapper {
+  height: calc(100vh - 135px);
+}
+
+.style-manage-section {
+  height: 100%;
+  border-left: 1px solid grey;
+}
+
+.style-image-preview {
+  position: relative;
+  img {
+    width: 100%;
+  }
+}
+
+
+.image-wrapper {
+  width: 60%;
+  border-image-slice: 30;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border: 60px solid transparent;
+  border-image-repeat: stretch;
+  img {
+    width: 100%;
+  }
+}

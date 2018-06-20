@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Language, TranslationService } from 'angular-l10n';
 import { template, templateSettings } from 'lodash';
 import { API } from '@photobook/core/consts/api';
+import { PatternType } from '../../pages/magazine-page/steps/style-step/components/pattern-selector/pattern-selector.component';
+import { BorderType } from '../../pages/magazine-page/steps/style-step/components/border-selector/border-selector.component';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +66,13 @@ export class CommonService {
       const imageScaleUrl = API.url.imageScaleUrl;
       return imageScaleUrl + '?width=300&height=300&image=' + url;
     }
+  }
+
+  getPatternImage(pattern: PatternType, extension) {
+    return `/assets/images/patterns/pattern_${pattern}.${extension}`;
+  }
+
+  getBorderImage(border: BorderType, extension, orientation) {
+    return `/assets/images/frames/frame_${border}_${ orientation ? 'landscape' : 'portrait' }.${extension}`;
   }
 }

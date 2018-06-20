@@ -17,7 +17,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@photobook/material';
 import { PhotoMoodInputComponent } from './components/photo-mood-input/photo-mood-input.component';
-import { ColorSliderComponent } from './components/color-slider/color-slider.component';
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 
 @NgModule({
@@ -39,7 +38,6 @@ import { FooterBarComponent } from './components/footer-bar/footer-bar.component
     DeleteConfirmModalComponent,
     PhotoEditModalComponent,
     PhotoMoodInputComponent,
-    ColorSliderComponent,
     FooterBarComponent
   ],
   providers: [

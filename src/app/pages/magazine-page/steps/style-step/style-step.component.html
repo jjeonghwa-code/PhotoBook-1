@@ -1,3 +1,23 @@
-<p>
-  style-step works!
-</p>
+<div fxLayout="row" class="style-step-content-wrapper" fxFlex="1 1 auto">
+  <div fxFlex="0 0 50%" fxLayout="row" fxLayoutAlign="center center"
+       [style.background-color]="styleForm.get('backgroundColor').value"
+       [style.background-image]="'url(' + commonService.getPatternImage(styleForm.get('pattern').value, 'svg') + ')'">
+    <div class="image-wrapper"
+         [style.border-image-source]="'url(' + commonService.getBorderImage(styleForm.get('border').value, 'png', image.orientation) + ')'">
+      <img [src]="image.url">
+    </div>
+  </div>
+  <div fxFlex="0 0 50%" class="style-manage-section">
+    <h1>Step 3: Style</h1>
+    <h5>Background Color</h5>
+    <pb-color-slider [color]="styleForm.get('backgroundColor').value" (select)="styleForm.get('backgroundColor').setValue($event)"></pb-color-slider>
+    <h5>Border</h5>
+    <pb-border-selector [border]="styleForm.get('border').value" (select)="styleForm.get('border').setValue($event)"></pb-border-selector>
+    <h5>Border Thickness</h5>
+    <pb-border-thickness-selector [thickness]="styleForm.get('borderThickness').value" (select)="styleForm.get('borderThickness').setValue($event)"></pb-border-thickness-selector>
+    <h5>Pattern</h5>
+    <pb-pattern-selector [pattern]="styleForm.get('pattern').value" (select)="styleForm.get('pattern').setValue($event)"></pb-pattern-selector>
+    <button class="btn btn-primary" (click)="test()">Test Console Log</button>
+  </div>
+</div>
+

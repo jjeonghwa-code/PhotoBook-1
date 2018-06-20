@@ -1,0 +1,5 @@
+<div fxLayout="row" fxLayoutGap="5px">
+  <div *ngFor="let btn of borderTypes" class="border-selector-btn" [class.active]="btn.value === border" (click)="selectBorder(btn)">
+    <img [src]="btn.icon">
+  </div>
+</div>

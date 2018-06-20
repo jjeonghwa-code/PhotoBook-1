@@ -1,0 +1,12 @@
+.border-selector-btn {
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  &.active {
+    border: 3px solid #FF3B30;
+    border-radius: 8px;
+  }
+  img {
+    width: 100%;
+  }
+}

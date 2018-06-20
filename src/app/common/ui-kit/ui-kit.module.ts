@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { ColorSliderComponent } from './color-slider/color-slider.component';
 
 @NgModule({
   imports: [
@@ -11,10 +12,12 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatProgressSpinnerModule
   ],
   exports: [
-    SpinnerComponent
+    SpinnerComponent,
+    ColorSliderComponent
   ],
   declarations: [
-    SpinnerComponent
+    SpinnerComponent,
+    ColorSliderComponent
   ]
 })
 export class UiKitModule { }

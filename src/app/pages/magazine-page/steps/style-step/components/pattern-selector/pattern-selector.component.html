@@ -1,0 +1,5 @@
+<div fxLayout="row" fxLayoutGap="5px">
+  <div *ngFor="let btn of patternTypes" class="pattern-selector-btn" [class.active]="btn.value === pattern" (click)="selectPattern(btn)">
+    <img [src]="btn.icon">
+  </div>
+</div>
