@@ -2,22 +2,35 @@
   <div fxFlex="0 0 50%" fxLayout="row" fxLayoutAlign="center center"
        [style.background-color]="styleForm.get('backgroundColor').value"
        [style.background-image]="'url(' + commonService.getPatternImage(styleForm.get('pattern').value, 'svg') + ')'">
-    <div class="image-wrapper"
-         [style.border-image-source]="'url(' + commonService.getBorderImage(styleForm.get('border').value, 'png', image.orientation) + ')'">
-      <img [src]="image.url">
+    <div class="image-wrapper">
+      <div class="border-wrapper"
+       [style.border-image-source]="'url(' + commonService.getBorderImage(styleForm.get('border').value, 'png', image.orientation) + ')'">
+      </div>
+      <div class="photo">
+        <img [src]="image.url">
+      </div>
     </div>
   </div>
   <div fxFlex="0 0 50%" class="style-manage-section">
-    <h1>Step 3: Style</h1>
-    <h5>Background Color</h5>
-    <pb-color-slider [color]="styleForm.get('backgroundColor').value" (select)="styleForm.get('backgroundColor').setValue($event)"></pb-color-slider>
-    <h5>Border</h5>
-    <pb-border-selector [border]="styleForm.get('border').value" (select)="styleForm.get('border').setValue($event)"></pb-border-selector>
-    <h5>Border Thickness</h5>
-    <pb-border-thickness-selector [thickness]="styleForm.get('borderThickness').value" (select)="styleForm.get('borderThickness').setValue($event)"></pb-border-thickness-selector>
-    <h5>Pattern</h5>
-    <pb-pattern-selector [pattern]="styleForm.get('pattern').value" (select)="styleForm.get('pattern').setValue($event)"></pb-pattern-selector>
-    <button class="btn btn-primary" (click)="test()">Test Console Log</button>
+    <div class="overflow-auto p-40 style-manage-content">
+      <h1 class="mb-1">How should your pages look like</h1>
+      <hr class="line-color bg-gradient-primary mt-1" />
+      <div class="main-style-form">
+        <h5 class="mt-3">Background Color</h5>
+        <pb-color-slider [color]="styleForm.get('backgroundColor').value" (select)="styleForm.get('backgroundColor').setValue($event)"></pb-color-slider>
+        <h5 class="mt-3">Border</h5>
+        <pb-border-selector [border]="styleForm.get('border').value" (select)="styleForm.get('border').setValue($event)"></pb-border-selector>
+        <h5 class="mt-3">Border Thickness</h5>
+        <pb-border-thickness-selector [thickness]="styleForm.get('borderThickness').value" (select)="styleForm.get('borderThickness').setValue($event)"></pb-border-thickness-selector>
+        <h5 class="mt-2">Pattern</h5>
+        <pb-pattern-selector [pattern]="styleForm.get('pattern').value" (select)="styleForm.get('pattern').setValue($event)"></pb-pattern-selector>
+        <button class="btn btn-primary" (click)="test()">Test Console Log</button>
+      </div>
+    </div>
+    <pb-cover-footer-bar
+      (prevStep)="prevStep()"
+      (nextStep)="nextStep()">
+    </pb-cover-footer-bar>
   </div>
 </div>
 

@@ -5,6 +5,10 @@
 .style-manage-section {
   height: 100%;
   border-left: 1px solid grey;
+
+  .style-manage-content {
+    height: calc(100% - 80px);
+  }
 }
 
 .style-image-preview {
@@ -14,15 +18,44 @@
   }
 }
 
-
 .image-wrapper {
   width: 60%;
-  border-image-slice: 30;
-  border-image-width: initial;
-  border-image-outset: initial;
+  position: relative;
   border: 60px solid transparent;
-  border-image-repeat: stretch;
-  img {
+  .photo {
     width: 100%;
+    position: relative;
+    z-index: 2;
+
+    img {
+      width: 100%;
+    }
   }
+
+  .border-wrapper {
+    position: absolute;
+    left: -36px;
+    right: -36px;
+    bottom: -36px;
+    top: -36px;
+    z-index: 0;
+    border-image-slice: 30;
+    border-image-outset: initial;
+    border-image-width: initial;
+    border-image-repeat: stretch;
+    border-width: 60px;
+    border-style: solid;
+    border-color: transparent;
+  }
+}
+
+.main-style-form {
+  max-width: 67%;
+}
+
+.p-40 {
+  padding: 40px;
+}
+.overflow-auto {
+  overflow: auto;
 }

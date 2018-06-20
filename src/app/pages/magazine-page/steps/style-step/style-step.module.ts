@@ -11,6 +11,7 @@ import { BorderSelectorComponent } from './components/border-selector/border-sel
 import { BorderThicknessSelectorComponent } from './components/border-thickness-selector/border-thickness-selector.component';
 import { PatternSelectorComponent } from './components/pattern-selector/pattern-selector.component';
 import { StyleStateService } from './services/style-state.service';
+import { CoverFooterBarComponent } from '../cover-step/components/cover-footer-bar/cover-footer-bar.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { StyleStateService } from './services/style-state.service';
     StyleStepComponent,
     BorderSelectorComponent,
     BorderThicknessSelectorComponent,
-    PatternSelectorComponent
+    PatternSelectorComponent,
+    CoverFooterBarComponent
   ],
   providers: [
     StyleStateService

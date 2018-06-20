@@ -5,6 +5,9 @@
     display: block;
     margin-bottom: 4px;
     cursor: pointer;
+    &:first-child {
+      border: 1px solid #000000;
+    }
     &.selected {
       outline: 2px solid orangered;
     }

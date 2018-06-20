@@ -37,4 +37,12 @@ export class StyleStepComponent implements OnInit {
     this.styleStateService.setMagazineStyle(this.styleForm.value);
   }
 
+  nextStep() {
+
+  }
+
+  prevStep() {
+    
+  }
+
 }
