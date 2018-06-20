@@ -1,3 +1,13 @@
+.photo-select-content {
+  & > div {
+    width: calc(25% - 10px);
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
 .active {
   border: 2px solid red;
 }

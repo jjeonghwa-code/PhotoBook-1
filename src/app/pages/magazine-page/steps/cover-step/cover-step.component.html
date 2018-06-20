@@ -1,36 +1,49 @@
 <div fxLayout="row" class="cover-step-content-wrapper" fxFlex="1 1 auto">
-  <div fxFlex="0 0 50%" fxLayout="row" fxLayoutAlign="center center">
-    <div fxLayout="column" fxFlex="0 0 50%">
-      <h1>De voorkant kan alleen een staande foto zijn.</h1>
-      <div class="cover-image-preview" fxFlex="0 0 60%">
+  <div fxFlex="0 0 50%" fxLayout="row" fxLayoutAlign="center center" class="p-40 overflow-auto">
+    <div fxLayout="column" fxFlex="0 0 100%" fxLayoutAlign="flex-start center" class="photo-preview-side" >
+      <div class="cover-image-preview">
         <img [src]="coverStateService.getCoverImage().url">
         <div class="cover-info"
              [class.top]="coverForm.get('position').value === CoverPosition.Top"
              [class.middle]="coverForm.get('position').value === CoverPosition.Middle"
              [class.bottom]="coverForm.get('position').value === CoverPosition.Bottom">
-          <h3>{{ coverForm.get('title').value }}</h3>
-          <h5>{{ coverForm.get('subtitle').value }}</h5>
+          <div class="bg-cover-info">
+            <h3>{{ coverForm.get('title').value }}</h3>
+            <h5>{{ coverForm.get('subtitle').value }}</h5>
+          </div>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" (click)="selectPhoto()">Select Photo</button>
     </div>
   </div>
   <div fxFlex="0 0 50%" class="cover-manage-section">
-    <h1>Step 2: Cover</h1>
-    <form [formGroup]="coverForm" (ngSubmit)="onSave()">
-      <h3>Title Position</h3>
-      <pb-cover-position-selector [position]="coverForm.get('position').value" (select)="coverForm.get('position').setValue($event)"></pb-cover-position-selector>
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" placeholder="" formControlName="title" maxlength="20">
-        <span>{{ coverForm.get('title').value.length }}/20</span>
+    <div class="overflow-auto p-40 pt-1 cover-form">
+      <div fxLayout="row" fxLayoutAlign="flex-start center" class="pt-2 pb-3">
+        <div class="covor-image-selection">
+          <button type="button" class="btn btn-primary photo-select-btn" (click)="selectPhoto()"><div class="photo-select-icon"><span l10nTranslate>Select cover photo</span></div></button>
+        </div>
+        <h5 class="mb-0 ml-3">De voorkant kan alleen een staande foto zijn.</h5>
       </div>
-      <div class="form-group">
-        <label>SubTitle</label>
-        <input type="text" class="form-control" placeholder="" formControlName="subtitle" maxlength="40">
-        <span>{{  coverForm.get('subtitle').value.length }}/40</span>
-      </div>
-      <button class="btn btn-primary" [disabled]="coverForm.invalid">Save</button>
-    </form>
+      <h1 class="mt-4 mb-1">Place a title on your photo book</h1>
+      <hr class="line-color bg-gradient-primary mt-1" />
+      <form [formGroup]="coverForm" (ngSubmit)="onSave()">
+        <h3>Title Position</h3>
+        <pb-cover-position-selector [position]="coverForm.get('position').value" (select)="coverForm.get('position').setValue($event)"></pb-cover-position-selector>
+        <div class="form-group mt-30">
+          <label><h3>Title</h3></label>
+          <input type="text" class="form-control bg-gray" placeholder="Type your title in this field (do not use emoticons!)" formControlName="title" maxlength="20">
+          <span>{{ coverForm.get('title').value.length }}/20</span>
+        </div>
+        <div class="form-group">
+          <label><h3>SubTitle</h3></label>
+          <input type="text" class="form-control bg-gray" placeholder="Type your subtitle in this field (do not use emoticons!)" formControlName="subtitle" maxlength="40">
+          <span>{{  coverForm.get('subtitle').value.length }}/40</span>
+        </div>
+        <button class="btn bg-gradient-primary" [disabled]="coverForm.invalid">Save</button>
+      </form>
+    </div>
+    <pb-cover-footer-bar
+      (prevStep)="prevStep()"
+      (nextStep)="nextStep()">
+    </pb-cover-footer-bar>
   </div>
 </div>

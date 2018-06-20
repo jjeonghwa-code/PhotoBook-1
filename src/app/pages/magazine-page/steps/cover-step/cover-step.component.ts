@@ -46,4 +46,12 @@ export class CoverStepComponent implements OnInit {
     this.coverStateService.setFrontCover(this.coverForm.value);
   }
 
+  nextStep() {
+
+  }
+
+  prevStep() {
+    
+  }
+
 }

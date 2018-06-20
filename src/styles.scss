@@ -372,7 +372,7 @@ span.right-tab {
 
   &.primary,
   &.alter {
-    background-image: linear-gradient(to left, $color-primary, $color-secondary);
+    background-image: linear-gradient(to left, $color-secondary, $color-primary);
 
     border: 0;
     box-shadow: none;
@@ -398,7 +398,7 @@ span.right-tab {
 
 .bg-gradient-primary.mat-mini-fab.mat-accent,
 .bg-gradient-primary {
-  background-image: linear-gradient(to top left, $color-secondary, $color-primary);
+  background-image: linear-gradient(to left, $color-secondary, $color-primary);
   color: white;
 
   &.line-color {

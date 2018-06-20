@@ -1,7 +1,9 @@
-<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
-  <div *ngFor="let file of files"
-       (click)="selectCoverImage(file)"
-       [class.active]="file.id === coverStateService.getCoverImage().id">
-    <img [src]="file?.url">
+<mat-dialog-content>
+  <div class="photo-select-content" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <div *ngFor="let file of files"
+        (click)="selectCoverImage(file)"
+        [class.active]="file.id === coverStateService.getCoverImage().id">
+      <img [src]="file?.url">
+    </div>
   </div>
-</div>
+</mat-dialog-content>
