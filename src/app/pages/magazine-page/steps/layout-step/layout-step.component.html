@@ -1,3 +1,30 @@
-<p>
-  layout-step works!
-</p>
+<div class="open-book-preview-wrapper front-cover-wrapper">
+  <div class="page-number left">1</div>
+  <div class="open-book-preview single front-cover"
+       [style.background-image]="'url(' + layoutStateService.cover.url + ')'"></div>
+</div>
+
+<div class="open-book-preview-wrapper" *ngFor="let key of itemArray">
+  <div class="page-number left">{{ key + 2 }}</div>
+  <div class="page-number right">{{ key + 3 }}</div>
+  <div class="open-book-preview"
+       fxLayout="row"
+       [style.background-color]="layoutStateService.magazineStyle.backgroundColor">
+    <div class="left-side"
+         fxFlex="0 0 50%"
+         [style.background-image]="'url(' + layoutStateService.magazinePattern + ')'">
+      <div class="book-image" *ngFor="let image of book.magazineJSONS[selectedOption].pages[key + 2]"
+           style="width: 50px; height: 50px;"
+           [style.background-image]="'url(' + layoutStateService.photoUrl(image.filePath) + ')'">
+      </div>
+    </div>
+    <div class="right-side"
+         fxFlex="0 0 50%"
+         [style.background-image]="'url(' + layoutStateService.magazinePattern + ')'">
+      <div class="book-image" *ngFor="let image of book.magazineJSONS[selectedOption].pages[key + 3]"
+           style="width: 100px; height: 50px;"
+           [style.background-image]="'url(' + layoutStateService.photoUrl(image.filePath) + ')'">
+      </div>
+    </div>
+  </div> <!-- .open-book-preview -->
+</div> <!-- .open-book-preview-wrapper -->
