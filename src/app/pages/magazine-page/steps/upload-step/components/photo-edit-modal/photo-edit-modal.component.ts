@@ -115,4 +115,9 @@ export class PhotoEditModalComponent implements OnInit {
     await this.uploadStateService.saveMood(res, this.mood);
     this.dialogRef.close();
   }
+
+  isWarning() {
+    return this.uploadStateService.isTooSmall(this.data.file) || this.uploadStateService.isWrongRatio(this.data.file)
+  }
+  
 }
