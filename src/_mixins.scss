@@ -322,3 +322,55 @@ $browser-context: 14;
   display: $display;
   margin: $margins;
 }
+
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+
+@mixin background-cover($url, $args: no-repeat center center fixed) {
+  background: url('/#{$url}') $args;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin transition($args: all 1s ease-in-out) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($args) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -o-transform: $args;
+  -ms-transform: $args;
+  transform: $args;
+}
+
+@mixin translate($x:0, $y:0) {
+  @include transform(translate($x, $y));
+}
+
+@mixin horizontal-gradient ($startColor: transparent, $endColor: transparent, $origin: left) {
+  background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+  background-image: -webkit-linear-gradient($origin, $startColor, $endColor);
+  background-image: -moz-linear-gradient($origin, $startColor, $endColor);
+  background-image: -ms-linear-gradient($origin, $startColor, $endColor);
+  background-image: -o-linear-gradient($origin, $startColor, $endColor);
+}
+
+@mixin opacity($opacity: 1) {
+  -moz-opacity: $opacity;
+  -khtml-opacity: $opacity;
+  -webkit-opacity: $opacity;
+  opacity: $opacity;
+  $opperc: $opacity * 100;
+  -ms-filter: opacity($opperc);
+  filter: opacity($opperc);
+}

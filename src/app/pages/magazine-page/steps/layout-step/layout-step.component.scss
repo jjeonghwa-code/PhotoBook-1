@@ -1,36 +1,4 @@
-.open-book-preview-wrapper {
-  display: inline-block;
-  padding: 15px 15px 50px;
+.layout-container {
   position: relative;
-
-  .page-number {
-    position: absolute;
-    bottom: 10px;
-
-    &.right {
-      right: 25%;
-    }
-    &.left {
-      left: 25%;
-    }
-  }
-  &.front-cover-wrapper, &.back-cover-wrapper {
-    .page-number {
-      left: 0;
-      width: 100%;
-      text-align: center;
-    }
-
-    .book-image {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .open-book-preview {
-    box-shadow: 0 0 12px rgba(0, 0, 0, .3);
-    background: #fff;
-    width: 180px;
-    height: 250px;
-    position: relative;
-  }
+  height: calc(100vh - 135px);
 }
