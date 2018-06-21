@@ -188,17 +188,17 @@ export class MagazineProd {
     }
   }
 
-  getPhotos(url) {
-    return $.ajax({
-      url: url,
-      method: 'GET',
-      dataType: 'json',
-      success: function () {
-        console.log('success');
-      },
-      error: function () {
-        console.log('error');
-      }
-    });
-  }
+  // getPhotos(url) {
+  //   return $.ajax({
+  //     url: url,
+  //     method: 'GET',
+  //     dataType: 'json',
+  //     success: function () {
+  //       console.log('success');
+  //     },
+  //     error: function () {
+  //       console.log('error');
+  //     }
+  //   });
+  // }
 }

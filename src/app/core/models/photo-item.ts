@@ -24,9 +24,9 @@ export class PhotoItem {
     this.width = data.width;
   }
 
-  isCover() {
-    return this.isCover === true;
-  }
+  // isCover() {
+  //   return this.isCover === true;
+  // }
 
   isLandscape() {
     return this.orientation === 1;

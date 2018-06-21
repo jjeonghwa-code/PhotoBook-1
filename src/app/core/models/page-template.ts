@@ -5,14 +5,13 @@ export class PageTemplate {
   allTemplatePages = [];
   multiTemplatePages = [];
   singleTemplatePages = [];
-  photoTemplates: any = {};
   isSpread;
 
   templateLandscapeSingle;
   templateLandscapeDual;
   templatePortraitFill;
 
-  photoTemplates = {
+  photoTemplates: any = {
     landscapePhotoTemplates: [],
     portraitPhotoTemplates: [],
     allPhotoTemplates: []
@@ -105,19 +104,19 @@ export class PageTemplate {
     }
   }
 
-  getTemplates(url) {
-    return $.ajax({
-      url: url,
-      method: 'GET',
-      dataType: 'json',
-      success: function () {
-        console.log('success');
-      },
-      error: function () {
-        console.log('error');
-      }
-    });
-  }
+  // getTemplates(url) {
+  //   return $.ajax({
+  //     url: url,
+  //     method: 'GET',
+  //     dataType: 'json',
+  //     success: function () {
+  //       console.log('success');
+  //     },
+  //     error: function () {
+  //       console.log('error');
+  //     }
+  //   });
+  // }
 
   loadPageTemplates(data) {
     const templateJSONList = data;

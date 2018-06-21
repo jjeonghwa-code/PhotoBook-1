@@ -15,7 +15,7 @@ export class LayoutStateService {
     private commonService: CommonService
   ) { }
 
-  get magazine() {
+  get magazine(): Magazine {
     return this.stateService.getMagazine();
   }
 
