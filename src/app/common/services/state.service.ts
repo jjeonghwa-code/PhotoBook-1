@@ -52,11 +52,14 @@ export class StateService {
   }
 
   refreshState(files, storage) {
-    this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
-    // this.files = JSON.parse(JSON.stringify(files));
+    if (storage) {
+      this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+      this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+    } else {
+      this.files = JSON.parse(JSON.stringify(files));
+      this.tempFiles = JSON.parse(JSON.stringify(files));
+    }
     this.setMagazinePart('files', this.files);
-    this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
-    // this.tempFiles = JSON.parse(JSON.stringify(files));
     this.saveFileToStorage();
     this.tempFileListChanged();
   }
