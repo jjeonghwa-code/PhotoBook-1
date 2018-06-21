@@ -11,11 +11,21 @@
 }
 
 .upload-step-component {
+  height: calc(100vh - 185px);
+  overflow: auto;
   position: relative;
 
+  .info-box-test {
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    top: 20px;
+    left: 20px;
+    background-color: orange;
+  }
+
   .photo-drop-area {
-    height: calc(100vh - 185px);
-    overflow: auto;
+    min-height: calc(100vh - 185px);
     padding: 20px;
 
     &.dragarea {

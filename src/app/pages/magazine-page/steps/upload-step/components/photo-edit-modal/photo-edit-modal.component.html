@@ -9,7 +9,7 @@
       <button mat-mini-fab (click)="slideImage(-1)" class="bg-gradient-primary"><mat-icon>chevron_left</mat-icon></button>
     </div>
     <div class="photo-editor-wrapper" fxFlex="1 1 auto">
-      <div class="warning-section"></div>
+      <div class="warning-section" *ngIf="isWarning()"></div>
       <div class="render-section">
         <image-cropper
           [hidden]="isSliding"

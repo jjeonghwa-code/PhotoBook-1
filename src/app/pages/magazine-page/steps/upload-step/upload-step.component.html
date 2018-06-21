@@ -1,6 +1,8 @@
 <div class="upload-step-component">
+  <div class="info-box-test">
+    <pb-info-box (addFiles)="fileInput.click()"></pb-info-box>
+  </div>
   <input type="file" #fileInput hidden accept="image/jpeg,image/jpg" [multiple]="true" (change)="addFiles($event)" />
-  <pb-info-box (addFiles)="fileInput.click()"></pb-info-box>
   <div [dragula]="'draggable-photo-bag'" draggable="true" class="photo-drop-area d-flex flex-wrap align-content-start" ngClass="{{dragAreaClass}}">
     <div
       class="image-wrapper"
@@ -17,12 +19,12 @@
       <div class="pb-mood-text" [innerHtml]="getMoodString(file?.mood)"></div>
     </div>
   </div>
-  <pb-footer-bar
-    (sortByDate)="uploadStateService.sortByDate()"
-    (sortByName)="uploadStateService.sortByName()"
-    (addFiles)="fileInput.click()"
-    (deleteAllFiles)="deleteAll()"
-    (nextStep)="nextStep()">
-  </pb-footer-bar>
   <pb-spinner *ngIf="uploadStateService.isLoading"></pb-spinner>
 </div>
+<pb-footer-bar
+  (sortByDate)="uploadStateService.sortByDate()"
+  (sortByName)="uploadStateService.sortByName()"
+  (addFiles)="fileInput.click()"
+  (deleteAllFiles)="deleteAll()"
+  (nextStep)="nextStep()">
+</pb-footer-bar>
