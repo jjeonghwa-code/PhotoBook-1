@@ -29,11 +29,11 @@ export class PhotoItem {
   // }
 
   isLandscape() {
-    return this.orientation === 1;
+    return this.orientation === 0;
   }
 
   isPortrait() {
-    return this.orientation === 0;
+    return this.orientation === 1;
   }
 
 }

@@ -23,6 +23,9 @@ export class MagazineProd {
   constructor() {}
 
   createMagazine(photos) {
+    this.allPhotos = [];
+    this.workingPhotoList = [];
+
     for (let i = 0; i < photos.length; i++) {
       this.allPhotos.push(photos[i]);
       this.workingPhotoList.push(photos[i]);
@@ -67,6 +70,7 @@ export class MagazineProd {
       this.shouldBendTheRules = false;
 
       while (!this.createPages()) {}
+
       const magazineJSON = {
         'pages': [],
         'frame': 0,
