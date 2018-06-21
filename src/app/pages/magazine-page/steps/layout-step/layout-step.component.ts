@@ -20,7 +20,6 @@ export class LayoutStepComponent implements OnInit {
   ngOnInit() {
     this.book.createMagazine(this.layoutStateService.magazine.files);
     this.itemArray = this.range(this.book.magazineJSONS[this.selectedOption].pages.length);
-    console.log(this.itemArray);
   }
 
   range(length) {
