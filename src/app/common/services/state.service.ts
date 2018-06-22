@@ -6,10 +6,13 @@ import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { API } from '@photobook/core/consts/api';
 import { map } from 'rxjs/operators';
+import { MagazineProd } from '@photobook/core/models/magazine-prod';
+import { Magazine } from '@photobook/core/models/magazine';
 
 export const StateKeys = {
   UserInfo: 'userInfo',
   Magazine: 'magazine',
+  CurrentMagazine: 'currentMagazine',
   Files: 'files'
 };
 
@@ -23,15 +26,17 @@ export class StateService {
   user_id = -1;
   folder_id = 0;
   cloudfolder = null;
-
   magazine: any = {};
-
   files: any[] = []; // top layer
   tempFiles: any[] = []; // second layer
 
   isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn);
-
   magazine$: BehaviorSubject<any> = new BehaviorSubject<any>(this.magazine);
+
+  isGenerated = false;
+  selectedLayoutOption = 0;
+
+  magazineJSON: any = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -51,10 +56,20 @@ export class StateService {
     return this.localStorageService.get(StateKeys.UserInfo);
   }
 
+  getFileById(id) {
+    const magazine: Magazine = this.getMagazine();
+    return magazine.files.find(x => x.id === id);
+  }
+
   refreshState(files, storage) {
     if (storage) {
-      this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
-      this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+      if (JSON.parse(storage).files.length === files.length) {
+        this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+        this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+      } else {
+        this.files = JSON.parse(JSON.stringify(files));
+        this.tempFiles = JSON.parse(JSON.stringify(files));
+      }
     } else {
       this.files = JSON.parse(JSON.stringify(files));
       this.tempFiles = JSON.parse(JSON.stringify(files));
@@ -138,6 +153,13 @@ export class StateService {
     this.tempFileListChanged();
   }
 
+  async saveCurrentMagazine(currentMagazine) {
+    this.localStorageService.set(StateKeys.CurrentMagazine, currentMagazine);
+    const currentStorage = this.localStorageService.get(StateKeys.Magazine);
+    const currMagazine = this.localStorageService.get(StateKeys.CurrentMagazine);
+    await this.setStorage(JSON.stringify(currentStorage), JSON.stringify(currMagazine)).toPromise();
+  }
+
   sortByDate() {
     this.isDateAscending = !this.isDateAscending;
     const files = JSON.parse(JSON.stringify(this.files));
@@ -178,7 +200,8 @@ export class StateService {
     const files = this.files.filter(x => !x.isFailed);
     this.setMagazinePart('files', files);
     const currentStorage = this.localStorageService.get(StateKeys.Magazine);
-    await this.setStorage(JSON.stringify(currentStorage)).toPromise();
+    const currentMagazine = this.localStorageService.get(StateKeys.CurrentMagazine);
+    await this.setStorage(JSON.stringify(currentStorage), JSON.stringify(currentMagazine)).toPromise();
   }
 
   // Interacting with backend
@@ -192,12 +215,12 @@ export class StateService {
     }));
   }
 
-  setStorage(storage: string) {
+  setStorage(storage: string, currentMagazine: string) {
     const headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     const body = new HttpParams()
       .set('use_guid', this.userInfo.use_guid)
       .set('storageMagazine', storage)
-      .set('storageCurrent', storage);
+      .set('storageCurrent', currentMagazine);
     return this.http.post(API.url.setStorage, body, {headers});
   }
 }

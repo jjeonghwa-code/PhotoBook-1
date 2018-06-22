@@ -15,6 +15,10 @@ export class LayoutStateService {
     private commonService: CommonService
   ) { }
 
+  get selectedLayoutOption() {
+    return this.stateService.selectedLayoutOption;
+  }
+
   get magazine(): Magazine {
     return this.stateService.getMagazine();
   }
