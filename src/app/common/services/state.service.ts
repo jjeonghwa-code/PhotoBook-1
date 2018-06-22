@@ -118,6 +118,7 @@ export class StateService {
   }
 
   replaceFile(oldFile, newfile) {
+    this.isGenerated = false;
     const index = this.files.findIndex(x => x.id === oldFile.id);
     const newItem = new StorageFileInfo();
     newItem.buildFileInfoFromImage(newfile, oldFile.weight);
