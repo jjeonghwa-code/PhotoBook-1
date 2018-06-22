@@ -1,13 +1,16 @@
 <div fxFlex="1 1 auto" class="layout-container">
-  <button class="btn btn-primary" (click)="setCurrentMagazine(0)">Option1</button>
-  <button class="btn btn-primary" (click)="setCurrentMagazine(1)">Option2</button>
-  <button class="btn btn-primary" (click)="setCurrentMagazine(2)">Option3</button>
-  <button class="btn btn-primary" (click)="generateJSON({ force: true })">Refresh</button>
+  <div class="button-layer mt-5 mb-3" fxLayoutAlign="center center">
+    <span class="mr-4">positie tekst</span>
+    <button class="btn-cover active-gradient active" (click)="setCurrentMagazine(0)">Option1</button>
+    <button class="btn-cover active-gradient" (click)="setCurrentMagazine(1)">Option2</button>
+    <button class="btn-cover active-gradient" (click)="setCurrentMagazine(2)">Option3</button>
+    <button class="btn-refresh" (click)="generateJSON({ force: true })"><div class="refresh-layout-btn"></div></button>
+  </div>
+  <div class="text-center">
+    <p class="mb-0">On this page you can change the position of your photos by switching their locations.</p>
+    <p>Be aware: Your selected border isn't shown. You will see your selected border in the preview (next step).</p>
+  </div>
   <div class="layout-edit-overlay">
-    <div>
-      <p>On this page you can change the position of your photos by switching their locations.</p>
-      <p>Be aware: Your selected border isn't shown. You will see your selected border in the preview (next step).</p>
-    </div>
     <div class="open-book-preview-wrapper front-cover-wrapper">
       <div class="page-number left">1</div>
       <div class="open-book-preview single front-cover"
@@ -68,3 +71,7 @@
     </ng-container>
   </div>
 </div>
+<pb-layout-footer-bar
+  (prevStep)="prevStep()"
+  (nextStep)="nextStep()">
+</pb-layout-footer-bar>

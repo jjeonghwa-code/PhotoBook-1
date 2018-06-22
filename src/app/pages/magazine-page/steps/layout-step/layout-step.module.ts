@@ -8,13 +8,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { SwappableDirective } from './swappable.directive';
 import { DroppableDirective } from './droppable.directive';
 
+import { LayoutFooterBarComponent } from './components/layout-footer-bar/layout-footer-bar.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     LayoutStepRoutingModule
   ],
-  declarations: [LayoutStepComponent, SwappableDirective, DroppableDirective],
+  declarations: [
+    LayoutStepComponent, 
+    SwappableDirective, 
+    DroppableDirective,
+    LayoutFooterBarComponent
+  ],
   providers: [
     LayoutStateService
   ]

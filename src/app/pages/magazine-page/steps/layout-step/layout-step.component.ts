@@ -158,4 +158,12 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
     return percentage + '%';
   }
 
+  prevStep() {
+
+  }
+
+  nextStep() {
+    
+  }
+
 }

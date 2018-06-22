@@ -5,12 +5,15 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 115px;
-  bottom: 0;
+  top: 165px;
+  bottom: 80px;
   background: #fff;
   padding: 15px 15px 15px;
   overflow: auto;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
 
   .open-book-preview-wrapper {
@@ -47,6 +50,14 @@
         width: 100%;
         height: 100%;
       }
+    }
+
+    &.front-cover-wrapper {
+      float: left;
+    }
+
+    &.back-cover-wrapper {
+      float: right;
     }
 
     .open-book-preview {
@@ -218,8 +229,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 115px;
-  bottom: 0;
+  top: 165px;
+  bottom: 80px;
   background: #fff;
   padding: 15px 15px 15px;
   overflow: auto;
@@ -312,7 +323,7 @@
   display: inline-block;
   margin: 0 auto;
   font-size: 30px;
-  background-image: url('/../images/icongrid_2.svg');
+  background-image: url('/assets/images/icongrid_2.svg');
   background-size: 51em 6em;
   width: 1em;
   height: 1em;
@@ -431,4 +442,47 @@
   top: 0;
   bottom: 0;
   width: 100%;
+}
+
+.s-danger {
+  background-color: #F7101C !important;
+}
+.s-centered {
+  display: block !important;
+  margin: 0 auto;
+  max-width: 100%;
+  position: relative;
+}
+.s-visible {
+  display: block;
+}
+[disabled],
+.s-disabled {
+  pointer-events: none !important;
+  cursor: not-allowed;
+  -moz-opacity: 0.6;
+  -khtml-opacity: 0.6;
+  -webkit-opacity: 0.6;
+  opacity: 0.6;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+  filter: alpha(opacity=60);
+  -webkit-filter: grayscale(80%);
+  /* Chrome, Safari, Opera */
+  filter: grayscale(80%);
+}
+.s-disabled--flipbook {
+  pointer-events: none !important;
+  cursor: not-allowed;
+  -moz-opacity: 0.4;
+  -khtml-opacity: 0.4;
+  -webkit-opacity: 0.4;
+  opacity: 0.4;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+  filter: alpha(opacity=40);
+  -webkit-filter: grayscale(80%);
+  /* Chrome, Safari, Opera */
+  filter: grayscale(80%);
+}
+.s-dragenter {
+  background: rgba(255, 128, 0, 0.5);
 }

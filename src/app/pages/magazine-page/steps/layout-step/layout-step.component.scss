@@ -2,3 +2,50 @@
   position: relative;
   height: calc(100vh - 135px);
 }
+
+.btn-cover {
+  background-color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 0px solid #000;
+  &.active {
+    color: #fff;
+    background-image: linear-gradient(to left, #FF8000, #FF3B30);
+    border-width: 0px;
+  }
+}
+
+.btn-refresh {
+  border-radius: 0%;
+  border: 0;
+  box-shadow: none;
+
+  .refresh-layout-btn {
+    content: '';
+    display: inline-block;
+    margin: 0 auto 0 10px;
+    background-image: url(/assets/images/icongrid_2.svg);
+    background-size: 51em 6em;
+    width: 1em;
+    height: 1em;
+    background-position: -12em 0;
+    vertical-align: middle;
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+pb-layout-footer-bar {
+  width: 100%;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0;
+}
