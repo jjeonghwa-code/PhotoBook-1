@@ -20,6 +20,7 @@ $fa-font-path: '../node_modules/font-awesome/fonts';
 /******************************************************************/
 * {
   box-sizing: border-box;
+  font-family: "Helvetica", sans-serif
 }
 
 article, aside, details, figcaption, figure,
@@ -32,7 +33,7 @@ body {
   color: $body-text-color;
   height: $body-height;
   font-size: $base-font-size;
-  font-family: "San Francisco", Arial, sans-serif;
+  font-family: "Helvetica", Arial, sans-serif;
 }
 
 ol, ul {

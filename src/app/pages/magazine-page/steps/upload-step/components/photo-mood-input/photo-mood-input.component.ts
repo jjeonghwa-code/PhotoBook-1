@@ -16,12 +16,21 @@ export class PhotoMoodInputComponent implements OnInit {
   TextWrapperStyle = TextWrapperStyle;
 
   fonts = [
-    'Font A',
-    'Font B',
-    'Font C',
-    'Font D',
-    'Font E',
-    'Font F',
+    'San Francisco Bold',
+    'San Francisco Medium',
+    'San Francisco',
+    'San Francisco Semi Bold',
+    'San Francisco Thin',
+    'San Francisco Ultra Light',
+    'AlexBrush',
+    'Caviar Dreams',
+    'GrandHotel',
+    'Helvetica',
+    'LobsterTwo',
+    'Pacifico',
+    'Raleway',
+    'SeasideResortNF',
+    'Windsong',
   ];
 
   constructor() { }
