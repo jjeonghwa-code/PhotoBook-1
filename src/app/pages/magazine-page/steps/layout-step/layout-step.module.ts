@@ -5,6 +5,8 @@ import { LayoutStepRoutingModule } from './layout-step-routing.module';
 import { LayoutStepComponent } from './layout-step.component';
 import { LayoutStateService } from './services/layout-state.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SwappableDirective } from './swappable.directive';
+import { DroppableDirective } from './droppable.directive';
 
 @NgModule({
   imports: [
@@ -12,7 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     LayoutStepRoutingModule
   ],
-  declarations: [LayoutStepComponent],
+  declarations: [LayoutStepComponent, SwappableDirective, DroppableDirective],
   providers: [
     LayoutStateService
   ]

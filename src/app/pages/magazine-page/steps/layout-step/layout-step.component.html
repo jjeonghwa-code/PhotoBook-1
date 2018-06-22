@@ -25,6 +25,7 @@
                fxFlex="0 0 50%"
                [style.background-image]="'url(' + layoutStateService?.magazinePattern + ')'">
             <div class="book-image" *ngFor="let image of stateService?.magazineJSON[selectedLayoutOption]?.pages[key + 2]"
+                 pbSwappable draggable="true"
                  [style.width]="setPreviewImageWidth(210, image.width, image.isSpread)"
                  [style.height]="setPreviewImageHeight(297, image.height, image.isSpread)"
                  [style.top]="toPercentage(297, image.y, image.isSpread)"
@@ -37,6 +38,7 @@
                fxFlex="0 0 50%"
                [style.background-image]="'url(' + layoutStateService?.magazinePattern + ')'">
             <div class="book-image" *ngFor="let image of stateService.magazineJSON[selectedLayoutOption].pages[key + 3]"
+                 pbSwappable draggable="true"
                  [style.width]="setPreviewImageWidth(210, image.width, image.isSpread)"
                  [style.height]="setPreviewImageHeight(297, image.height, image.isSpread)"
                  [style.top]="toPercentage(297, image.y, image.isSpread)"
