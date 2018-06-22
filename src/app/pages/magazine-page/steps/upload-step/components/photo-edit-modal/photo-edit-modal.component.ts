@@ -88,7 +88,8 @@ export class PhotoEditModalComponent implements OnInit {
     this.drawMood();
   }
   imageLoaded(e) {
-    this.rotate = this.rotate - this.addionalRotate;
+    console.log("additional rotate", this.addionalRotate)
+    
     this.isLoading = false;
   }
 
@@ -104,14 +105,12 @@ export class PhotoEditModalComponent implements OnInit {
       this.height = $('image-cropper').height();
     }
     this.isSliding = true;
-    this.tmpRotate = e;
+    this.tmpRotate = this.rotate + e;
     this.setRotateImageSize();
   }
 
   rotateChange() {
-    this.rotate = this.tmpRotate;
-    this.isSliding = false;
-    this.rotateImage(this.rotate);
+    this.rotateImage(this.rotate + this.addionalRotate);
   }
 
   changeMood(e) {
@@ -144,8 +143,9 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   imageRoate(value) {
+    console.log(this.rotate)
     this.rotate += value;
-    this.rotateImage(this.rotate);
+    this.rotateImage(this.rotate + this.addionalRotate);
   }
 
 }

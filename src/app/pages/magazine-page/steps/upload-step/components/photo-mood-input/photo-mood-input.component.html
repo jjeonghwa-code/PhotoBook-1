@@ -25,14 +25,6 @@
 <ng-template #textPaintOptions>
   <div class="text-paint-options">
     <a class="close" (click)="textPainter.hide()"><i class="fa fa-times"></i></a>
-    <div class="type-option" fxLayout="column">
-      <p>Type</p>
-      <div class="type-group" fxLayout="row" fxLayoutGap="10px">
-        <a class="text-type-1" [class.selected]="mood.background.style === TextWrapperStyle.Type1" (click)="changeTextWrapperStyle(TextWrapperStyle.Type1)"><span>Text</span></a>
-        <a class="text-type-2" [class.selected]="mood.background.style === TextWrapperStyle.Type2" (click)="changeTextWrapperStyle(TextWrapperStyle.Type2)"><span>Text</span></a>
-        <a class="text-type-3" [class.selected]="mood.background.style === TextWrapperStyle.Type3" (click)="changeTextWrapperStyle(TextWrapperStyle.Type3)"><span>Text</span></a>
-      </div>
-    </div>
     <div class="opacity-option" fxLayout="column">
       <p>Opacity</p>
       <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">

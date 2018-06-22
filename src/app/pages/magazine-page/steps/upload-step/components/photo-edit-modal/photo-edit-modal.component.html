@@ -40,7 +40,7 @@
             <p>|</p>
             <p>45</p>
           </div>
-          <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="addionalRotate" (input)="sliding(rotate + $event.value)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
+          <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="addionalRotate" (input)="sliding($event.value)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
         </div>
         <div class="action-crop-area">
           <p>Crop style select</p>
