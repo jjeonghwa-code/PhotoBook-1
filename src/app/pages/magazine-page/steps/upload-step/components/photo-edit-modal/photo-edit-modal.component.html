@@ -21,7 +21,7 @@
           (imageCropped)="imageCropped($event)"
           (imageLoaded)="imageLoaded($event)">
         </image-cropper>
-        <div class="temp-image-wrapper" *ngIf="isSliding" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
+        <div class="temp-image-wrapper" [hidden]="!isSliding" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
           <img [src]="originbase64Image" [style.transform]="'rotate(' + rotate + 'deg)'">
         </div>
       </div>

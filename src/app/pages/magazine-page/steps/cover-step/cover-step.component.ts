@@ -38,7 +38,6 @@ export class CoverStepComponent implements OnInit {
       width: '900px',
     });
     dialogRef.afterClosed().pipe(filter(x => x)).subscribe(() => {
-      console.log('heree');
     });
   }
 

@@ -53,7 +53,6 @@ export class UploadStepComponent implements OnInit, OnDestroy {
 
   onDropModel(args) {
     let [el, target, source] = args;
-    // console.log(11111, this.files);
     // do something else
   }
 

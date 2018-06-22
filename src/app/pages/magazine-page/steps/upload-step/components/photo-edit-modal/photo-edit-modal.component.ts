@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DeleteConfirmModalComponent } from '../delete-confirm-modal/delete-confirm-modal.component';
 import { UploadStateService } from '../../services/upload-state.service';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { Mood } from '@photobook/core/models/mood';
+declare var $: any;
 
 @Component({
   selector: 'pb-photo-edit-modal',
@@ -29,6 +30,9 @@ export class PhotoEditModalComponent implements OnInit {
   cropRatio = 4 / 3;
   mood: Mood = new Mood();
 
+  width;
+  height;
+
   constructor(
     private cdr: ChangeDetectorRef,
     public dialogRef: MatDialogRef<DeleteConfirmModalComponent>,
@@ -46,6 +50,12 @@ export class PhotoEditModalComponent implements OnInit {
       this.mood = new Mood();
     }
   }
+
+  setRotateImageSize() {
+    $('.temp-image-wrapper').height(this.height - 5);
+    $('.temp-image-wrapper').width(this.width - 5);
+  }
+
 
   async readImageAsBase64(fileUrl) {
     this.originbase64Image = await this.uploadStateService.readUrlAsBase64(fileUrl);
@@ -82,11 +92,14 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   sliding(e) {
+    this.width = $('image-cropper').width() > 0 ? $('image-cropper').width() : this.width;
+    this.height = $('image-cropper').height() > 0 ? $('image-cropper').height() : this.height;
     this.isSliding = true;
     this.rotate = e.value;
+    this.setRotateImageSize();
   }
 
-  rotateChange(e) {
+  rotateChange() {
     this.isSliding = false;
     this.rotateImage(this.rotate);
   }
@@ -119,5 +132,5 @@ export class PhotoEditModalComponent implements OnInit {
   isWarning() {
     return this.uploadStateService.isTooSmall(this.data.file) || this.uploadStateService.isWrongRatio(this.data.file)
   }
-  
+
 }

@@ -49,7 +49,6 @@ export class BorderSelectorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.border);
   }
 
   selectBorder(border) {
