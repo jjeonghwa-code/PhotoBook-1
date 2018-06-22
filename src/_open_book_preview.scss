@@ -213,3 +213,222 @@
     } 
   } 
 } 
+
+.layout-edit-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 115px;
+  bottom: 0;
+  background: #fff;
+  padding: 15px 15px 15px;
+  overflow: auto;
+  text-align: center;
+}
+.layout-edit-overlay .open-book-preview-wrapper {
+  display: inline-block;
+  padding: 15px 15px 50px;
+  position: relative;
+}
+.layout-edit-overlay .open-book-preview-wrapper:before,
+.layout-edit-overlay .open-book-preview-wrapper:after {
+  display: block;
+  clear: both;
+  content: ' ';
+}
+.layout-edit-overlay .open-book-preview-wrapper .page-number {
+  position: absolute;
+  bottom: 10px;
+}
+.layout-edit-overlay .open-book-preview-wrapper .page-number.right {
+  right: 25%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .page-number.left {
+  left: 25%;
+}
+.layout-edit-overlay .open-book-preview-wrapper.front-cover-wrapper .page-number,
+.layout-edit-overlay .open-book-preview-wrapper.back-cover-wrapper .page-number {
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.layout-edit-overlay .open-book-preview-wrapper.front-cover-wrapper .book-image,
+.layout-edit-overlay .open-book-preview-wrapper.back-cover-wrapper .book-image {
+  width: 100%;
+  height: 100%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview {
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  width: 132.0625mm;
+  height: 91.0625mm;
+  position: relative;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.single {
+  background: url('/') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 62.0625mm;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.selected {
+  z-index: 20;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.selected .book-image.selected {
+  z-index: 5;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.selected .book-image.selected:before {
+  display: none;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.selected .book-image.selected:after {
+  content: '';
+  background: rgba(255, 127, 1, 0.5);
+  position: absolute;
+  display: block;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.front-cover {
+  position: relative;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.front-cover:before {
+  background: rgba(0, 0, 0, 0.5);
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.front-cover:after {
+  content: '';
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 30px;
+  background-image: url('/../images/icongrid_2.svg');
+  background-size: 51em 6em;
+  width: 1em;
+  height: 1em;
+  background-position: -3em -1em;
+  vertical-align: middle;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview.back-cover:not(.s-disabled).s-hover:after {
+  content: '';
+  background: rgba(255, 127, 1, 0.5);
+  position: absolute;
+  display: block;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image--spread:after,
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image--spread:before {
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  -webkit-opacity: 0.7;
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+  filter: alpha(opacity=70);
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 25px;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image--spread:before {
+  background-image: -webkit-gradient(linear, left top, right top, from(transparent), to(#000));
+  background-image: -webkit-linear-gradient(left, transparent, #000);
+  background-image: -moz-linear-gradient(left, transparent, #000);
+  background-image: -ms-linear-gradient(left, transparent, #000);
+  background-image: -o-linear-gradient(left, transparent, #000);
+  right: 50%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image--spread:after {
+  background-image: -webkit-gradient(linear, left top, right top, from(#000), to(transparent));
+  background-image: -webkit-linear-gradient(left, #000, transparent);
+  background-image: -moz-linear-gradient(left, #000, transparent);
+  background-image: -ms-linear-gradient(left, #000, transparent);
+  background-image: -o-linear-gradient(left, #000, transparent);
+  left: 50%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single):before {
+  background-image: -webkit-gradient(linear, left top, right top, from(transparent), to(rgba(0, 0, 0, 0.2)));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2));
+  background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2));
+  background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2));
+  background-image: -o-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2));
+  content: '';
+  border-right: 1px solid #E6E6E6;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 100px;
+  height: 100%;
+  z-index: 0;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single) .right-side,
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single) .left-side {
+  height: 100%;
+  width: 50%;
+  float: left;
+  z-index: 1;
+  position: relative;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single) .right-side img,
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single) .left-side img {
+  width: 100%;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview:not(.single) .right-side[data-spread="1"] {
+  display: none;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image {
+  background: url('/') center center no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: absolute;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image .text-position-display {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image.s-hover:not(.s-disabled):before {
+  display: none;
+}
+.layout-edit-overlay .open-book-preview-wrapper .open-book-preview .book-image.s-hover:not(.s-disabled):after {
+  content: '';
+  background: rgba(255, 127, 1, 0.5);
+  position: absolute;
+  display: block;
+  z-index: 40;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
