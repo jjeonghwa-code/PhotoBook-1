@@ -87,9 +87,7 @@ export class PhotoEditModalComponent implements OnInit {
     this.cropped64Image = image;
     this.drawMood();
   }
-  imageLoaded(e) {
-    console.log("additional rotate", this.addionalRotate)
-    
+  imageLoaded(e) {    
     this.isLoading = false;
   }
 
@@ -110,6 +108,7 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   rotateChange() {
+    this.isSliding = false;
     this.rotateImage(this.rotate + this.addionalRotate);
   }
 
