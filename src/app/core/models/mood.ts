@@ -20,7 +20,7 @@ export class Mood {
 
   constructor(
     text = '',
-    font = '',
+    font = 'Helvetica',
     align = TextAlign.Left,
     color = '#000000',
     style = {bold: false, italic: false, underline: false},

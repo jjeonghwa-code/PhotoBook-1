@@ -16,16 +16,10 @@ export class PhotoMoodInputComponent implements OnInit {
   TextWrapperStyle = TextWrapperStyle;
 
   fonts = [
-    'San Francisco Bold',
-    'San Francisco Medium',
-    'San Francisco',
-    'San Francisco Semi Bold',
-    'San Francisco Thin',
-    'San Francisco Ultra Light',
+    'Helvetica',
     'AlexBrush',
     'Caviar Dreams',
     'GrandHotel',
-    'Helvetica',
     'LobsterTwo',
     'Pacifico',
     'Raleway',
