@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { StateService } from '@photobook/state-service';
 import { Magazine } from '@photobook/core/models/magazine';
 import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
@@ -9,6 +9,8 @@ import { MagazineProd } from '@photobook/core/models/magazine-prod';
   providedIn: 'root'
 })
 export class LayoutStateService {
+
+  setCurrentMagazine: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
     private stateService: StateService,

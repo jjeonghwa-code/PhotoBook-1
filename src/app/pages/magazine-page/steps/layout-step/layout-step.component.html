@@ -23,9 +23,15 @@
              [style.background-color]="layoutStateService?.magazineStyle?.backgroundColor">
           <div class="left-side"
                fxFlex="0 0 50%"
+               [attr.data-spread]="currentMagazine?.pages[key]?.isSpread"
                [style.background-image]="'url(' + layoutStateService?.magazinePattern + ')'">
-            <div class="book-image" *ngFor="let image of stateService?.magazineJSON[selectedLayoutOption]?.pages[key + 2]"
+            <div class="book-image" *ngFor="let image of currentMagazine?.pages[key];let i = index"
                  pbSwappable draggable="true"
+                 [attr.data-id]="image?.id"
+                 [attr.data-orientation]="image?.orientation"
+                 [attr.data-spread]="image?.isSpread"
+                 [attr.data-page-index]="key"
+                 [attr.data-index]="i"
                  [style.width]="setPreviewImageWidth(210, image.width, image.isSpread)"
                  [style.height]="setPreviewImageHeight(297, image.height, image.isSpread)"
                  [style.top]="toPercentage(297, image.y, image.isSpread)"
@@ -37,8 +43,13 @@
           <div class="right-side"
                fxFlex="0 0 50%"
                [style.background-image]="'url(' + layoutStateService?.magazinePattern + ')'">
-            <div class="book-image" *ngFor="let image of stateService.magazineJSON[selectedLayoutOption].pages[key + 3]"
+            <div class="book-image" *ngFor="let image of currentMagazine?.pages[key + 1]; let i = index"
                  pbSwappable draggable="true"
+                 [attr.data-id]="image?.id"
+                 [attr.data-orientation]="image?.orientation"
+                 [attr.data-spread]="image?.isSpread"
+                 [attr.data-page-index]="key + 1"
+                 [attr.data-index]="i"
                  [style.width]="setPreviewImageWidth(210, image.width, image.isSpread)"
                  [style.height]="setPreviewImageHeight(297, image.height, image.isSpread)"
                  [style.top]="toPercentage(297, image.y, image.isSpread)"
@@ -49,7 +60,7 @@
         </div> <!-- .open-book-preview -->
       </div> <!-- .open-book-preview-wrapper -->
       <div class='open-book-preview-wrapper back-cover-wrapper'>
-        <div class='page-number left'>{{ stateService.magazineJSON[selectedLayoutOption]?.pages.length }}</div>
+        <div class='page-number left'>{{ currentMagazine?.pages.length }}</div>
         <div class='open-book-preview single back-cover'>
           <div class='book-image' [style.background-image]="'url(' + layoutStateService.photoUrl(backCover[0]?.filePath) + ')'"></div>
         </div>

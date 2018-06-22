@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LayoutStateService } from './services/layout-state.service';
 import { MagazineProd } from '@photobook/core/models/magazine-prod';
 import { StateService } from '@photobook/state-service';
 import { Magazine } from '@photobook/core/models/magazine';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'pb-layout-step',
   templateUrl: './layout-step.component.html',
   styleUrls: ['./layout-step.component.scss']
 })
-export class LayoutStepComponent implements OnInit {
+export class LayoutStepComponent implements OnInit, OnDestroy {
 
   book: MagazineProd = new MagazineProd();
   itemArray = [];
@@ -21,6 +22,8 @@ export class LayoutStepComponent implements OnInit {
 
   generatedMagazinesBlobUrl: any = {};
 
+  even1$: Subscription = new Subscription();
+
   constructor(
     public layoutStateService: LayoutStateService,
     public stateService: StateService
@@ -29,6 +32,13 @@ export class LayoutStepComponent implements OnInit {
   ngOnInit() {
     this.frontCover = this.layoutStateService.cover;
     this.generateJSON();
+    this.even1$ = this.layoutStateService.setCurrentMagazine.subscribe(index => {
+      this.setCurrentMagazine(index);
+    });
+  }
+
+  ngOnDestroy() {
+    this.even1$.unsubscribe();
   }
 
   generateJSON(options?: any) {

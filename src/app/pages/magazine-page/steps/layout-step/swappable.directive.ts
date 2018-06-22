@@ -1,5 +1,6 @@
-import { AfterViewInit, Directive, ElementRef, HostListener } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, NgZone } from '@angular/core';
 import { StateService } from '@photobook/state-service';
+import { LayoutStateService } from './services/layout-state.service';
 
 declare var $: any;
 
@@ -12,7 +13,9 @@ export class SwappableDirective implements AfterViewInit {
 
   constructor(
     private stateService: StateService,
-    private element: ElementRef
+    private layoutStateService: LayoutStateService,
+    private element: ElementRef,
+    private _zone: NgZone
   ) {}
 
   @HostListener('click', ['$event']) onClick($event) {
@@ -26,22 +29,43 @@ export class SwappableDirective implements AfterViewInit {
   @HostListener('dragend', ['$event']) onDragEnd($event) {
     this.wrapper.removeClass('selected');
     $('.book-image').removeClass('s-disabled');
+    $('.book-image').removeClass('s-hover');
+  }
+
+  @HostListener('dragleave', ['$event']) onDragLeave($event) {
+    $($event.target).removeClass('s-hover');
   }
 
   @HostListener('dragenter', ['$event']) onDragEnter($event) {
-    if ($($event.toElement.hasClass('book-image'))) {
-      if ($($event.target).hasClass('s-disabled')) {
-        return;
-      } else {
-        $($event.target).addClass('s-hover');
-        this.swapHandler();
-      }
+    if ($($event.target).hasClass('s-disabled')) {
+      return;
+    } else {
+      $($event.target).addClass('s-hover');
+    }
+  }
+
+  @HostListener('drop', ['$event']) onDrop($event) {
+    if ($($event.target).hasClass('s-disabled')) {
+      return;
+    } else {
+      $($event.target).addClass('s-hover');
+      this.swapHandler();
     }
   }
 
 
   ngAfterViewInit() {
     this.wrapper = $(this.element.nativeElement).parents('.open-book-preview');
+
+    this._zone.runOutsideAngular(() => {
+      this.element.nativeElement.addEventListener(
+        'dragover', this._onDragOver.bind(this)
+      );
+    });
+  }
+
+  _onDragOver($event) {
+    $event.preventDefault();
   }
 
   swapHandler() {
@@ -73,11 +97,9 @@ export class SwappableDirective implements AfterViewInit {
 
     if (target.length) {
       const attributesToSwap = ['filePath', 'id', 'text', 'name', 'photoID'];
-
       swappedFiles = this.swap(files, pageIndex, index, targetPageIndex, targetIndex, attributesToSwap, isSpread, targetIsSpread);
-
       this.stateService.magazineJSON[this.stateService.selectedLayoutOption].pages = swappedFiles;
-      // scope.magazine.setCurrentMagazine(this.stateService.selectedLayoutOption);
+      this.layoutStateService.setCurrentMagazine.emit(this.stateService.selectedLayoutOption);
       target.removeClass('selected');
       this.wrapper.removeClass('selected');
       $('.book-image').removeClass('s-disabled');
