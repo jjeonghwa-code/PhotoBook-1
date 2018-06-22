@@ -43,6 +43,8 @@ export class CoverStepComponent implements OnInit {
   }
 
   onSave() {
+    const image = this.coverStateService.getCoverImage();
+    this.coverStateService.setCoverImage(image);
     this.coverStateService.setFrontCover(this.coverForm.value);
   }
 
@@ -51,7 +53,7 @@ export class CoverStepComponent implements OnInit {
   }
 
   prevStep() {
-    
+
   }
 
 }

@@ -81,6 +81,7 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
       for (const n in magazineJSON[i].pages) {
         for (const m in magazineJSON[i].pages[n]) {
           const f = this.stateService.getFileById(magazineJSON[i].pages[n][m].id);
+          console.log(f);
           magazineJSON[i].pages[n][m].text = f.text;
           count++;
         }

@@ -31,8 +31,12 @@ export class LayoutStateService {
   }
 
   get magazineStyle() {
-    const magazine: Magazine = this.stateService.getMagazine();
-    return magazine.magazineStyle;
+    try {
+      const magazine: Magazine = this.stateService.getMagazine();
+      return magazine.magazineStyle;
+    } catch (e) {
+      return null;
+    }
   }
 
   get magazinePattern() {
