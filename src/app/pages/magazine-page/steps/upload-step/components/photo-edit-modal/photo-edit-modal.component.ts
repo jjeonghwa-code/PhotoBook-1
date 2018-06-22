@@ -24,6 +24,8 @@ export class PhotoEditModalComponent implements OnInit {
   cropped64Image: any = '';
 
   rotate = 0;
+  tmpRotate = 0;
+  addionalRotate = 0;
   isSliding = false;
   tempCrop = {x1: 0, y1: 0, x2: 0, y2: 0};
 
@@ -32,6 +34,8 @@ export class PhotoEditModalComponent implements OnInit {
 
   width;
   height;
+
+  isLoading = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -63,6 +67,7 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   async rotateImage(deg) {
+    this.isLoading = true;
     const img = new Image();
     img.src = this.originbase64Image;
     const canvas = (<HTMLCanvasElement>this.canvas.nativeElement);
@@ -83,6 +88,8 @@ export class PhotoEditModalComponent implements OnInit {
     this.drawMood();
   }
   imageLoaded(e) {
+    this.rotate = this.rotate - this.addionalRotate;
+    this.isLoading = false;
   }
 
   slideImage(value) {
@@ -92,14 +99,17 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   sliding(e) {
-    this.width = $('image-cropper').width() > 0 ? $('image-cropper').width() : this.width;
-    this.height = $('image-cropper').height() > 0 ? $('image-cropper').height() : this.height;
+    if ($('image-cropper').width() > 0) {
+      this.width = $('image-cropper').width();
+      this.height = $('image-cropper').height();
+    }
     this.isSliding = true;
-    this.rotate = e.value;
+    this.tmpRotate = e;
     this.setRotateImageSize();
   }
 
   rotateChange() {
+    this.rotate = this.tmpRotate;
     this.isSliding = false;
     this.rotateImage(this.rotate);
   }
@@ -131,6 +141,11 @@ export class PhotoEditModalComponent implements OnInit {
 
   isWarning() {
     return this.uploadStateService.isTooSmall(this.data.file) || this.uploadStateService.isWrongRatio(this.data.file)
+  }
+
+  imageRoate(value) {
+    this.rotate += value;
+    this.rotateImage(this.rotate);
   }
 
 }

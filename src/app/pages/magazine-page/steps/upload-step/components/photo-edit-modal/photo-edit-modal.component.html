@@ -22,15 +22,16 @@
           (imageLoaded)="imageLoaded($event)">
         </image-cropper>
         <div class="temp-image-wrapper" [hidden]="!isSliding" fxFlex="1 1 auto" fxLayout="row" fxLayoutAlign="center center">
-          <img [src]="originbase64Image" [style.transform]="'rotate(' + rotate + 'deg)'">
+          <img [src]="originbase64Image" [style.transform]="'rotate(' + tmpRotate + 'deg)'">
         </div>
+        <pb-spinner *ngIf="isLoading"></pb-spinner>
       </div>
       <div class="footer-section" fxLayout="row" fxLayoutAlign="space-between center">
         <div class="action-flip-area">
           <p>Foto draaien</p>
           <div fxLayout="row">
-            <button class="rotation-btn" type="button" (click)="rotateImage(-90)"><div class="decrease-rotation"></div></button>
-            <button class="rotation-btn" type="button" (click)="rotateImage(90)"><div class="increase-rotation"></div></button>
+            <button class="rotation-btn" type="button" (click)="imageRoate(-90)"><div class="decrease-rotation"></div></button>
+            <button class="rotation-btn" type="button" (click)="imageRoate(90)"><div class="increase-rotation"></div></button>
           </div>
         </div>
         <div class="action-rotate-area px-50 mt-5" style="position: relative;" fxFlex="1 1 auto">
@@ -39,7 +40,7 @@
             <p>|</p>
             <p>45</p>
           </div>
-          <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="rotate" (input)="sliding($event)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
+          <mat-slider fxFlex="1 1 auto" [min]="-45" [max]="45" [(ngModel)]="addionalRotate" (input)="sliding(rotate + $event.value)" (change)="rotateChange()" [step]="1" color="primary"></mat-slider>
         </div>
         <div class="action-crop-area">
           <p>Crop style select</p>
