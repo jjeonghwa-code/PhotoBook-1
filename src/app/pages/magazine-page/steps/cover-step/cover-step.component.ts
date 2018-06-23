@@ -26,10 +26,12 @@ export class CoverStepComponent implements OnInit {
 
   ngOnInit() {
     const cover: FrontCover = this.coverStateService.getCoverInfo();
+    cover.filePath = this.coverStateService.getCoverImage().url;
     this.coverForm = this.formBuilder.group({
       position: [cover.position, Validators.required],
       title: [cover.title || '', Validators.required],
-      subtitle: [cover.subtitle || '', Validators.required]
+      subtitle: [cover.subtitle || '', Validators.required],
+      filePath: [cover.filePath || '', Validators.required]
     });
   }
 

@@ -161,6 +161,10 @@ export class StateService {
     await this.setStorage(JSON.stringify(currentStorage), JSON.stringify(currMagazine)).toPromise();
   }
 
+  get currentMagazine(): any {
+    return this.localStorageService.get(StateKeys.CurrentMagazine);
+  }
+
   sortByDate() {
     this.isDateAscending = !this.isDateAscending;
     const files = JSON.parse(JSON.stringify(this.files));

@@ -35,6 +35,9 @@ export class CoverStateService {
 
   setCoverImage(file) {
     this.stateService.setMagazinePart('selectedCover', file.id);
+    const cover = this.getCoverInfo();
+    cover.filePath = file.url;
+    this.setFrontCover(cover);
   }
 
   setFrontCover(cover: FrontCover) {

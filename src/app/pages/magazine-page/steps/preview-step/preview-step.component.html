@@ -1,3 +1,15 @@
-<p>
-  preview-step works!
-</p>
+<button class="btn btn-primary" (click)="generatePDF()">Generate PDF</button>
+<button class="btn btn-primary" (click)="displayWowbook()">Display Wowbook</button>
+
+<div style="margin-top: 50px">
+  <h4>Progress: {{generatedPagesProgress || 0 | number}}%</h4>
+  <h5>{{ pdfUrl || 'Not loaded' }}</h5>
+</div>
+
+<div style="margin-top: 50px">
+  <div id='pdf-container'>
+    <div id='wowbook-container'></div>
+    <div class='page-number-right'></div>
+    <div class='page-number-left'></div>
+  </div>
+</div>

@@ -75,6 +75,7 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
       magazineJSON[i].frontCover.title = magazine.frontCover.title;
       magazineJSON[i].frontCover.subtitle = magazine.frontCover.subtitle;
       magazineJSON[i].frontCover.titlePosition = magazine.frontCover.position;
+      magazineJSON[i].frontCover.filePath = magazine.frontCover.filePath;
       magazineJSON[i].frontCover = magazineJSON[i].frontCover;
       magazineJSON[i].magazineID = i;
       let count = 0;
@@ -163,7 +164,7 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
   }
 
   nextStep() {
-    
+
   }
 
 }

@@ -1,0 +1,483 @@
+{
+	"pages": [
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 0,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 1,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 6,
+			"height": 72,
+			"y": 34.5,
+			"photoID": 3,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 108,
+			"height": 72,
+			"y": 34.5,
+			"photoID": 4,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 6,
+			"height": 72,
+			"y": 112.5,
+			"photoID": 5,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 108,
+			"height": 72,
+			"y": 112.5,
+			"photoID": 6,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 6,
+			"height": 72,
+			"y": 190.5,
+			"photoID": 7,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 108,
+			"height": 72,
+			"y": 190.5,
+			"photoID": 8,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 9,
+			"width": 230,
+			"isSpread": 1,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 9,
+			"width": 230,
+			"isSpread": 2,
+			"orientation": 0
+		}],
+		[{
+			"x": 6,
+			"height": 128,
+			"y": 84.5,
+			"photoID": 10,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 108,
+			"height": 128,
+			"y": 84.5,
+			"photoID": 11,
+			"width": 96,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 15,
+			"height": 240,
+			"y": 28.5,
+			"photoID": 12,
+			"width": 180,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 13,
+			"width": 230,
+			"isSpread": 1,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 13,
+			"width": 230,
+			"isSpread": 2,
+			"orientation": 0
+		}],
+		[{
+			"x": 34,
+			"height": 189,
+			"y": 6,
+			"photoID": 14,
+			"width": 142,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 34,
+			"height": 90,
+			"y": 201.30000000000001,
+			"photoID": 15,
+			"width": 68,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 108,
+			"height": 90,
+			"y": 201.30000000000001,
+			"photoID": 16,
+			"width": 68,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 17,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 18,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 19,
+			"width": 230,
+			"isSpread": 1,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 19,
+			"width": 230,
+			"isSpread": 2,
+			"orientation": 0
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 20,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 21,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 22,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 23,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 24,
+			"width": 230,
+			"isSpread": 1,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 24,
+			"width": 230,
+			"isSpread": 2,
+			"orientation": 0
+		}],
+		[{
+			"x": 38,
+			"height": 178,
+			"y": 6,
+			"photoID": 26,
+			"width": 134,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 38,
+			"height": 100,
+			"y": 190.69999999999999,
+			"photoID": 25,
+			"width": 134,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 306,
+			"y": -5,
+			"photoID": 27,
+			"width": 230,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 15,
+			"height": 240,
+			"y": 28.5,
+			"photoID": 28,
+			"width": 180,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 34,
+			"height": 90,
+			"y": 6,
+			"photoID": 29,
+			"width": 68,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 108,
+			"height": 90,
+			"y": 6,
+			"photoID": 30,
+			"width": 68,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 34,
+			"height": 189,
+			"y": 102.7,
+			"photoID": 31,
+			"width": 142,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 32,
+			"width": 230,
+			"isSpread": 1,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 298,
+			"y": -5,
+			"photoID": 32,
+			"width": 230,
+			"isSpread": 2,
+			"orientation": 0
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 33,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 34,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 38,
+			"height": 178,
+			"y": 6,
+			"photoID": 36,
+			"width": 134,
+			"isSpread": 0,
+			"orientation": 1
+		}, {
+			"x": 38,
+			"height": 100,
+			"y": 190.69999999999999,
+			"photoID": 35,
+			"width": 134,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 37,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 38,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 15,
+			"height": 240,
+			"y": 28.5,
+			"photoID": 39,
+			"width": 180,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 12,
+			"height": 139,
+			"y": 6,
+			"photoID": 40,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}, {
+			"x": 12,
+			"height": 139,
+			"y": 151.5,
+			"photoID": 41,
+			"width": 186,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 307,
+			"y": -5,
+			"photoID": 42,
+			"width": 230,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 6,
+			"height": 148,
+			"y": 74.299999999999997,
+			"photoID": 43,
+			"width": 198,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 6,
+			"height": 148,
+			"y": 74.299999999999997,
+			"photoID": 44,
+			"width": 198,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 6,
+			"height": 148,
+			"y": 74.299999999999997,
+			"photoID": 45,
+			"width": 198,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": 6,
+			"height": 148,
+			"y": 74.299999999999997,
+			"photoID": 46,
+			"width": 198,
+			"isSpread": 0,
+			"orientation": 0
+		}],
+		[{
+			"x": -10,
+			"height": 306,
+			"y": -5,
+			"photoID": 47,
+			"width": 230,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": 15,
+			"height": 239,
+			"y": 28.5,
+			"photoID": 48,
+			"width": 180,
+			"isSpread": 0,
+			"orientation": 1
+		}],
+		[{
+			"x": -10,
+			"height": 306,
+			"y": -5,
+			"photoID": 49,
+			"width": 230,
+			"isSpread": 0,
+			"orientation": 1
+		}]
+	],
+	"frame": 0,
+	"frontCover": {
+		"photoID": 2,
+		"title": "Maart 2016",
+		"titlePosition": 2,
+		"subtitle": "Magazine van Joke Jakhals"
+	},
+	"pattern": 0,
+	"numberOfPhotos": 54,
+	"pageColor": "#FFFFFF",
+	"frameThickness": 1,
+	"frameDecorationThickness": 0
+}

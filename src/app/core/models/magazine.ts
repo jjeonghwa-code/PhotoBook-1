@@ -11,6 +11,7 @@ export interface FrontCover {
   title: string;
   subtitle: string;
   position: number;
+  filePath: string;
 }
 
 export interface Magazine {
