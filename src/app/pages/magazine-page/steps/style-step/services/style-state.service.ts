@@ -27,5 +27,6 @@ export class StyleStateService {
 
   setMagazineStyle(style: MagazineStyle) {
     this.stateService.setMagazinePart('magazineStyle', style);
+    this.stateService.sendStorageToBackend();
   }
 }

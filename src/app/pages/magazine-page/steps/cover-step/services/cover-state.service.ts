@@ -41,4 +41,10 @@ export class CoverStateService {
    this.stateService.setMagazinePart('frontCover', cover);
   }
 
+  saveCoverInfo(file, cover: FrontCover) {
+    this.stateService.setMagazinePart('selectedCover', file.id);
+    this.stateService.setMagazinePart('frontCover', cover);
+    this.stateService.sendStorageToBackend();
+  }
+
 }

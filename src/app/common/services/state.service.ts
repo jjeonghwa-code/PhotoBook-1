@@ -200,6 +200,10 @@ export class StateService {
   private async saveFileToStorage() {
     const files = this.files.filter(x => !x.isFailed);
     this.setMagazinePart('files', files);
+    this.sendStorageToBackend();
+  }
+
+  async sendStorageToBackend() {
     const currentStorage = this.localStorageService.get(StateKeys.Magazine);
     const currentMagazine = this.localStorageService.get(StateKeys.CurrentMagazine);
     await this.setStorage(JSON.stringify(currentStorage), JSON.stringify(currentMagazine)).toPromise();
