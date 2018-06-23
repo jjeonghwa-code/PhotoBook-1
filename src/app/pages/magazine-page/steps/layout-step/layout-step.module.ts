@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { L10nModule } from '@photobook/l10n';
+import { UiKitModule } from '@photobook/ui-kit';
 
 import { LayoutStepRoutingModule } from './layout-step-routing.module';
 import { LayoutStepComponent } from './layout-step.component';
@@ -14,7 +16,9 @@ import { LayoutFooterBarComponent } from './components/layout-footer-bar/layout-
   imports: [
     CommonModule,
     FlexLayoutModule,
-    LayoutStepRoutingModule
+    LayoutStepRoutingModule,
+    L10nModule,
+    UiKitModule
   ],
   declarations: [
     LayoutStepComponent, 
