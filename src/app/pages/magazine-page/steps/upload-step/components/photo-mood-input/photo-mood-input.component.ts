@@ -17,6 +17,9 @@ export class PhotoMoodInputComponent implements OnInit {
 
   fonts = [
     'Helvetica',
+    'Comic Sans MS',
+    'Impact',
+    'Times new roman',
     'AlexBrush',
     'Caviar Dreams',
     'GrandHotel',
