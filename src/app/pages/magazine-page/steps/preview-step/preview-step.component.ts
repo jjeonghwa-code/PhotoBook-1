@@ -12,7 +12,7 @@ declare var $: any;
 export class PreviewStepComponent implements OnInit {
 
   generatedMagazinesBlobUrl: any = {};
-  generatedPagesProgress: any;
+  generatedPagesProgress: any = 0;
 
   pdfUrl = '';
 
@@ -37,6 +37,7 @@ export class PreviewStepComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.generatePDF();
   }
 
   generatePDF() {
@@ -87,6 +88,7 @@ export class PreviewStepComponent implements OnInit {
       const blobObject = data.object;
       this.generatedMagazinesBlobUrl[this.stateService.currentMagazine.magazineID] = blobURL;
       this.pdfUrl = blobURL;
+      this.displayWowbook();
         // vm.enableGeneratorActions();
       })
       .catch((err) => {
@@ -131,5 +133,12 @@ export class PreviewStepComponent implements OnInit {
 
   } // onShowPage
 
+  prevStep() {
+
+  }
+
+  nextStep() {
+    
+  }
 
 }

@@ -1,15 +1,24 @@
-<button class="btn btn-primary" (click)="generatePDF()">Generate PDF</button>
-<button class="btn btn-primary" (click)="displayWowbook()">Display Wowbook</button>
+<div fxFlex="1 1 auto"  class="preview-container">
+  <div>
+    <div *ngIf="pdfUrl == ''" class="progress-container">
+      <div class="mt-4 progress-wrapper">
+        <div class="preview-progress-bar bg-gradient-primary"
+          [style.width]="generatedPagesProgress + '%'"
+        ></div>
+      </div>
+    </div>
 
-<div style="margin-top: 50px">
-  <h4>Progress: {{generatedPagesProgress || 0 | number}}%</h4>
-  <h5>{{ pdfUrl || 'Not loaded' }}</h5>
-</div>
-
-<div style="margin-top: 50px">
-  <div id='pdf-container'>
-    <div id='wowbook-container'></div>
-    <div class='page-number-right'></div>
-    <div class='page-number-left'></div>
+    <div class="pdf-wrapper">
+      <div id='pdf-container'>
+        <div id='wowbook-container'></div>
+        <div class='page-number-right'></div>
+        <div class='page-number-left'></div>
+      </div>
+    </div>
   </div>
+  <pb-preview-footer-bar
+  (prevStep)="prevStep()"
+  (nextStep)="nextStep()"
+  >
+  </pb-preview-footer-bar>
 </div>
