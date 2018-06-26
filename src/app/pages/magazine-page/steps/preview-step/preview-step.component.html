@@ -10,6 +10,8 @@
 
     <div class="pdf-wrapper">
       <div id='pdf-container'>
+        <button mat-mini-fab [class.isHide]="isNavigation" class='book-right-arrow arraw-nav prev-nav bg-gradient-primary'><mat-icon>chevron_left</mat-icon></button>
+        <button mat-mini-fab [class.isHide]="isNavigation" class='book-left-arrow arraw-nav next-nav bg-gradient-primary'><mat-icon>chevron_right</mat-icon></button>
         <div id='wowbook-container'></div>
         <div class='page-number-right'></div>
         <div class='page-number-left'></div>

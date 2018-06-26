@@ -15,6 +15,7 @@ export class PreviewStepComponent implements OnInit {
   generatedPagesProgress: any = 0;
 
   pdfUrl = '';
+  isNavigation = true;
 
   wowbookParams = {
     width: 600,
@@ -26,8 +27,8 @@ export class PreviewStepComponent implements OnInit {
     pageNumbers: false,
     centeredWhenClosed: true,
     controls : {
-      next : '.book-right-arrow',
-      back : '.book-left-arrow',
+      next : '.book-left-arrow',
+      back : '.book-right-arrow',
     },
     onShowPage: this.onShowPage,
   };
@@ -88,6 +89,7 @@ export class PreviewStepComponent implements OnInit {
       const blobObject = data.object;
       this.generatedMagazinesBlobUrl[this.stateService.currentMagazine.magazineID] = blobURL;
       this.pdfUrl = blobURL;
+      this.isNavigation = false;
       this.displayWowbook();
         // vm.enableGeneratorActions();
       })

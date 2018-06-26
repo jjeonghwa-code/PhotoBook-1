@@ -3,7 +3,7 @@
   top: 50px;
   right: 0;
   left: 0;
-  bottom: 10px;
+  bottom: 40px;
 
   #wowbook-container {
     margin: auto;
@@ -23,6 +23,23 @@
   position: relative;
   overflow: hidden;
 }
+
+.arraw-nav {
+  position: absolute;
+  top: 50%;
+
+  &.prev-nav {
+    left: 10px;
+  }
+  &.next-nav {
+    right: 10px;
+  }
+}
+
+.isHide {
+  visibility: hidden;
+}
+
 .progress-container {
   position: absolute;
   top: 300px;
@@ -31,11 +48,11 @@
 
   .progress-wrapper {
     width: 100%;
-    height: 40px;
+    height: 30px;
     max-width: 60vw;
-    border-radius: 20px;
+    border-radius: 16px;
     margin: auto;
-    background-color: transparent;
+    background-color: grey;
     border: 1px solid grey;
 
     .preview-progress-bar {
