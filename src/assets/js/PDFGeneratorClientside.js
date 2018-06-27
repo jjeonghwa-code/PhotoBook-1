@@ -44,6 +44,28 @@ var generatedMagazinesBlobUrl = {};
 var resolve;
 var reject;
 
+// font uint array for frontend embed
+var moodFont = {
+  helvetica: null,
+  alexBrush: null,
+  caviarDreams: null,
+  caviarDreamsBold: null,
+  caviarDreamsItalic: null,
+  caviarDreamsBoldItalic: null,
+  grandHotel: null,
+  lobsterTwo: null,
+  lobsterTwoBold: null,
+  lobsterTwoItalic: null,
+  lobsterTwoBoldItalic: null,
+  pacifico: null,
+  raleway: null,
+  ralewayBold: null,
+  ralewayItalic: null,
+  ralewayBoldItalic: null,
+  seasideResortNF: null,
+  windsong: null
+};
+
 // public method for encoding an Uint8Array to base64
 function encode (input) {
   var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -72,7 +94,7 @@ function encode (input) {
   return output;
 }
 
-function addImage(image_name, x, y, imgWidth, imgHeight)
+function addImage(image_name, x, y, imgWidth, imgHeight, mood = null)
 {
   var  infoBlock= document.getElementById("information");
   if (infoBlock) {
@@ -144,23 +166,59 @@ function addImage(image_name, x, y, imgWidth, imgHeight)
 
     if(currentPhoto)
     {
+      if (currentPhoto.mood) {
+        currentPhoto.text = currentPhoto.mood.text;
+      }
       if(currentPhoto.text && currentPhoto.isSpread ==0)
       {
+        if (currentPhoto.mood) {
+          var textBoxWidth = imgWidth -(frameDecoration*2);
+          var textBoxHeight = (Math.floor((mood.text.length * 10) / textBoxWidth) + 1) * 20;
 
-        var textBoxWidth = imgWidth -(frameDecoration*2);
-        var textBoxY = (imgHeight+ y)- TEXTBOX_HEIGHT -frameDecoration;
-        var textBoxX =x + frameDecoration;
+          var textBoxY = (imgHeight+ y)- textBoxHeight - frameDecoration - 30;
+          var textBoxX =x + frameDecoration;
 
-        if(imgFrame) {
-          textBoxWidth-= (frameMargin*2)
-          textBoxX += frameMargin;
-          textBoxY -= frameMargin;
+          var align = 'center';
+          if (mood.align === 0) {
+            align = 'left';
+          } else if (mood.align === 1) {
+            align = 'center';
+          } else {
+            align = 'right'
+          }
+
+          doc.save()
+            .rect(textBoxX, textBoxY, textBoxWidth, textBoxHeight + 30)
+            .fillColor('#' + mood.background.color, mood.background.transparency)
+            .fill();
+
+          doc
+            .font(getFontData(mood))
+            .fillColor(mood.color)
+            .fontSize(22)
+            .text(mood.text, textBoxX + 10, textBoxY + 15, {
+              width: textBoxWidth - 20,
+              height: textBoxHeight,
+              align: align,
+              underline: mood.style.underline
+            })
+
+        } else {
+          var textBoxWidth = imgWidth -(frameDecoration*2);
+          var textBoxY = (imgHeight+ y)- TEXTBOX_HEIGHT -frameDecoration;
+          var textBoxX =x + frameDecoration;
+
+          if(imgFrame) {
+            textBoxWidth-= (frameMargin*2)
+            textBoxX += frameMargin;
+            textBoxY -= frameMargin;
+          }
+
+          doc.image(imgTextBox, textBoxX, textBoxY, {width: textBoxWidth, height: TEXTBOX_HEIGHT+1});
+          doc.fillColor('white');
+          doc.fontSize(12);
+          doc.text(currentPhoto.text,textBoxX,textBoxY+15,{  width: textBoxWidth, height:TEXTBOX_HEIGHT-15 , align: 'center'});
         }
-
-        doc.image(imgTextBox, textBoxX, textBoxY, {width: textBoxWidth, height: TEXTBOX_HEIGHT+1});
-        doc.fillColor('white');
-        doc.fontSize(12);
-        doc.text(currentPhoto.text,textBoxX,textBoxY+15,{  width: textBoxWidth, height:TEXTBOX_HEIGHT-15 , align: 'center'});
       }
     }
 
@@ -170,6 +228,48 @@ function addImage(image_name, x, y, imgWidth, imgHeight)
 
   oReq.send(null);
 }
+
+function buildMoodContent(mood, x, y)
+{
+  var  infoBlock= document.getElementById("information");
+  if (infoBlock) {
+    infoBlock.innerHTML ="<font face=Arial size=15 color=333333> Title";
+  }
+
+  var coverTitlePositionY = 600;
+
+  switch(template.frontCover.titlePosition) {
+    case 0:
+      coverTitlePositionY = 120;
+      break;
+    case 1:
+      coverTitlePositionY = 360;
+      break;
+    case 2:
+      coverTitlePositionY = 600;
+      break;
+    default:
+      coverTitlePositionY = 600;
+  }
+
+  if(mood)
+  {
+    doc.image(imgFade,0 , coverTitlePositionY-100, {width: A4Width, height: 300});
+  }
+  doc.fontSize(45);
+  doc.font('Helvetica');
+
+  doc.fontSize(30);
+  doc.save()
+    .moveTo(100, 150)
+    .lineTo(100, 250)
+    .lineTo(200, 250)
+    .fill('#' + mood.background.color);
+  // doc.text(mood.text, 0, coverTitlePositionY + 50,{  width: A4Width, align: 'center', continued: 'yes'}).fillColor(mood.color);
+
+  doc.fillColor(mood.color).text(mood.text, 0, y, {width: A4Width, align: align})
+}
+
 
 function buildTitlePage()
 {
@@ -246,7 +346,7 @@ function nextStep(cb)
     currentPhoto = currentPage[photosInCurrentPage];
     photosInCurrentPage++;
 
-    addImage(currentPhoto.filePath, currentPhoto.x*PDF_SIZE_FACTOR, currentPhoto.y*PDF_SIZE_FACTOR, currentPhoto.width*PDF_SIZE_FACTOR, currentPhoto.height*PDF_SIZE_FACTOR);
+    addImage(currentPhoto.filePath, currentPhoto.x*PDF_SIZE_FACTOR, currentPhoto.y*PDF_SIZE_FACTOR, currentPhoto.width*PDF_SIZE_FACTOR, currentPhoto.height*PDF_SIZE_FACTOR, currentPhoto.mood);
     index++;
 
     // update progress
@@ -317,6 +417,7 @@ function getBase64PDF()
 
 function loadResources()
 {
+  registerFonts();
   loadTextBox();
   if(template.frame >0)  {
     loadFrame();
@@ -332,6 +433,93 @@ function loadResources()
 //###################################################################
 //Loading resources part
 //TODO: make this nicer :(
+
+function registerFonts() {
+  var fonts = [
+    {asset: 'helvetica/HELR45W.ttf', name: 'helvetica'},
+    {asset: 'alex-brush/AlexBrush-Regular.ttf', name: 'alexBrush'},
+    {asset: 'Caviar-Dreams/CaviarDreams.ttf', name: 'caviarDreams'},
+    {asset: 'Caviar-Dreams/Caviar_Dreams_Bold.ttf', name: 'caviarDreamsBold'},
+    {asset: 'Caviar-Dreams/CaviarDreams_Italic.ttf', name: 'caviarDreamsItalic'},
+    {asset: 'Caviar-Dreams/CaviarDreams_BoldItalic.ttf', name: 'caviarDreamsBoldItalic'},
+    {asset: 'grand-hotel/GrandHotel-Regular.otf', name: 'grandHotel'},
+    {asset: 'lobster-two/LobsterTwo-Regular.otf', name: 'lobsterTwo'},
+    {asset: 'lobster-two/LobsterTwo-Bold.otf', name: 'lobsterTwoBold'},
+    {asset: 'lobster-two/LobsterTwo-Italic.otf', name: 'lobsterTwoBoldItalic'},
+    {asset: 'lobster-two/LobsterTwo-BoldItalic.otf', name: 'lobsterTwoBoldItalic'},
+    {asset: 'pacifico/Pacifico.ttf', name: 'pacifico'},
+    {asset: 'SeasideResortNF/SEASRN__.ttf', name: 'raleway'},
+    {asset: 'Windsong/Windsong.ttf', name: 'ralewayBold'},
+    {asset: 'raleway/Raleway-Regular.ttf', name: 'ralewayItalic'},
+    {asset: 'raleway/Raleway-Bold.ttf', name: 'ralewayBoldItalic'},
+    {asset: 'raleway/Raleway-Italic.ttf', name: 'seasideResortNF'},
+    {asset: 'raleway/Raleway-BoldItalic.ttf', name: 'windsong'},
+  ];
+
+  for (var i = 0; i < fonts.length; i++) {
+    loadFont(fonts[i].asset, fonts[i].name);
+  }
+}
+
+function getFontData(mood) {
+  if (mood.font === 'Helvetica') {
+    return moodFont.helvetica;
+  } else if (mood.font === 'AlexBrush') {
+    return moodFont.alexBrush;
+  } else if (mood.font === 'Caviar Dreams') {
+    if (mood.style.bold && mood.style.italic) {
+      return moodFont.caviarDreamsBoldItalic;
+    } else if (mood.style.bold && !mood.style.italic) {
+      return moodFont.caviarDreamsBold;
+    } else if (!mood.style.bold && mood.style.italic) {
+      return moodFont.caviarDreamsItalic;
+    } else {
+      return moodFont.caviarDreams;
+    }
+  } else if (mood.font === 'GrandHotel') {
+    return moodFont.grandHotel;
+  } else if (mood.font === 'LobsterTwo') {
+    if (mood.style.bold && mood.style.italic) {
+      return moodFont.caviarDreamsBoldItalic;
+    } else if (mood.style.bold && !mood.style.italic) {
+      return moodFont.caviarDreamsBold;
+    } else if (!mood.style.bold && mood.style.italic) {
+      return moodFont.caviarDreamsBold;
+    } else {
+      return moodFont.caviarDreams;
+    }
+  } else if (mood.font === 'Pacifico') {
+    return moodFont.pacifico;
+  } else if (mood.font === 'Raleway') {
+    if (mood.style.bold && mood.style.italic) {
+      return moodFont.ralewayBoldItalic;
+    } else if (mood.style.bold && !mood.style.italic) {
+      return moodFont.ralewayBold;
+    } else if (!mood.style.bold && mood.style.italic) {
+      return moodFont.ralewayItalic;
+    } else {
+      return moodFont.raleway;
+    }
+  } else if (mood.font === 'SeasideResortNF') {
+    return moodFont.seasideResortNF;
+  } else if (mood.font === 'Windsong') {
+    return moodFont.windsong;
+  }
+}
+
+function loadFont(asset, name = null) {
+  var request = new XMLHttpRequest();
+  request.open('GET', 'assets/fonts/' + asset, true);
+  request.responseType = 'arraybuffer';
+  request.onload = () => {
+    var data = request.response;
+    if (name) {
+      moodFont[name] = new Uint8Array(data);
+    }
+  }
+  request.send(null);
+}
+
 function loadTitleFade()
 {
 
