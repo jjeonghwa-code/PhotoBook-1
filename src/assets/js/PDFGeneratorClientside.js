@@ -44,7 +44,7 @@ var generatedMagazinesBlobUrl = {};
 var resolve;
 var reject;
 
-// font uint array for frontend embed
+// font uint 8 array for frontend embed
 var moodFont = {
   helvetica: null,
   alexBrush: null,
