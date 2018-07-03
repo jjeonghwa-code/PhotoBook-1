@@ -8,6 +8,7 @@ import { API } from '@photobook/core/consts/api';
 import { map } from 'rxjs/operators';
 import { MagazineProd } from '@photobook/core/models/magazine-prod';
 import { Magazine } from '@photobook/core/models/magazine';
+import { Router } from '@angular/router';
 
 export const StateKeys = {
   UserInfo: 'userInfo',
@@ -38,9 +39,20 @@ export class StateService {
 
   magazineJSON: any = [];
 
+  currentStep = 0;
+  steps = [
+    'magazine/create/step1',
+    'magazine/create/step2',
+    'magazine/create/step3',
+    'magazine/create/step4',
+    'magazine/create/step5',
+    'magazine/create/step6',
+  ];
+
   constructor(
     private localStorageService: LocalStorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   get isLoggedIn() {
@@ -231,5 +243,43 @@ export class StateService {
       .set('storageMagazine', storage)
       .set('storageCurrent', currentMagazine);
     return this.http.post(API.url.setStorage, body, {headers});
+  }
+
+  changeStep(step = 0) {
+    this.currentStep += step;
+    this.router.navigate([this.steps[this.currentStep]]);
+  }
+
+  isStepValidation(stepNumber) {
+    if (stepNumber === 0) {
+
+    } else if (stepNumber === 1) {
+
+    } else if (stepNumber === 2) {
+
+    } else if (stepNumber === 3) {
+
+    }
+  }
+
+  get styleValidation() {
+
+  }
+
+  get coverValidation() {
+    const magazine: Magazine = this.localStorageService.get(StateKeys.Magazine);
+    if (magazine) {
+      if (magazine.selectedCover && magazine.frontCover) {
+        if (magazine.frontCover.filePath && magazine.frontCover.position && magazine.frontCover.subtitle && magazine.frontCover.title) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

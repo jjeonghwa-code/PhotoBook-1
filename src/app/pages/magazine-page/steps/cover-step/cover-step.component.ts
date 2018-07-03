@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { CoverPhotoSelectModalComponent } from './components/cover-photo-select-modal/cover-photo-select-modal.component';
 import { FrontCover } from '@photobook/core/models/magazine';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-cover-step',
@@ -21,7 +22,8 @@ export class CoverStepComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    public coverStateService: CoverStateService
+    public coverStateService: CoverStateService,
+    private router: Router
   ) { }
 
   ngOnInit() {

@@ -8,6 +8,7 @@ import { DragulaService } from 'ng2-dragula';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonService } from '@photobook/common-service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-upload-step',
@@ -30,7 +31,8 @@ export class UploadStepComponent implements OnInit, OnDestroy {
     private stateService: StateService,
     private sanitizer: DomSanitizer,
     private dragulaService: DragulaService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router
   ) {
     // dragulaService.setOptions('draggable-photo-bag', {
     //   revertOnSpill: true,
@@ -108,7 +110,7 @@ export class UploadStepComponent implements OnInit, OnDestroy {
   }
 
   nextStep() {
-
+    this.router.navigate(['/magazine/create/step2']);
   }
 
   @HostListener('dragover', ['$event']) onDragOver(event) {

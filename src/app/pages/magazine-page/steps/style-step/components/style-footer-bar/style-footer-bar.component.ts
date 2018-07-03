@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StateService } from '@photobook/state-service';
 
 @Component({
   selector: 'pb-style-footer-bar',
@@ -10,16 +11,18 @@ export class StyleFooterBarComponent implements OnInit {
   @Output() nextStep: EventEmitter<any> = new EventEmitter();
   @Output() prevStep: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private stateService: StateService
+  ) { }
 
   ngOnInit() {
   }
 
   next() {
-
+    this.stateService.changeStep(1);
   }
 
   prev() {
-
+    this.stateService.changeStep(-1);
   }
 }

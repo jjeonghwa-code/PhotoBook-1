@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StateService } from '@photobook/state-service';
 
 @Component({
   selector: 'pb-footer-bar',
@@ -15,7 +16,9 @@ export class FooterBarComponent implements OnInit {
   isDateAscending = false;
   isNameAscending = false;
 
-  constructor() { }
+  constructor(
+    private stateService: StateService
+  ) { }
 
   ngOnInit() {
   }
@@ -39,6 +42,6 @@ export class FooterBarComponent implements OnInit {
   }
 
   next() {
-
+    this.stateService.changeStep(1);
   }
 }
