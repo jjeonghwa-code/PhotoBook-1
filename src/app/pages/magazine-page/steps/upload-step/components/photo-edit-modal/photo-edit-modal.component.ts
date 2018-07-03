@@ -92,7 +92,13 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   slideImage(value) {
-    this.currentIndex += value;
+    if (this.currentIndex <= 0 && value < 0) {
+      this.currentIndex = 0
+    } else if (this.currentIndex >= this.totalCounter - 1 && value > 0) {
+      this.currentIndex = this.totalCounter - 1
+    } else {
+      this.currentIndex += value;
+    }
     const file = this.uploadStateService.getFileByIndex(this.currentIndex);
     this.readImageAsBase64(file.url);
   }
