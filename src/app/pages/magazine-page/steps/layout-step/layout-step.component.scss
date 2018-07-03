@@ -39,6 +39,24 @@
   }
 }
 
+div.help-icon {
+  content: '';
+  display: inline-block;
+  margin: 0 auto;
+  font-size: 100%;
+  background-image: url(/assets/images/icongrid_2.svg);
+  background-size: 51em 6em;
+  width: 1em;
+  height: 1em;
+  background-position: -45em 0em;
+  vertical-align: middle;
+  background-color: gray;
+}
+
+.layout-detail {
+  width: 100%;
+}
+
 .text-center {
   text-align: center;
 }
