@@ -262,9 +262,6 @@ export class StateService {
     }
   }
 
-  get styleValidation() {
-
-  }
 
   get coverValidation() {
     const magazine: Magazine = this.localStorageService.get(StateKeys.Magazine);
