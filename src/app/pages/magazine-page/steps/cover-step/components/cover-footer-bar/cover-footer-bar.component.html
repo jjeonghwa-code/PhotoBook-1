@@ -5,9 +5,8 @@
     <span l10nTranslate ng-reflect-l10n-translate>PREVIOUS_STEP</span>
   </button>
   <button
-    class="common-rounded-button primary btn"
+    class="common-rounded-button primary btn" [disabled]="disabled"
     (click)="next()">
     <span l10nTranslate ng-reflect-l10n-translate>NEXT_STEP</span>
   </button>
 </div>
-  

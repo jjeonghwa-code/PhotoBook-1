@@ -78,6 +78,25 @@ export class StateService {
       if (JSON.parse(storage).files.length === files.length) {
         this.files = JSON.parse(JSON.stringify(JSON.parse(storage).files));
         this.tempFiles = JSON.parse(JSON.stringify(JSON.parse(storage).files));
+        if (JSON.parse(storage).frontCover) {
+          const frontCover = JSON.parse(JSON.stringify(JSON.parse(storage).frontCover));
+          if (frontCover) {
+            this.setMagazinePart('frontCover', frontCover);
+          }
+        }
+        if (JSON.parse(storage).selectedCover) {
+          const selectedCover = JSON.parse(JSON.stringify(JSON.parse(storage).selectedCover));
+          if (selectedCover) {
+            this.setMagazinePart('selectedCover', selectedCover);
+          }
+        }
+        if (JSON.parse(storage).magazineStyle) {
+          const magazineStyle = JSON.parse(JSON.stringify(JSON.parse(storage).magazineStyle));
+          if (magazineStyle) {
+            this.setMagazinePart('magazineStyle', magazineStyle);
+          }
+        }
+
       } else {
         this.files = JSON.parse(JSON.stringify(files));
         this.tempFiles = JSON.parse(JSON.stringify(files));

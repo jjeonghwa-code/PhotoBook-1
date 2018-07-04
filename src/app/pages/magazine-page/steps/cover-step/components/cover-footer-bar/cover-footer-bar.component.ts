@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CoverFooterBarComponent implements OnInit {
   @Input() files;
+  @Input() disabled = false;
   @Output() nextStep: EventEmitter<any> = new EventEmitter();
   @Output() prevStep: EventEmitter<any> = new EventEmitter();
 

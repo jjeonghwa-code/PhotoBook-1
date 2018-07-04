@@ -20,6 +20,9 @@ export class CoverStateService {
 
   getCoverImage(): StorageFileInfo {
     const magazine: Magazine = this.stateService.getMagazine();
+    if (!magazine) {
+      return;
+    }
     if (!magazine.selectedCover) {
       const files = magazine.files.filter(x => x.orientation === 1);
       return files[0];

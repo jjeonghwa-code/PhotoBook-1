@@ -41,6 +41,7 @@
       </form>
     </div>
     <pb-cover-footer-bar
+      [disabled]="coverForm.invalid"
       (prevStep)="prevStep()"
       (nextStep)="nextStep()">
     </pb-cover-footer-bar>
