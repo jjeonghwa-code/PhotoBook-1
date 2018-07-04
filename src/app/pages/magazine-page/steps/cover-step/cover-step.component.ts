@@ -45,17 +45,16 @@ export class CoverStepComponent implements OnInit {
     });
   }
 
-  onSave() {
+  nextStep() {
     const image = this.coverStateService.getCoverImage();
     this.coverStateService.saveCoverInfo(image, this.coverForm.value);
-  }
-
-  nextStep() {
-
+    this.router.navigate(['/magazine/create/step3']);
   }
 
   prevStep() {
-
+    const image = this.coverStateService.getCoverImage();
+    this.coverStateService.saveCoverInfo(image, this.coverForm.value);
+    this.router.navigate(['/magazine/create/step1']);
   }
 
 }

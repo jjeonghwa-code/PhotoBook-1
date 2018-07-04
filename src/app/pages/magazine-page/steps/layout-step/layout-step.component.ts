@@ -4,6 +4,7 @@ import { MagazineProd } from '@photobook/core/models/magazine-prod';
 import { StateService } from '@photobook/state-service';
 import { Magazine } from '@photobook/core/models/magazine';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-layout-step',
@@ -26,7 +27,8 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
 
   constructor(
     public layoutStateService: LayoutStateService,
-    public stateService: StateService
+    public stateService: StateService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -161,11 +163,11 @@ export class LayoutStepComponent implements OnInit, OnDestroy {
   }
 
   prevStep() {
-
+    this.router.navigate(['/magazine/create/step3']);
   }
 
   nextStep() {
-
+    this.router.navigate(['/magazine/create/step5']);
   }
 
 }

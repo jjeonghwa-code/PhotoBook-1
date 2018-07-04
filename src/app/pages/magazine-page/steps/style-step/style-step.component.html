@@ -25,7 +25,6 @@
         <pb-border-thickness-selector [thickness]="styleForm.get('borderThickness').value" (select)="styleForm.get('borderThickness').setValue($event)"></pb-border-thickness-selector>
         <h5 class="mt-2">Pattern</h5>
         <pb-pattern-selector [pattern]="styleForm.get('pattern').value" (select)="styleForm.get('pattern').setValue($event)"></pb-pattern-selector>
-        <button class="btn btn-primary" (click)="test()">Test Console Log</button>
       </div>
     </div>
     <pb-style-footer-bar

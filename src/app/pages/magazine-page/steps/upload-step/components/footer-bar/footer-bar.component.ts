@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StateService } from '@photobook/state-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-footer-bar',
@@ -17,7 +18,8 @@ export class FooterBarComponent implements OnInit {
   isNameAscending = false;
 
   constructor(
-    private stateService: StateService
+    private stateService: StateService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,6 @@ export class FooterBarComponent implements OnInit {
   }
 
   next() {
-    this.stateService.changeStep(1);
+    this.router.navigate(['/magazine/create/step2']);
   }
 }

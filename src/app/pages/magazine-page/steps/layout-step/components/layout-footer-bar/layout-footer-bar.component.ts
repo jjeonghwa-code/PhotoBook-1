@@ -19,10 +19,10 @@ export class LayoutFooterBarComponent implements OnInit {
   }
 
   next() {
-    this.stateService.changeStep(1);
+    this.nextStep.emit();
   }
 
   prev() {
-    this.stateService.changeStep(-1);
+    this.prevStep.emit();
   }
 }

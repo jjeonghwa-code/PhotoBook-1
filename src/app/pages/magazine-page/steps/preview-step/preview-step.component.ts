@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '@photobook/state-service';
+import { Router } from '@angular/router';
 
 declare var createMagazineWithJSON: any;
 declare var $: any;
@@ -34,7 +35,8 @@ export class PreviewStepComponent implements OnInit {
   };
 
   constructor(
-    private stateService: StateService
+    private stateService: StateService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -136,11 +138,11 @@ export class PreviewStepComponent implements OnInit {
   } // onShowPage
 
   prevStep() {
-
+    this.router.navigate(['/magazine/create/step4']);
   }
 
   nextStep() {
-    
+    this.router.navigate(['/magazine/create/step6']);
   }
 
 }

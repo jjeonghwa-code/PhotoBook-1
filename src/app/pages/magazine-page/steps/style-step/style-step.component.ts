@@ -4,6 +4,7 @@ import { StorageFileInfo } from '@photobook/core/models/storage-file-info';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MagazineStyle } from '@photobook/core/models/magazine';
 import { CommonService } from '@photobook/common-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pb-style-step',
@@ -18,7 +19,8 @@ export class StyleStepComponent implements OnInit {
   constructor(
     public styleStateService: StyleStateService,
     public commonService: CommonService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -33,16 +35,14 @@ export class StyleStepComponent implements OnInit {
     });
   }
 
-  test() {
-    this.styleStateService.setMagazineStyle(this.styleForm.value);
-  }
-
   nextStep() {
-
+    this.styleStateService.setMagazineStyle(this.styleForm.value);
+    this.router.navigate(['/magazine/create/step4']);
   }
 
   prevStep() {
-    
+    this.styleStateService.setMagazineStyle(this.styleForm.value);
+    this.router.navigate(['/magazine/create/step2']);
   }
 
 }

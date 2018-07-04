@@ -172,6 +172,7 @@ function addImage(image_name, x, y, imgWidth, imgHeight, mood = null)
       if(currentPhoto.text && currentPhoto.isSpread ==0)
       {
         if (currentPhoto.mood) {
+          const mood = currentPhoto.mood;
           var textBoxWidth = imgWidth -(frameDecoration*2);
           var textBoxHeight = (Math.floor((mood.text.length * 10) / textBoxWidth) + 1) * 20;
 
@@ -504,6 +505,8 @@ function getFontData(mood) {
     return moodFont.seasideResortNF;
   } else if (mood.font === 'Windsong') {
     return moodFont.windsong;
+  } else {
+    return moodFont.helvetica;
   }
 }
 
