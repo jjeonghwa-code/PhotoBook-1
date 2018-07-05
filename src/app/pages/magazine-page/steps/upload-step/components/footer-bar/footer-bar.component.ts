@@ -1,11 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StateService } from '@photobook/state-service';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from '@photobook/common-service';
+import { UploadStateService } from '../../services/upload-state.service';
 
 @Component({
   selector: 'pb-footer-bar',
   templateUrl: './footer-bar.component.html',
-  styleUrls: ['./footer-bar.component.scss']
+  styleUrls: ['./footer-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FooterBarComponent implements OnInit {
   @Input() files;
@@ -18,7 +20,8 @@ export class FooterBarComponent implements OnInit {
   isNameAscending = false;
 
   constructor(
-    private stateService: StateService,
+    private uploadStateService: UploadStateService,
+    public commonService: CommonService,
     private router: Router
   ) { }
 
@@ -43,7 +46,15 @@ export class FooterBarComponent implements OnInit {
     this.deleteAllFiles.emit();
   }
 
+  enableNext() {
+    return this.uploadStateService.getTotalPortraitCounts() >= 2
+          && this.uploadStateService.getFileLength() >= 36
+          && this.uploadStateService.getFileLength() <= 100;
+  }
+
   next() {
-    this.router.navigate(['/magazine/create/step2']);
+    if (this.enableNext()) {
+      this.router.navigate(['/magazine/create/step2']);
+    }
   }
 }

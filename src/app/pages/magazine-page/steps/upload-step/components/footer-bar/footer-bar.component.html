@@ -7,6 +7,11 @@
   </div>
   <div>
     <button
+      mat-raised-button
+      matTooltip="Minimaal 2 staande foto's, Minimaal 36 foto's, Maximaal 100"
+      matTooltipPosition="above"
+      matTooltipClass="tooltip-red"
+      [matTooltipDisabled]="enableNext()"
       type="button"
       class="common-rounded-button primary btn mx-auto"
       (click)="next()">
