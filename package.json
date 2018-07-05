@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --prod",
-    "deploy": "git push https://heroku:fbaec52f-0089-4915-b45b-190ec1ced5e1@git.heroku.com/photobook-dev.git dev-photo-edit:master"
+    "deploy": "git push https://heroku:357c0bbf-12b6-4e30-bc7c-aa056d818717@git.heroku.com/photobook-dev.git dev-photo-edit:master"
   },
   "private": true,
   "dependencies": {

@@ -25,7 +25,7 @@
       </div>
       <h1 class="mt-4 mb-1">Place a title on your photo book</h1>
       <hr class="line-color bg-gradient-primary mt-1" />
-      <form [formGroup]="coverForm" (ngSubmit)="onSave()">
+      <form [formGroup]="coverForm">
         <h3>Title Position</h3>
         <pb-cover-position-selector [position]="coverForm.get('position').value" (select)="coverForm.get('position').setValue($event)"></pb-cover-position-selector>
         <div class="form-group mt-30">
