@@ -1,0 +1,25 @@
+@import 'mixins';
+@import 'variables';
+
+.footer-bar-component {
+  padding: 5px 34px;
+  height: 80px;
+  border-top: 1px solid #F0F0F0;
+
+  &.justify-flex-end {
+    justify-content: flex-end;
+  }
+
+  .common-rounded-button {
+    min-width: 170px;
+    min-height: 60px;
+    font-size: 18px;
+
+    &.bg-white {
+      background-color: white;
+      border-width: 1px;
+      border-color: #FF3B30;
+      color: #4a4a4a;
+    }
+  }
+}

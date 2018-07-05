@@ -1,0 +1,122 @@
+.cover-step-content-wrapper {
+  height: calc(100vh - 135px);
+}
+
+.cover-manage-section {
+  height: 100%;
+  border-left: 1px solid grey;
+  .cover-form {
+    height: calc(100% - 80px);
+    .form-group {
+      position: relative;
+      span {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+  }
+}
+
+.cover-image-preview {
+  width: calc(100% - 40px);
+  position: relative;
+  max-width: 36vh;
+  margin-top: 2vh;
+  display: inline-block;
+
+  img {
+    width: 100%;
+  }
+}
+
+.covor-image-selection {
+  position: relative;
+  display: inline-block;
+}
+
+.photo-select-btn {
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border-width: 0;
+  border: 0px !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  .photo-select-icon {
+    display: inline-block;
+    background: #FF3B30;
+    background-image: linear-gradient(to left, #FF8000, #FF3B30);
+    z-index: 10;
+    position: relative;
+    padding: 8px 10px 8px 50px;
+    border-radius: 10px;
+
+    &::before {
+      background-image: url(/assets/images/icongrid_2.svg);
+      background-position: -29em 0;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      position: absolute;
+      content: '';
+      display: inline-block;
+      margin: 0 auto;
+      font-size: 30px;
+      background-size: 51em 6em;
+      width: 1em;
+      height: 1em;
+      vertical-align: middle;
+      left: 15%;
+      top: 40%;
+    }
+  }
+}
+
+.cover-info {
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  &.top {
+    top: 0;
+  }
+  &.bottom {
+    bottom: 0;
+  }
+  &.middle {
+    top: 50%;
+  }
+
+  .bg-cover-info {
+    display: inline-block;
+    background: url(/assets/images/white_blur.rsc) 50% 50%;
+    background-size: 100% 100%;
+    padding: 30px 0;
+    width: 100%;
+  }
+}
+
+.oder-terms {
+  color: #FF8000;
+}
+
+.bg-gray {
+  background-color: #EAE8E6;
+  color: black
+}
+.p-40 {
+  padding: 40px;
+}
+.overflow-auto {
+  overflow: auto;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
