@@ -1,3 +1,20 @@
-<div>
-  <button class="photo-upload-btn" (click)="add()"><div class="photo-upload-icon"></div></button>
+<div class="info-box-component">
+  <div class="d-flex">
+    <div class="title" >
+      <span l10nTranslate>STEP_1_MESSAGE_BASIS</span>
+      <a (click)="add()" l10nTranslate>
+        STEP_1_SEARCH
+      </a>
+    </div>
+    <div class='upload-files-btn' (click)="add()"></div>
+  </div>
+  <div class="error">
+    <div
+      *ngIf="totalPortraitCounts < minPortraitFiles"
+      [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MISSING_PORTRAIT', {missingCount: minPortraitFiles-totalPortraitCounts})">
+    </div>
+    <div>{{ warningFilesMessage }}</div>
+    <div>{{ uploadedFilesMessage }} {{ minMaxWarningMessage }}</div>
+    <div [innerHtml]="commonService.translateTemplate('STEP_1_MESSAGE_MIN_MAX_DEFAULT', {min: minFiles, max: maxFiles})"></div>
+  </div>
 </div>

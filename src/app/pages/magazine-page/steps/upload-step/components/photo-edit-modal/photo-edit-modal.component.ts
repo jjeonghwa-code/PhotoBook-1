@@ -144,7 +144,7 @@ export class PhotoEditModalComponent implements OnInit {
   }
 
   isWarning() {
-    return this.uploadStateService.isTooSmall(this.data.file) || this.uploadStateService.isWrongRatio(this.data.file)
+    return this.uploadStateService.isTooSmall(this.data.file) || this.uploadStateService.isWrongRatio(this.data.file);
   }
 
   imageRoate(value) {

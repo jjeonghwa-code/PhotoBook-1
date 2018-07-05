@@ -17,7 +17,6 @@ import { throwError } from 'rxjs';
 export class UploadStateService {
 
   fileExt: string[] = ['JPG', 'JPEG'];
-  totalPortraitCounts = 0;
   isLoading = false;
 
   constructor(
@@ -249,6 +248,14 @@ export class UploadStateService {
 
   getFileLength() {
     return this.stateService.files.length;
+  }
+
+  getFiles() {
+    return this.stateService.files;
+  }
+
+  getTotalPortraitCounts() {
+    return this.stateService.totalPortraitCounts;
   }
 
   isTooSmall(file) {

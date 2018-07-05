@@ -16,12 +16,12 @@
   position: relative;
 
   .info-box-test {
-    position: absolute;
-    width: 300px;
-    height: 150px;
-    top: 20px;
-    left: 20px;
-    background-color: orange;
+    // position: absolute;
+    // width: 300px;
+    // height: 150px;
+    // top: 20px;
+    left: 10px;
+    // background-color: orange;
   }
 
   .photo-drop-area {
@@ -50,7 +50,7 @@
       overflow: hidden;
     
       &:first-child {
-        margin-left: 500px;
+        margin-left: 520px;
       }
     
       .m-btn-photo-actions-wrapper {

@@ -26,6 +26,7 @@ export class StateService {
 
   user_id = -1;
   folder_id = 0;
+  totalPortraitCounts = 0;
   cloudfolder = null;
   magazine: any = {};
   files: any[] = []; // top layer
@@ -173,6 +174,7 @@ export class StateService {
   clear() {
     this.folder_id = 0;
     this.cloudfolder = null;
+    this.totalPortraitCounts = 0;
     this.localStorageService.clearAll();
     this.isLoggedIn$.next(false);
   }
@@ -234,6 +236,11 @@ export class StateService {
 
   private async saveFileToStorage() {
     const files = this.files.filter(x => !x.isFailed);
+    files.forEach((file) => {
+      if (file.orientation === 1) {
+        this.totalPortraitCounts++;
+      }
+    });
     this.setMagazinePart('files', files);
     this.sendStorageToBackend();
   }

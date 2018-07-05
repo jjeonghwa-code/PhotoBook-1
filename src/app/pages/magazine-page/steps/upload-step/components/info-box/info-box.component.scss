@@ -1,44 +1,47 @@
-.photo-upload-btn {
-  width: 80px;
-  height: 80px;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-  border-width: 0;
-  border: 0px !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
+@import 'mixins';
+@import 'variables';
 
-  .photo-upload-icon {
-    width: 80px;
-    height: 80px;
-    display: inline-block;
-    background: #FF3B30;
-    background-image: linear-gradient(to left, #FF8000, #FF3B30);
-    z-index: 10;
+.info-box-component {
+  position: absolute;
+  width: 520px;
+  font-size: 24px;
+  padding: 17px;
+  margin: 3px;
+  z-index: 100;
+  background: $white;
+
+  .title {
+    font-family: "San Francisco Medium", Arial, sans-serif;
+    line-height: 27px;
+    color: $black;
+    max-width: 385px;
+
+    a {
+      cursor: pointer;
+      color: $psp-red;
+    }
+  }
+
+  .upload-files-btn {
     position: relative;
-    padding: 8px 10px 8px 50px;
+    cursor: pointer;
+    background-image: linear-gradient(to right, $color-primary, $color-secondary);
+    min-width: 80px;
+    min-height: 80px;
     border-radius: 50%;
 
-    &::before {
-      background-image: url(/assets/images/icongrid_2.svg);
-      background-position: -22em 0;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
+    &:before {
+      @include icon-grid-svg-display();
+      @include icon-grid-svg(-22em, 0, 30px);
       position: absolute;
-      content: '';
-      display: inline-block;
-      margin: 0 auto;
-      font-size: 30px;
-      background-size: 51em 6em;
-      width: 1em;
-      height: 1em;
-      vertical-align: middle;
-      left: 50%;
-      top: 50%;
+      left: 25px;
+      top: 25px;
     }
+  }
+
+  .error {
+    font-size: 18px;
+    color: $mostly-black;
+    margin-top: 10px;
   }
 }
