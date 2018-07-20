@@ -45,6 +45,9 @@ $browser-context: 14;
   }
 
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: $width;
   min-height: $height;
   background-color: $bg-color;
@@ -357,12 +360,12 @@ $browser-context: 14;
   @include transform(translate($x, $y));
 }
 
-@mixin horizontal-gradient ($startColor: transparent, $endColor: transparent, $origin: left) {
+@mixin horizontal-gradient($startColor: $color-primary , $endColor: $color-secondary, $origin: left) {
   background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
   background-image: -webkit-linear-gradient($origin, $startColor, $endColor);
-  background-image: -moz-linear-gradient($origin, $startColor, $endColor);
-  background-image: -ms-linear-gradient($origin, $startColor, $endColor);
-  background-image: -o-linear-gradient($origin, $startColor, $endColor);
+  // background-image: -moz-linear-gradient($origin, $startColor, $endColor);
+  // background-image: -ms-linear-gradient($origin, $startColor, $endColor);
+  // background-image: -o-linear-gradient($origin, $startColor, $endColor);
 }
 
 @mixin opacity($opacity: 1) {

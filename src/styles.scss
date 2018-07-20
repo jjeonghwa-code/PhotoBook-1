@@ -475,6 +475,13 @@ span.right-tab {
   }
 }
 
+.l-separator--line {
+  height: 2px;
+  width: 100%;
+  @include horizontal-gradient();
+  margin: 20px 0;
+  display: block;
+}
 // custom
 
 image-cropper .source-image {

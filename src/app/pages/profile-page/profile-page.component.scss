@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'variables';
+
+.profile-page-component {
+  .common-rounded-button {
+    font-family: 'San Francisco';
+    font-size: 18px;
+    width: 200px;
+    min-width: 200px;
+    margin: 30px 0;
+
+    span {
+      color: $white;
+    }
+  }
+}

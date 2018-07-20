@@ -1,0 +1,63 @@
+<div class="profile-page-component container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 l10nTranslate>MY_PROFILE</h1>
+      <div class="l-separator--line"></div>
+      <strong>{{ userInfo.use_firstname }} {{ userInfo.use_lastname }}</strong>
+      <div>{{ userInfo.use_email }}</div>
+      <div>{{ userInfo.use_phonenumber }}</div>
+      <div>{{ userInfo.use_street }} {{ userInfo.use_housenumber }} {{ userInfo.use_housenumbersuffix }}</div>
+      <div>{{ userInfo.use_city }}</div>
+      <a
+        class="common-rounded-button primary btn"
+        routerLink="edit">
+        <span l10nTranslate>EDIT</span>
+      </a>
+
+      <h4>Delen met vrienden</h4>
+      <div class="l-separator--line"></div>
+      <div>
+        Geef <b>3 vrienden 25% korting</b> op hun fotoboek en krijg dan <b>zelf ook 25% korting</b> op jouw fotoboek!<br />
+        <span style="font-size:12px;">De korting is 1 maand geldig en niet geldig in combinatie met andere kortingen.</span>
+      </div>
+      <a
+        class="common-rounded-button primary btn"
+        [href]="'https://ota.onsfotoboek.nl/friends/ForFriends?guid=' + userInfo.use_guid" target="_blank">
+        <span l10nTranslate>CLICK_HERE</span>
+      </a>
+    </div>
+    <div class="col-md-6">
+      <h1 *ngIf="userInfo.sus_credits > 0" l10nTranslate>MY_CREDIT</h1>
+      <h1 *ngIf="userInfo.sus_credits < 1" l10nTranslate>NO_CREDIT</h1>
+      <div class="l-separator--line"></div>
+      <div *ngIf="userInfo.sus_credits === 1"><span l10nTranslate>MY_CREDIT</span>: <strong>1 </strong><strong l10nTranslate>MAGAZINE</strong></div>
+      <div *ngIf="userInfo.sus_credits > 1"><span l10nTranslate>MY_CREDIT</span>: <strong>{{ userInfo.sus_credits }} </strong><strong l10nTranslate>MAGAZINES</strong></div>
+      <div *ngIf="userInfo.sus_credits < 1" l10nTranslate>NO_CREDIT</div>
+      <div *ngIf="userInfo.use_creditsOld >= 1"><span l10nTranslate>YOU_STILL_GET</span> <strong>{{userInfo.use_creditsOld}}</strong><strong l10nTranslate>AUTOMATIC_DISCOUNT</strong> &euro; 5,- <strong l10nTranslate>PER_ORDER</strong></div>
+      <div class="mt-4">Voordeelbundels</div>
+      <div>Ben je van plan om vaker een fotoboek te maken, dan is het goedkoper om vooraf een voordeelbundel te kopen. Je koopt dan tegoed dat je later bij een bestelling kunt inzetten.</div>
+      <a
+        class="common-rounded-button primary btn"
+        [href]="userInfo.payment_url" target="_blank">
+        <span l10nTranslate>ADD_CREDITS</span>
+      </a>
+      
+      <div>Heb je een actiecode?</div>
+      <div>Na het uploaden van jouw fotoboek, kom je op de betaalpagina waar je de actiecode kunt gebruiken. Wil je echter de code nu inwisselen en later pas een fotoboek maken?</div>
+      <a
+        class="common-rounded-button primary btn"
+        [href]="'https://ota.onsfotoboek.nl/psp/pages/code?guid=' + userInfo.use_guid" target="_blank">
+        <span l10nTranslate>CLICK_HERE</span>
+      </a>
+
+      <h4>Geef een fotoboek cadeau!</h4>
+      <div class="l-separator--line"></div>
+      <div>Ontvang via de mail een mooie cadeaukaart met een code voor een gratis fotoboek.</div>
+      <a
+        class="common-rounded-button primary btn"
+        [href]="userInfo.giftcard_url" target="_blank">
+        <span l10nTranslate>GIFTCARD</span>
+      </a>
+    </div>
+  </div>
+</div>
