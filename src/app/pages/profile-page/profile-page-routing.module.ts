@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfilePageComponent } from './profile-page.component';
 
 const routes: Routes = [
-  {path: '', component: ProfilePageComponent}
+  {path: '', component: ProfilePageComponent},
+  {path: 'edit', loadChildren: './edit/edit.module#EditModule'},
 ];
 
 @NgModule({

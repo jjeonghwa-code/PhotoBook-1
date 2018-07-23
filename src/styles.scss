@@ -447,7 +447,7 @@ span.right-tab {
 }
 
 .custom-radio-button {
-  @include app-label-checkbox($very-dark-gray, $dark-gray, 12px);
+  @include app-label-checkbox($very-dark-gray, $dark-gray, 20px);
 }
 
 // PhotoBook
@@ -472,6 +472,14 @@ span.right-tab {
   &:before {
     @include icon-grid-svg-display();
     @include icon-grid-svg(-3em, 0, 30px);
+  }
+}
+
+.icon-telephone {
+  padding-bottom: 22px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-30em, 0, 30px);
   }
 }
 

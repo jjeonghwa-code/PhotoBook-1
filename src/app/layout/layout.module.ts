@@ -3,18 +3,28 @@ import { CommonModule } from '@angular/common';
 import { L10nModule } from '@photobook/l10n';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UiKitModule } from '@photobook/ui-kit';
+import { AccountDetailsComponent } from './account-details/account-details.component';
+import { MaterialModule } from '@photobook/material';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    L10nModule
+    L10nModule,
+    FormsModule,
+    ReactiveFormsModule,
+    UiKitModule,
+    MaterialModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    AccountDetailsComponent
   ],
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    AccountDetailsComponent
   ]
 })
 export class LayoutModule { }
