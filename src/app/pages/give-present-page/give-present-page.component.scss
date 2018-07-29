@@ -1,0 +1,95 @@
+@import 'mixins';
+@import 'variables';
+
+.give-present-page-component {
+  .sign-in-form {
+    margin-bottom: 30px;
+
+    .empty-div {
+      width: 30px;
+    }
+
+    .form-group {
+      position: relative;
+      height: 80px;
+      margin-bottom: 20px;
+      flex: 1;
+      padding-left: 15px;
+
+      label {
+        font-family: "San Francisco Medium", Arial, sans-serif;
+        font-size: 22px;
+        line-height: 15px;
+      }
+
+      input {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 3px solid $medium-gray;
+        border-radius: unset;
+        padding-left: 0;
+
+        &.ng-invalid {
+          border-color: $alert-error-background-color;
+        }
+      }
+
+      .form-field-error {
+        color: $alert-error-background-color;
+        font-size: 14px;
+        margin: 2px;
+      }
+
+      mat-form-field {
+        display: block;
+
+        .mat-form-field-wrapper {
+          padding: 0;
+          
+          .mat-form-field-infix {
+            padding: 0;
+            border: none;
+          }
+  
+          .mat-form-field-underline {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .login-error-message {
+      font-family: "San Francisco Medium", Arial, sans-serif;
+      font-size: 20px;
+      height: 30px;
+      color: $alert-error-background-color;
+      text-align: center;
+    }
+  }
+
+  .image-div {
+    position: relative;
+    width: 352px;
+
+    img {
+      width: 100%;
+    }
+
+    .cover-heading-preview {
+      font-family: "San Francisco";
+      position: absolute;
+      left: 0;
+      right: 0;
+      transition: all 0.2s ease-in-out;
+      text-align: center;
+      transform: translate(0, -100%);
+      display: inline-block;
+      background: url('assets/images/white_blur.rsc');
+      background-size: 100% 100%;
+      background-position: 50% 50%;
+      padding: 30px;
+      width: 100%;
+    }
+  }
+}

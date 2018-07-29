@@ -1,0 +1,114 @@
+<div class="give-present-page-component container">
+    <div class="row">
+      <div class="col-md-6">
+        <div l10nTranslate>LIST_ORDER_GIFT</div>
+        <div class="l-separator--line"></div>
+        <div l10nTranslate>GIFT_INFO</div>
+        <form class="sign-in-form" name="accountDetailForm" [formGroup]="accountDetailForm" (ngSubmit)="addGift()" novalidate>
+          <div l10nTranslate>GIFT_RECEIVER</div>
+          <div class="d-flex align-items-center">
+            <div class='icon-user'></div>
+            <div class="form-group">
+              <label l10nTranslate>FIRSTNAME</label>
+              <input class="form-control" [placeholder]="'REGISTER_FORM_FIRSTNAME' | translate:lang" formControlName="firstName">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.firstName.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_FIRSTNAME
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class='empty-div'></div>
+            <div class="form-group">
+              <label l10nTranslate>LASTNAME</label>
+              <input class="form-control" [placeholder]="'REGISTER_FORM_LASTNAME' | translate:lang" formControlName="lastName">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.lastName.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_LASTNAME
+              </div>
+            </div>
+          </div>
+
+          <div l10nTranslate>EDIT_ADDRESS</div>
+          <div class="d-flex align-items-center">
+            <div class='icon-marker'></div>
+            <div class="form-group">
+              <label l10nTranslate>STREET</label>
+              <input class="form-control" formControlName="street">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.street.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_STREET
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class='empty-div'></div>
+            <div class="form-group">
+              <label l10nTranslate>HOUSE_NUMBER</label>
+              <input class="form-control" formControlName="houseNumber">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.houseNumber.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_HOUSE_NUMBER
+              </div>
+              <div class="form-field-error" *ngIf="!accountDetailFormErrors.houseNumber.required && accountDetailFormErrors.houseNumber.pattern" l10nTranslate>
+                REGISTER_FORM_ERROR_PATTERN_HOUSE_NUMBER
+              </div> 
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class='empty-div'></div>
+            <div class="form-group">
+              <label l10nTranslate>HOUSE_NUMBER_PREFIX</label>
+              <input class="form-control" placeholder="Optioneel" formControlName="houseNumberSuffix">
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class='empty-div'></div>
+            <div class="form-group">
+              <label l10nTranslate>POSTAL_CODE</label>
+              <input class="form-control" formControlName="postalCode">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.postalCode.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_ZIPCODE
+              </div>
+              <div class="form-field-error" *ngIf="!accountDetailFormErrors.postalCode.required && accountDetailFormErrors.postalCode.pattern" l10nTranslate>
+                REGISTER_FORM_ERROR_PATTERN_ZIPCODE
+              </div>   
+            </div>
+          </div>  
+
+          <div class="d-flex align-items-center">
+            <div class='empty-div'></div>
+            <div class="form-group">
+              <label l10nTranslate>CITY</label>
+              <input class="form-control" formControlName="city">
+              <div class="form-field-error" *ngIf="accountDetailFormErrors.city.required" l10nTranslate>
+                REGISTER_FORM_ERROR_REQUIRED_CITY
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="common-rounded-button btn pull-right"
+            [disabled]="accountDetailForm.invalid">
+            <span l10nTranslate>ORDER_MAGAZINE</span>
+          </button>
+        </form>
+      </div>
+      <div class="col-md-4 offset-md-2">
+        <div
+          *ngIf="currentUpload"
+          class='image-div'>
+          <img [src]="currentUpload.upl_cover" />
+          <div
+            [style.top.%]="30+35*currentUpload.upl_position"
+            *ngIf='currentUpload.upl_title || currentUpload.upl_subtitle' 
+            class='cover-heading-preview'>
+            <h2>{{ currentUpload.upl_title }}</h2>
+            <h5>{{ currentUpload.upl_subtitle }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pb-spinner *ngIf="isLoading"></pb-spinner>
+</div>

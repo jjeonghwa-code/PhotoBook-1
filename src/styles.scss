@@ -483,6 +483,14 @@ span.right-tab {
   }
 }
 
+.icon-marker {
+  padding-bottom: 22px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-5em, 0, 30px);
+  }
+}
+
 .l-separator--line {
   height: 2px;
   width: 100%;
