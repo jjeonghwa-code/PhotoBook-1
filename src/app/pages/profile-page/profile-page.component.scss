@@ -4,13 +4,39 @@
 .profile-page-component {
   .common-rounded-button {
     font-family: 'San Francisco';
-    font-size: 18px;
-    width: 200px;
+    font-size: 1.25rem;
     min-width: 200px;
+    max-width: 300px;
     margin: 30px 0;
+    padding: 0.75rem 1.5rem;
+    display: inline-flex;
 
     span {
       color: $white;
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 1.25rem 0 0.55rem 0;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .small-font, 
+  .small-font * {
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-family: 'San Francisco';
+
+    strong {
+      font-weight: 700;
+    }
+
+    &.strong {
+      font-weight: 700;
     }
   }
 }

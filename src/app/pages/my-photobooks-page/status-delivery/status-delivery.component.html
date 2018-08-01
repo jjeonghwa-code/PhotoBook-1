@@ -1,9 +1,9 @@
 <div class="status-delivery-component">
-  <div class='clearfix'>
+  <div class='clearfix mt-2'>
     <div class='pull-left text-bold'></div>
-    <div class='pull-right' *ngIf='deliveryStatus >= 2'>
+    <div class='pull-right date-info' *ngIf='deliveryStatus >= 2'>
       <span class='detail text-right' l10nTranslate>EXPECTED_DELIVERY_DATE</span>
-      <span class='detail text-bold text-right'>{{ status.upl_delivery }}</span>
+      <span class='detail text-bold text-right ml-1'><strong>{{ status.upl_delivery }}</strong></span>
     </div>
   </div>
 

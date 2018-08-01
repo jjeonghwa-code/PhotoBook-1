@@ -1,10 +1,10 @@
 <div class="account-details-component container">
-  <div>My account details</div>
+  <h1 l10nTranslate>DATA</h1>
   <div class="l-separator--line"></div>
   <form class="sign-in-form" name="accountDetailForm" [formGroup]="accountDetailForm" (ngSubmit)="saveProfile()" novalidate>
     <div class="row">
       <div class="col-md-4">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='icon-user'></div>
           <div class="form-group">
             <label l10nTranslate>FIRSTNAME</label>
@@ -15,7 +15,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='empty-div'></div>
           <div class="form-group">
             <label l10nTranslate>LASTNAME</label>
@@ -26,7 +26,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='icon-email'></div>
           <div class="form-group">
             <label>Email</label>
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='icon-password'></div>
           <div class="form-group">
             <label l10nTranslate>PASSWORD</label>
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='empty-div'></div>
           <div class="form-group">
             <label l10nTranslate>PASSWORD_REPEAT</label>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="col-md-4">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class="form-group">
             <label l10nTranslate>POSTAL_CODE</label>
             <input class="form-control" formControlName="postalCode" (ngModelChange)="doPostalCodeCheck()">
@@ -80,7 +80,7 @@
           </div>
         </div>  
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class="form-group">
             <label l10nTranslate>HOUSE_NUMBER</label>
             <input class="form-control" formControlName="houseNumber" (ngModelChange)="doPostalCodeCheck()">
@@ -93,14 +93,14 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class="form-group">
             <label l10nTranslate>HOUSE_NUMBER_PREFIX</label>
             <input class="form-control" placeholder="Optioneel" formControlName="houseNumberSuffix">
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class="form-group">
             <label l10nTranslate>STREET</label>
             <input class="form-control" formControlName="street">
@@ -110,7 +110,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class="form-group">
             <label l10nTranslate>CITY</label>
             <input class="form-control" formControlName="city">
@@ -122,7 +122,7 @@
       </div>
       
       <div class="col-md-4">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='empty-div'></div>
           <div class="form-group">
             <label l10nTranslate>EDIT_DATE_OF_BIRTH</label>
@@ -137,7 +137,7 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mt-4 mb-4">
           <div class='icon-telephone'></div>
           <div class="form-group">
             <label l10nTranslate>EDIT_PHONE</label>
@@ -151,10 +151,10 @@
         <div class="d-flex">
           <div class='icon-email'></div>
           <div *ngIf="userInfo" class="form-group">
-            <div class="d-flex align-items-center mb-2">
+            <div class="d-flex align-items-center mt-4 mb-4">
               <span l10nTranslate>NEWSLETTER_SUBSCRIBE</span>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mt-4 mb-4">
               <label class="custom-radio-button">
                 <input
                   type="radio"
@@ -165,7 +165,7 @@
               </label>
               <span l10nTranslate>YES</span>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center mt-4 mb-4">
               <label class="custom-radio-button">
                 <input
                   type="radio"

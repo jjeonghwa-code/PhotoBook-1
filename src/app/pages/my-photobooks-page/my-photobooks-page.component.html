@@ -4,20 +4,20 @@
   </div>
 
   <div class="container">
-    <div l10nTranslate>LIST_TITLE</div>
+    <h2 l10nTranslate>LIST_TITLE</h2>
     <span class='l-separator--line'></span>
 
     <div class='m-magazine' *ngFor='let mag of magazineService.magazines'>
       <div class='row col-md-12'>
         <div class="date">{{ mag.upl_date }}</div>
-        <div class="row">
-          <div class="col-md-6 m-image-wrapper">
+        <div class="row p-3">
+          <div class="col-md-6 m-image-wrapper pl-0 pt-1">
             <div class='m-image-sizer'>
               <!-- <div
                 class='s-centered m-background-img m-magazine-cover'
                 [ngStyle]="{'backgroundImage': 'url(' + mag.upl_cover + ')'}"> -->
               <div
-                class='s-centered m-background-img m-magazine-cover'>
+                class='s-left m-background-img m-magazine-cover'>
                 <img [src]="mag.upl_cover" />
                 <div
                   [style.top.%]="30+35*mag.upl_position"
@@ -33,20 +33,20 @@
             <div class="l-buttons-divided">
               <div class='row magazine-action-links'>
                 <div class='col-md-12 view'>
-                  <a *ngIf="!showOrderPhotobook(mag)" class="button button-small primary" [href]='mag.reorder_url' target='_blank' l10nTranslate>
+                  <a *ngIf="!showOrderPhotobook(mag)" class="common-rounded-button primary btn" [href]='mag.reorder_url' target='_blank' l10nTranslate>
                     LIST_ORDER_EXTRA
                   </a>
-                  <a *ngIf="showOrderPhotobook(mag)" class='button button-small primary' [href]='mag.payment_url' target='_blank' l10nTranslate>
+                  <a *ngIf="showOrderPhotobook(mag)" class='common-rounded-button primary btn' [href]='mag.payment_url' target='_blank' l10nTranslate>
                     ORDER_MAGAZINE
                   </a>
                 </div>
                 <div class='col-md-12 view'>
-                  <a class="button button-small primary" [routerLink]="'/give-present/' + mag.upl_id" l10nTranslate>
+                  <a class="common-rounded-button primary btn" [routerLink]="'/give-present/' + mag.upl_id" l10nTranslate>
                     LIST_ORDER_GIFT
                   </a>
                 </div>
                 <div class='col-md-12 share tooltip-toggle'>
-                  <a class="button button-small primary" [href]="mag.upl_invite" target="_blank" l10nTranslate>
+                  <a class="common-rounded-button primary btn share-btn" [href]="mag.upl_invite" target="_blank" l10nTranslate>
                     LIST_ORDER_INVITE
                   </a>
                   <div class='tooltip-wrapper'>
@@ -65,12 +65,12 @@
                   </div>
                 </div>
                 <div class='col-md-6 view'>
-                  <a class="button button-small primary" [href]="mag.upl_share" target="_blank" l10nTranslate>
+                  <a class="common-rounded-button primary btn" [href]="mag.upl_share" target="_blank" l10nTranslate>
                     LIST_ORDER_INVITE_WATCH
                   </a>
                 </div>
                 <div class='col-md-6 share tooltip-toggle'>
-                  <a class="button button-small primary" [href]="mag.upl_share" target="_blank" l10nTranslate>
+                  <a class="common-rounded-button primary btn share-btn" [href]="mag.upl_share" target="_blank" l10nTranslate>
                     LIST_ORDER_SHARE
                   </a>
                   <div class='tooltip-wrapper'>
@@ -96,8 +96,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="btn-group status-toggle">
-                  <div l10nTranslate>LIST_ORDER_STATUS_HINT</div>
+                <div class="btn-group status-toggle mt-2">
+                  <div class="small-font mt-2" l10nTranslate>LIST_ORDER_STATUS_HINT</div>
                   <ul class="dropdown-menu2">
                     <li *ngFor="let status of mag.upl_status">
                       <pb-status-delivery

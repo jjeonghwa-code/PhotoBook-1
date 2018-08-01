@@ -100,7 +100,7 @@
         position: absolute;
         top: 50%;
         background-color: $color-gray-medium;
-        padding: 6px 10px;
+        padding: 7px 10px 11px 10px;
     
         & > span {
           @include translate(-50%, 0);
@@ -119,31 +119,36 @@
           left: 0;
     
           &:before {
-            @include icon-grid-svg(-48em, 0, 30px);
+            @include icon-grid-svg-rem(-48rem, 0, 30px);
           }
         }
         &.payed {
           left: 33.33%;
     
           &:before {
-            @include icon-grid-svg(-47em, 0, 30px);
+            @include icon-grid-svg-rem(-47rem, 0, 30px);
           }
         }
         &.printed{
           left: 66.66%;
     
           &:before {
-            @include icon-grid-svg(-49em, 0, 30px);
+            @include icon-grid-svg-rem(-49rem, 0, 30px);
           }
         }
         &.send{
           left: 100%;
     
           &:before {
-            @include icon-grid-svg(-50em, 0, 30px);
+            @include icon-grid-svg-rem(-50rem, 0, 30px);
           }
         }
       }      
     }
+  }
+
+  .date-info {
+    display: flex;
+    flex-direction: row;
   }
 }

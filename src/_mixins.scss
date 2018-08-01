@@ -320,6 +320,16 @@ $browser-context: 14;
   vertical-align: middle;
 }
 
+@mixin icon-grid-svg-rem($pos-x: 0rem, $pos-y: 0rem, $size: 100%) {
+  font-size: $size;
+  background-image: url('/assets/images/icons/icongrid_2.svg');
+  background-size: 51rem 6rem;
+  width: 1rem;
+  height: 1rem;
+  background-position: $pos-x $pos-y;
+  vertical-align: middle;
+}
+
 @mixin icon-grid-svg-display($display: inline-block, $margins: 0 auto) {
   content: '';
   display: $display;
