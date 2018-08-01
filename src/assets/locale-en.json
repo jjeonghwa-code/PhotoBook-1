@@ -197,6 +197,7 @@
   "LIST_ORDER_SHARE": "Share",
   "LIST_ORDER_SHARE_INFO": "Share the preview of your photo book with others",
   "LIST_ORDER_STATUS": "Check the status of your order(s)",
+  "LIST_ORDER_STATUS_HINT": "Status of your order(s):",
   
   "GIFT_INFO": "Please provide the name and address of the receiver.",
   "GIFT_RECEIVER" : "Receiver",

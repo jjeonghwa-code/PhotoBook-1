@@ -1,0 +1,18 @@
+<div class="status-delivery-component">
+  <div class='clearfix'>
+    <div class='pull-left text-bold'></div>
+    <div class='pull-right' *ngIf='deliveryStatus >= 2'>
+      <span class='detail text-right' l10nTranslate>EXPECTED_DELIVERY_DATE</span>
+      <span class='detail text-bold text-right'>{{ status.upl_delivery }}</span>
+    </div>
+  </div>
+
+  <div class='status-bar-wrapper'>
+    <div class='status-bar' [attr.data-status]="deliveryStatus">
+      <i class='status-icon uploaded'><span l10nTranslate>UPLOADED</span></i>
+      <i class='status-icon payed'><span l10nTranslate>PAYED</span></i>
+      <i class='status-icon printed'><span l10nTranslate>PRINTED</span></i>
+      <i class='status-icon send'><span l10nTranslate>SEND</span></i>
+    </div>
+  </div>
+</div>

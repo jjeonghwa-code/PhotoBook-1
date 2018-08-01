@@ -195,7 +195,8 @@
   "LIST_ORDER_SHARE": "Delen",
   "LIST_ORDER_SHARE_INFO": "Deel de voorvertoning van jouw fotoboek met anderen",
   "LIST_ORDER_STATUS": "Bekijk status bestelling(en)",
-  
+  "LIST_ORDER_STATUS_HINT": "Status bestelling(en):",
+
   "GIFT_INFO": "Voer hieronder de gegevens in van de ontvanger van het cadeau.",
   "GIFT_RECEIVER" : "Ontvanger",
   

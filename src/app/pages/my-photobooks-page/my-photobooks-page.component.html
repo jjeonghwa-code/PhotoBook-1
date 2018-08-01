@@ -1,0 +1,118 @@
+<div class="my-photobooks-page-component">
+  <div class='col-md-12'>
+    <div class='success-message' *ngIf="upload_success" l10nTranslate>LIST_MESSAGE</div>
+  </div>
+
+  <div class="container">
+    <div l10nTranslate>LIST_TITLE</div>
+    <span class='l-separator--line'></span>
+
+    <div class='m-magazine' *ngFor='let mag of magazineService.magazines'>
+      <div class='row col-md-12'>
+        <div class="date">{{ mag.upl_date }}</div>
+        <div class="row">
+          <div class="col-md-6 m-image-wrapper">
+            <div class='m-image-sizer'>
+              <!-- <div
+                class='s-centered m-background-img m-magazine-cover'
+                [ngStyle]="{'backgroundImage': 'url(' + mag.upl_cover + ')'}"> -->
+              <div
+                class='s-centered m-background-img m-magazine-cover'>
+                <img [src]="mag.upl_cover" />
+                <div
+                  [style.top.%]="30+35*mag.upl_position"
+                  *ngIf='mag.upl_title || mag.upl_subtitle' 
+                  class='cover-heading-preview'>
+                  <h2>{{ mag.upl_title }}</h2>
+                  <h5>{{ mag.upl_subtitle }}</h5>
+                </div>    
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="l-buttons-divided">
+              <div class='row magazine-action-links'>
+                <div class='col-md-12 view'>
+                  <a *ngIf="!showOrderPhotobook(mag)" class="button button-small primary" [href]='mag.reorder_url' target='_blank' l10nTranslate>
+                    LIST_ORDER_EXTRA
+                  </a>
+                  <a *ngIf="showOrderPhotobook(mag)" class='button button-small primary' [href]='mag.payment_url' target='_blank' l10nTranslate>
+                    ORDER_MAGAZINE
+                  </a>
+                </div>
+                <div class='col-md-12 view'>
+                  <a class="button button-small primary" [routerLink]="'/give-present/' + mag.upl_id" l10nTranslate>
+                    LIST_ORDER_GIFT
+                  </a>
+                </div>
+                <div class='col-md-12 share tooltip-toggle'>
+                  <a class="button button-small primary" [href]="mag.upl_invite" target="_blank" l10nTranslate>
+                    LIST_ORDER_INVITE
+                  </a>
+                  <div class='tooltip-wrapper'>
+                    <div class='tooltip-block bottom'>
+                      <span style="color: black;" l10nTranslate>LIST_ORDER_INVITE_INFO</span><br />
+                      <a class='share-icon share-mail' target='_blank' [href]="mailToStr1 + mag.upl_title + mailToStr2 + mag.upl_invite">
+                        <span>Email</span>
+                      </a>
+                      <a class='share-icon copy-clipboard' ngxClipboard [cbContent]="mag.upl_invite" (cbOnSuccess)="copiedToClipboardAlert()">
+                        <span l10nTranslate>LIST_ORDER_INVITE_COPY</span>
+                      </a>
+                      <a class='share-icon copy-clipboard' target='_blank' [href]='mag.upl_invite'>
+                        <span l10nTranslate>LIST_ORDER_INVITE_WATCH</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class='col-md-6 view'>
+                  <a class="button button-small primary" [href]="mag.upl_share" target="_blank" l10nTranslate>
+                    LIST_ORDER_INVITE_WATCH
+                  </a>
+                </div>
+                <div class='col-md-6 share tooltip-toggle'>
+                  <a class="button button-small primary" [href]="mag.upl_share" target="_blank" l10nTranslate>
+                    LIST_ORDER_SHARE
+                  </a>
+                  <div class='tooltip-wrapper'>
+                    <div class='tooltip-block bottom'>
+                      <span style="color: black;" l10nTranslate>
+                        LIST_ORDER_SHARE_INFO
+                      </span><br />
+                      <a class='share-icon share-facebook' target='_blank' [href]="'https://www.facebook.com/sharer/sharer.php?u=' + mag.upl_share">
+                        <span>Facebook</span>
+                      </a>
+                      <a class='share-icon share-twitter' target='_blank' [href]="'https://twitter.com/home?status=' + mag.upl_share">
+                        <span>Twitter</span>
+                      </a>
+                      <a class='share-icon share-google-plus' target='_blank' [href]="'https://plus.google.com/share?url=' + mag.upl_share">
+                        <span>Google+</span>
+                      </a>
+                      <a class='share-icon share-mail' target='_blank' [href]="'mailto:?&subject=' + mag.upl_title + ',' + mag.upl_subtitle + '&body=' + mag.upl_share">
+                        <span>Email</span>
+                      </a>
+                      <a class='share-icon copy-clipboard' ngxClipboard [cbContent]="mag.upl_share" (cbOnSuccess)="copiedToClipboardAlert()">
+                        <span l10nTranslate>LIST_ORDER_INVITE_COPY</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-group status-toggle">
+                  <div l10nTranslate>LIST_ORDER_STATUS_HINT</div>
+                  <ul class="dropdown-menu2">
+                    <li *ngFor="let status of mag.upl_status">
+                      <pb-status-delivery
+                        [status]='status'
+                        [paymentUrl]='mag.payment_url'>
+                      </pb-status-delivery>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="l-separator--line"></span>
+      </div>
+    </div>
+  </div>    
+</div>

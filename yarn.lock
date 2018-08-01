@@ -4094,9 +4094,22 @@ ngx-bootstrap@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-3.0.0.tgz#563368404dd71962e2ef8eee21794c6aeaab4490"
 
+ngx-clipboard@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/ngx-clipboard/-/ngx-clipboard-11.1.1.tgz#80225c7de824aef4365a4efab0f49fe7b4fbb55d"
+  dependencies:
+    ngx-window-token "^1.0.0"
+    tslib "^1.9.0"
+
 ngx-image-cropper@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-0.2.8.tgz#555980facf3217fca98aafab7883d32f4be0c775"
+
+ngx-window-token@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-window-token/-/ngx-window-token-1.0.0.tgz#12acb174fbbcffa5c60b3fea5a6ea78cc3304793"
+  dependencies:
+    tslib "^1.9.0"
 
 no-case@^2.2.0:
   version "2.3.2"
@@ -5192,10 +5205,6 @@ resolve@^1.1.7, resolve@^1.3.2, resolve@^1.5.0:
 ret@~0.1.10:
   version "0.1.15"
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
-
-retinajs@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/retinajs/-/retinajs-2.1.3.tgz#1594594d799f9f59476cdfdbdef47ec0ae7ec509"
 
 retry@^0.10.0:
   version "0.10.1"
