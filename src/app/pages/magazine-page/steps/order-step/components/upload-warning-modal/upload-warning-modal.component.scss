@@ -1,0 +1,47 @@
+@import 'mixins';
+@import 'variables';
+
+.upload-warning-modal-component {
+  position: relative;
+  width: 600px;
+  padding: 40px;
+
+  .close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    
+    img {
+      max-width: 15px;
+    }
+  }
+
+  .title {
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: normal;
+    color: $mostly-black;
+    margin-bottom: 24px;
+  }
+
+  .content {
+    font-size: 15px;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: $extra-light-gray;
+    margin-bottom: 69px;
+  }
+
+  .common-rounded-button {
+    min-width: 170px;
+    min-height: 60px;
+    font-size: 18px;
+
+    &.bg-white {
+      background-color: white;
+      border-width: 1px;
+      border-color: #FF3B30;
+      color: #4a4a4a;
+    }
+  }
+}

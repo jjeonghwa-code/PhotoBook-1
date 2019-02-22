@@ -23,7 +23,7 @@ export class CoverStateService {
     if (!magazine) {
       return;
     }
-    if (!magazine.selectedCover) {
+    if (!magazine.selectedCover || magazine.files.findIndex((x)  => x.id === magazine.selectedCover) === -1) {
       const files = magazine.files.filter(x => x.orientation === 1);
       return files[0];
     } else {

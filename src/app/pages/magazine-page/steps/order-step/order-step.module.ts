@@ -9,6 +9,8 @@ import { MaterialModule } from '@photobook/material';
 import { OrderStepRoutingModule } from './order-step-routing.module';
 import { OrderStepComponent } from './order-step.component';
 import { OrderFooterBarComponent } from './components/order-footer-bar/order-footer-bar.component';
+import { UploadWarningModalComponent } from './components/upload-warning-modal/upload-warning-modal.component';
+import { UploadSuccessModalComponent } from './components/upload-success-modal/upload-success-modal.component';
 
 @NgModule({
   imports: [
@@ -21,6 +23,7 @@ import { OrderFooterBarComponent } from './components/order-footer-bar/order-foo
     UiKitModule,
     OrderStepRoutingModule
   ],
-  declarations: [OrderStepComponent, OrderFooterBarComponent]
+  declarations: [OrderStepComponent, OrderFooterBarComponent, UploadWarningModalComponent, UploadSuccessModalComponent],
+  entryComponents: [UploadWarningModalComponent, UploadSuccessModalComponent]
 })
 export class OrderStepModule { }

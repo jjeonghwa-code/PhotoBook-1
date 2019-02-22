@@ -1,0 +1,24 @@
+<div class="upload-warning-modal-component">
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onClose()">
+    <span>&times;</span>
+  </button>
+  <div class="d-flex">
+    <div class='warning-icon'></div>
+    <div>
+      <h3 class="modal-title" l10nTranslate>MODAL_BE_AWARE</h3>
+      <p [innerHtml]="commonService.translateTemplate('STEP_6_CONFIRM')"></p>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-between">
+    <button
+      class="common-rounded-button bg-white btn"
+      (click)="cancel()">
+      <span l10nTranslate>Cancel</span>
+    </button>
+    <button
+      class="common-rounded-button primary btn"
+      (click)="continue()">
+      <span l10nTranslate>Continue</span>
+    </button>
+  </div>
+</div>

@@ -491,6 +491,31 @@ span.right-tab {
   }
 }
 
+.warning-icon {
+  float: left;
+  margin-right: 40px;
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-10em, -1em, 50px);
+  }
+}
+
+.big-check-icon {
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  display: inline-block;
+  padding: 20px;
+  background-color: $white;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 40px;
+
+  &:before {
+    @include icon-grid-svg-display();
+    @include icon-grid-svg(-14em, -1em, 60px);
+  }
+}
+
 .l-separator--line {
   height: 2px;
   width: 100%;

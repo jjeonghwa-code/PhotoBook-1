@@ -54,4 +54,44 @@ export class MagazineService {
       .set('followId', data.followId);
     return this.http.post(API.url.addGift, body, {headers: headers});
   }
+
+  uploadMagazine() {
+    const user = this.stateService.userInfo;
+    const magazine = this.stateService.currentMagazine;
+    const frame = magazine.frame;
+    const pageColor = magazine.pageColor;
+    const pattern = magazine.pattern;
+    const coverTitle = magazine.frontCover.title;
+    const coverSubTitle = magazine.frontCover.subtitle;
+    const coverTitlePosition = magazine.frontCover.titlePosition;
+    const selectedCoverId = this.stateService.getMagazine().selectedCover;
+    const selectedCover = this.stateService.getFileById(selectedCoverId);
+
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = new HttpParams()
+      .set('use_guid', user.use_guid)
+      .set('upl_theme', '0')
+      .set('upl_photos', magazine.numberOfPhotos)
+      .set('upl_coverphoto', selectedCover.name.replace(/\.jpe?g$/, ''))
+      .set('upl_covertitle', coverTitle)
+      .set('upl_coversubtitle', coverSubTitle)
+      .set('upl_coverposition', coverTitlePosition)
+      .set('upl_backgroundcolor', pageColor)
+      .set('upl_backgroundstyle', pattern)
+      .set('upl_frame', frame)
+      .set('upl_layout', JSON.stringify(magazine))
+      .set('cloud_user', '1');
+
+    return this.http.post(API.url.setUpload, body, { headers });
+  }
+
+  uploadComplete() {
+    const user = this.stateService.userInfo;
+    const headers = new HttpHeaders()
+      .append('Content-Type', 'application/x-www-form-urlencoded');
+    const body = new HttpParams()
+      .set('use_guid', user.use_guid);
+    return this.http.post(API.url.uploadComplete, body, {headers: headers});
+  }
 }

@@ -61,6 +61,15 @@ export class FileService {
     return this.http.post(API.url.uploadCloud, formData);
   }
 
+  uploadPDF(upl_id, filename, blob) {
+    const formData: FormData = new FormData();
+    formData.append('upl_filename', filename);
+    formData.append('upl_id', upl_id);
+    formData.append('attachment', blob);
+
+    return this.http.post(API.url.uploadPDF, formData);
+  }
+
   uploadCloudEdited(imgId, base64String) {
     const formData: FormData = new FormData();
     formData.append('img_id', imgId);

@@ -231,7 +231,7 @@ export class StateService {
   }
 
   getMagazine() {
-    return this.localStorageService.get(StateKeys.Magazine);
+    return this.localStorageService.get<any>(StateKeys.Magazine);
   }
 
   private async saveFileToStorage() {
